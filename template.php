@@ -440,15 +440,6 @@ function unl_five_file_icon($variables) {
   return '';
 }
 
-function unl_five_menu_item($link, $has_children, $menu = '', $in_active_trail = FALSE, $extra_class = NULL) {
-  if ($extra_class) {
-    return '<li class="' . $extra_class . '">' . $link . $menu . '</li>' . "\n";
-  }
-  else {
-    return '<li>' . $link . $menu . '</li>' . PHP_EOL;
-  }
-}
-
 /**
  * Implements theme_menu_tree().
  */
