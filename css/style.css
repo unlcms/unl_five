@@ -10,25 +10,10 @@ label {
 }
 
 /* Position tabs at the top right of maincontent */
-main ul.wdn_tabs.cms_tabs {
+#unlcms_tabs {
   position: absolute;
   right: 0;
   top: 155px;
-  opacity: 0.96;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-main ul.wdn_tabs.cms_tabs li {
-  background-color: #F6F5EA;
-  float: left;
-  margin-right: 2px;
-}
-main ul.wdn_tabs.cms_tabs li a {
-  padding: 8px;
-  text-align: center;
-  display: block;
-  text-decoration: none;
 }
 
 /* Related Links region contextual links */
