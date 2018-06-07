@@ -395,13 +395,13 @@ function unl_five_breadcrumb($variables) {
     $breadcrumbs[] = '<a href="">' . check_plain(unl_five_get_site_name_abbreviated()) . '</a>';
   }
   else {
-    //Change 'Home' to be $site_name
+    // Change 'Home' to $site_name.
     array_unshift($breadcrumbs,
                   str_replace('Home', check_plain(unl_five_get_site_name_abbreviated()),
                   array_shift($breadcrumbs)));
   }
 
-  //Add the intermediate breadcrumbs if they exist
+  // Add the intermediate breadcrumbs if they exist.
   $intermediateBreadcrumbs = theme_get_setting('intermediate_breadcrumbs');
   if (is_array($intermediateBreadcrumbs)) {
     krsort($intermediateBreadcrumbs);
@@ -412,21 +412,22 @@ function unl_five_breadcrumb($variables) {
     }
   }
 
-  //Prepend UNL
-  if (variable_get('site_name') != 'UNL') {
-    array_unshift($breadcrumbs, '<a href="http://www.unl.edu/">Nebraska</a>');
+  // Prepend Nebraska as the first breadcrumb.
+  if (variable_get('site_name') != 'Welcome to Nebraska' &&
+      variable_get('site_name') != 'University of Nebraska–Lincoln' &&
+      variable_get('site_name') != 'Nebraska') {
+    array_unshift($breadcrumbs, '<a href="https://www.unl.edu/">Nebraska</a>');
   }
 
-  // Append menu link title of current page -- http://drupal.org/node/133242
+  // Append menu link title of current page. (See http://drupal.org/node/133242)
   if (!drupal_is_front_page()) {
     $breadcrumbs[] = check_plain(menu_get_active_title());
   }
 
-  $html = '<ul>' . PHP_EOL;
+  $html = '' . PHP_EOL;
   foreach ($breadcrumbs as $breadcrumb) {
     $html .= '<li>' .  $breadcrumb . '</li>';
   }
-  $html .= '</ul>';
 
   return $html;
 }
