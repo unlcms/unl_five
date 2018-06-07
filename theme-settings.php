@@ -127,19 +127,6 @@ function unl_five_form_system_theme_settings_alter(&$form, &$form_state) {
       '#title' => t('Content grid class when both sidebars are present'),
       '#default_value' => !empty($grid_class_content_two_sidebars) ? theme_get_setting('grid_class_content_two_sidebars') : 'bp768-wdn-col-two-fourths',
     ),
-    'disable_drill_down' => array(
-      '#type' => 'checkbox',
-      '#title' => t('Disable drill-down menus'),
-      '#default_value' => theme_get_setting('disable_drill_down'),
-      '#description' => t('Turns off changing the navigation if you are 2+ levels deep with even deeper enabled menu links.'),
-    ),
-    'wdn_beta' => array(
-      '#type' => 'checkbox',
-      '#title' => t('Use WDN beta/development CSS and JavaScript'),
-      '#default_value' => theme_get_setting('wdn_beta'),
-      '#description' => t('Replaces the links in &lt;head&gt; to the stable /wdn directory with the latest development versions.'),
-      '#access' => _unl_five_use_wdn_beta(),
-    ),
     'unl_affiliate' => array(
       '#type' => 'checkbox',
       '#title' => t('Affiliate site'),
@@ -216,16 +203,4 @@ function _unl_five_attach_syntax_highlighting(&$form, $css = TRUE, $js = TRUE) {
   $form['#attached']['css'][] = 'sites/all/libraries/codemirror/theme/default.css';
   $form['#attached']['js'][] = drupal_get_path('theme', 'unl_five') . '/codemirror/unl.js';
   $form['#attached']['css'][] = drupal_get_path('theme', 'unl_five') . '/codemirror/unl.css';
-}
-
-/**
- * Custom access function to determine if it is staging or live since the live site should not allow WDN dev code to be used.
- * @TODO: Make this better using something other than site_name.
- */
-function _unl_five_use_wdn_beta() {
-  $site_name = variable_get('site_name');
-  if (strpos($site_name, 'STAGING') === 0) {
-    return TRUE;
-  }
-  return FALSE;
 }
