@@ -1,0 +1,124 @@
+/**
+ * Most unl_five css comes from all.css in the WDNTemplates project.
+ * CSS that does appear here is for CMS specific items or modifications
+ * that need to be made for WDN styles to work with CMS DOM structure.
+ */
+
+/* Override Drupal's decision to make all labels bold. */
+label {
+  font-weight: inherit;
+}
+
+/* Position tabs at the top right of maincontent */
+main ul.wdn_tabs.cms_tabs {
+  position: absolute;
+  right: 0;
+  top: 155px;
+  opacity: 0.96;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+main ul.wdn_tabs.cms_tabs li {
+  background-color: #F6F5EA;
+  float: left;
+  margin-right: 2px;
+}
+main ul.wdn_tabs.cms_tabs li a {
+  padding: 8px;
+  text-align: center;
+  display: block;
+  text-decoration: none;
+}
+
+/* Related Links region contextual links */
+#wdn_footer_related a.contextual-links-trigger {
+  display: none;
+}
+#wdn_footer_related .contextual-links-region:hover a.contextual-links-trigger {
+  display: block;
+}
+
+/* Fix for a Views page */
+#pagetitle {
+  position: relative;
+}
+#wdn_content_wrapper.contextual-links-region {
+  position: static;
+}
+
+/* Overrides of system.menus.css due to conflicts with UNL navigation */
+nav.dcf-nav-local li {
+  margin: 0;
+  padding: 0;
+  list-style-image: none;
+  list-style-type: none;
+}
+
+/* Override for unl #maincontent specificity */
+ul.links.inline {
+  padding-left: 0 !important;
+}
+
+/* Webform calendar image shouldn't stretch to 100% */
+input.webform-calendar {
+  width: auto;
+  vertical-align: baseline;
+  margin-left: 0.4em;
+}
+
+/* Color contrast of required * on form labels */
+.marker, .form-required {
+  color: #b40000;
+}
+
+/**
+ * WDN bands support
+ */
+.content-top .field-collection-view,
+.content-bottom .field-collection-view {
+  overflow: hidden;
+}
+.content-top .node > h2,
+.content-bottom .node > h2 {
+  display: none;
+}
+.field-collection-view-links {
+  display: none;
+}
+.field-name-field-wdn-band-bg img.wdn-stretch {
+  position: absolute;
+}
+.node .content.wdn-inner-wrapper {
+  position: relative;
+}
+#maincontent > .wdn-band:after {
+  clear: both;
+  content: "";
+  display: block;
+}
+#block-views-bands-bands-top > h3,
+#block-views-bands-bands-bottom > h3 {
+  display: none;
+}
+
+
+/* taxonomy */
+.taxonomy-term-description {
+  box-shadow: 0 0 1px #bbb;
+  margin: 0 0 20px;
+  padding: 10px;
+}
+
+
+/* sidebar */
+.sidebar .block {
+  margin: 0 0 30px 0;
+}
+.sidebar .block:after {
+  clear: both;
+  content: ".";
+  display: block;
+  height: 0;
+  visibility: hidden;
+}

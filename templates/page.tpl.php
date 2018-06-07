@@ -44,7 +44,7 @@
 
     <nav class="dcf-wrapper dcf-nav-local" role="navigation" aria-label="local navigation">
         <!-- InstanceBeginEditable name="navlinks" -->
-      <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/local/nav-local.html"); ?>
+        <?php print render($page['navlinks']); ?>
         <!-- InstanceEndEditable -->
     </nav>
 

@@ -1,0 +1,52 @@
+/**
+ * Book navigation blocks have the .block-menu-block class
+ * added so they can share the menu-block.css styles.
+ */
+
+.book-navigation ul {
+  margin: 0 0 1em 0;
+  padding: 2.532em .75em 0 1.333em !important;
+  border-top: 1px solid #d5d5d2;
+}
+.book-navigation .page-links {
+  margin: 3.375em 0 1em;
+  padding: .602em .75em .563em;
+  border-top: 1px solid #d5d5d2;
+  border-bottom: 1px solid #d5d5d2;
+  background: #f9f8f5;
+}
+.book-navigation .page-links a,
+.node-book .links a,
+.links .book_add_child a,
+.links .book_printer a,
+.links .comment_forbidden a {
+  font-family: 'Gotham SSm A', 'Gotham SSm B', Verdana, sans-serif;
+  font-size: .75rem;
+}
+.book-navigation .page-links a {
+  color: #5b5b5a;
+  border: none;
+}
+.book-navigation .page-links a:hover {
+  color: #d00000;
+}
+.links .comment_forbidden a {
+  border-bottom-style: dotted;
+  border-bottom-width: 1px;
+}
+.book-navigation li,
+.book-navigation li.collapsed,
+.book-navigation li.expanded,
+.book-navigation li.leaf {list-style-image: none; list-style-type: none;}
+.book-navigation li.collapsed,
+.book-navigation li.expanded,
+.book-navigation li.leaf {padding: 0 0 .254em 0;}
+.book-navigation li.collapsed > a,
+.book-navigation li.expanded > a,
+.book-navigation li.leaf > a {position: relative;}
+.book-navigation li.collapsed > a:before,
+.book-navigation li.expanded > a:before,
+.book-navigation li.leaf > a:before {position: absolute; top: 50%; transform: translate(-.75rem,-45%); font-size: .451rem; color: #5b5b5a; opacity: .8;}
+.book-navigation li.collapsed > a:before {content: '\25B6';}
+.book-navigation li.expanded > a:before {content: '\25BC';}
+.book-navigation li.leaf > a:before {content: '\2022';}

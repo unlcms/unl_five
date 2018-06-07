@@ -12,7 +12,7 @@ stylesheets[all][] = css/views.css
 regions[page_top] = Page top
 regions[page_bottom] = Page bottom
 
-regions[navigation] = Navigation
+regions[navlinks] = Navigation
 regions[content_top] = Content top
 regions[sidebar_first] = Sidebar first
 regions[content] = Content
@@ -22,7 +22,7 @@ regions[content_bottom] = Content bottom
 regions[contactinfo] = Contact info (Main)
 regions[contactinfo_additional] = Contact info (Additional)
 regions[socialmedia] = Social media
-regions[relatedlinks] = Related links
+regions[leftcollinks] = Related links
 
 settings[toggle_logo] = 0
 settings[toggle_slogan] = 0
