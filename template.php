@@ -9,11 +9,6 @@ function unl_five_block_view_alter(&$data, $block) {
   if ($block->module == 'system' && $block->delta == 'main-menu') {
     return _unl_five_block_view_system_main_menu_alter($data, $block);
   }
-
-  // Don't display "Block title"
-  if (in_array($block->region, array('contactinfo'))) {
-    $block->title = '';
-  }
 }
 
 /**

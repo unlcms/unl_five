@@ -88,7 +88,34 @@
 </main>
 <footer class="dcf-footer" id="dcf-footer" role="contentinfo">
     <!-- InstanceBeginEditable name="contactinfo" -->
-    <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/local/footer-local.html"); ?>
+    <div class="dcf-wrapper dcf-footer dcf-footer-local dcf-d-grid dcf-col-gap-vw dcf-row-gap-md dcf-pt-8 dcf-pb-8" id="dcf-footer-local">
+        <h2 class="dcf-site-title dcf-mb-0 dcf-bold dcf-uppercase dcf-lh-2 dcf-inverse unl-footer-local-heading" style="letter-spacing: .032em;"><?php print $site_name; ?></h2>
+
+        <?php if ($page['contactinfo']): ?>
+        <div class="unl-footer-local">
+            <?php print render($page['contactinfo']); ?>
+        </div>
+        <?php endif; ?>
+
+        <?php if ($page['contactinfo_additional']): ?>
+        <div class="unl-footer-local">
+            <?php print render($page['contactinfo_additional']); ?>
+        </div>
+        <?php endif; ?>
+
+        <?php if ($page['socialmedia']): ?>
+        <div class="unl-footer-local">
+            <?php print render($page['socialmedia']); ?>
+        </div>
+        <?php endif; ?>
+
+        <?php if ($page['leftcollinks']): ?>
+        <div class="unl-footer-local">
+            <?php print render($page['leftcollinks']); ?>
+        </div>
+        <?php endif; ?>
+
+    </div>
     <!-- InstanceEndEditable -->
     <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/footer-global.html"); ?>
 </footer>
