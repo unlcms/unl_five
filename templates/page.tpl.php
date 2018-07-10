@@ -93,7 +93,9 @@
 
     <?php print render($page['content_top']); ?>
 
+    <?php if ($unl_remove_inner_wrapper): ?><div class="dcf-stretch"><?php endif; ?>
     <?php print render($page['content']); ?>
+    <?php if ($unl_remove_inner_wrapper): ?></div><?php endif; ?>
 
     <?php print render($page['content_bottom']); ?>
     <!-- InstanceEndEditable -->
