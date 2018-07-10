@@ -19,5 +19,12 @@
 
 <?php require(DRUPAL_ROOT."/wdn/templates_5.0/includes/global/noscript.html"); ?>
 <?php require(DRUPAL_ROOT."/wdn/templates_5.0/includes/global/js-body.html"); ?>
+<script>
+    require(['dialog'],function(dialogHelper){
+        var dialog = document.querySelector('#my-dialog');
+        dialogHelper.initialize(dialog);
+        dialogHelper.setupShowDialogButton(dialog, document.querySelector('#test-button'));
+    });
+</script>
 </body>
 </html>

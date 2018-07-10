@@ -14,6 +14,7 @@ label {
   position: absolute;
   right: 0;
   top: 155px;
+  z-index: 1010;
 }
 
 /* Related Links region contextual links */

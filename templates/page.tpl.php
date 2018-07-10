@@ -1,21 +1,21 @@
-<header class="dcf-header" id="dcf-header" role="banner">
+<header class="dcf-header dcf-txt-xs" id="dcf-header" role="banner">
 
-    <div class="dcf-header-global dcf-wrapper dcf-d-flex dcf-flex-row dcf-flex-nowrap dcf-jc-between unl-bg-scarlet">
+    <div class="dcf-header-global dcf-wrapper dcf-d-flex dcf-flex-row dcf-flex-nowrap dcf-jc-between dcf-relative unl-bg-scarlet">
         <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/institution.html"); ?>
         <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/nav-global.html"); ?>
         <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/idm.html"); ?>
         <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/search.html"); ?>
     </div>
 
-    <div class="dcf-wrapper dcf-logo-lockup dcf-d-flex dcf-ai-center dcf-overflow-hidden">
+    <div class="dcf-logo-lockup dcf-wrapper dcf-d-flex dcf-ai-flex-end dcf-relative dcf-overflow-hidden">
         <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/logo.html"); ?>
-        <div class="dcf-d-flex dcf-flex-col dcf-jc-center dcf-flex-grow-1 dcf-h-100%">
-            <div class="dcf-site-affiliation dcf-txt-xs dcf-lh-3 dcf-italic" id="dcf-site-affiliation">
+        <div class="dcf-site-group dcf-d-flex dcf-flex-col dcf-jc-center">
+            <div class="dcf-site-affiliation dcf-lh-3 dcf-italic dcf-txt-sm" id="dcf-site-affiliation">
                 <!-- InstanceBeginEditable name="affiliation" -->
                 <?php if ($site_slogan): ?><?php print $site_slogan; ?><?php endif; ?>
                 <!-- InstanceEndEditable -->
             </div>
-            <div class="dcf-site-title dcf-bold dcf-uppercase dcf-lh-2 unl-font-sans" id="dcf-site-title">
+            <div class="dcf-site-title dcf-bold dcf-lh-2 dcf-uppercase unl-font-sans unl-ls-1 unl-site-title-long" id="dcf-site-title">
                 <!-- InstanceBeginEditable name="titlegraphic" -->
                 <?php if ($site_name): ?><a href="<?php print $front_page; ?>"><?php print $site_name; ?></a><?php endif; ?>
                 <!-- InstanceEndEditable -->
@@ -23,9 +23,9 @@
         </div>
     </div>
 
-    <div class="dcf-nav-bar dcf-relative dcf-modal-parent">
+    <div class="dcf-nav-bar dcf-relative dcf-modal-parent unl-font-sans">
 
-        <div class="dcf-mobile-toolbar dcf-mobile-toolbar-menu dcf-flex-col dcf-ai-center dcf-jc-center hrjs">
+        <div class="dcf-mobile-toolbar dcf-mobile-toolbar-menu dcf-flex-col dcf-ai-center hrjs">
             <button class="dcf-mobile-toolbar-toggle dcf-mobile-toolbar-toggle-menu dcf-d-flex dcf-flex-col dcf-ai-center dcf-jc-center dcf-w-100% dcf-b-0 dcf-bg-transparent unl-font-sans" id="dcf-menu-toggle" aria-expanded="false">
                 <!--       <span class="dcf-d-flex dcf-flex-col dcf-ai-center dcf-jc-center dcf-h-100%"> -->
                 <!--             <span class="dcf-d-flex dcf-ai-center dcf-jc-center dcf-h-5 dcf-w-5 dcf-mb-1"> -->
@@ -56,6 +56,13 @@
                     <?php print render($page['navlinks']); ?>
                     <!-- InstanceEndEditable -->
                 </nav>
+                <nav class="dcf-breadcrumbs dcf-txt-sm dcf-d-none" id="dcf-breadcrumbs" role="navigation" aria-label="breadcrumbs">
+                    <ol class="dcf-list-bare dcf-mb-0 unl-font-sans">
+                        <!-- InstanceBeginEditable name="breadcrumbs" -->
+                      <?php if ($breadcrumb): ?><?php print $breadcrumb; ?><?php endif; ?>
+                        <!-- InstanceEndEditable -->
+                    </ol>
+                </nav>
             </div>
         </div>
 
@@ -65,20 +72,13 @@
 
 <main class="dcf-wrapper" id="dcf-main" role="main" tabindex="-1">
 
-    <div class="dcf-stretch unl-stripe-b-white">
+    <div class="dcf-stretch">
         <div class="dcf-wrapper dcf-pt-10 dcf-pb-7">
-            <nav class="dcf-breadcrumbs" id="dcf-breadcrumbs" role="navigation" aria-label="breadcrumbs">
-                <ol class="dcf-list-bare dcf-d-flex dcf-flex-wrap dcf-mb-0 dcf-lh-2 dcf-txt-xs">
-                    <!-- InstanceBeginEditable name="breadcrumbs" -->
-                    <?php if ($breadcrumb): ?><?php print $breadcrumb; ?><?php endif; ?>
-                    <!-- InstanceEndEditable -->
-                </ol>
-            </nav>
 
             <div id="dcf-page-title">
                 <!-- InstanceBeginEditable name="pagetitle" -->
                 <?php print render($title_prefix); ?>
-                <?php if ($title): ?><h1 <?php if ($unl_hide_page_title): ?> class="wdn-text-hidden"<?php endif; ?>><?php print $title; ?></h1><?php endif; ?>
+                <?php if ($title): ?><h1 class="dcf-mb-0<?php if ($unl_hide_page_title): ?> wdn-text-hidden<?php endif; ?>"><?php print $title; ?></h1><?php endif; ?>
                 <?php print render($title_suffix); ?>
                 <!-- InstanceEndEditable -->
             </div>
@@ -99,36 +99,20 @@
     <!-- InstanceEndEditable -->
 
 </main>
-<footer class="dcf-footer" id="dcf-footer" role="contentinfo">
+<footer class="dcf-footer dcf-txt-xs" id="dcf-footer" role="contentinfo">
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/footer-global-1.html"); ?>
     <!-- InstanceBeginEditable name="contactinfo" -->
-    <div class="dcf-wrapper dcf-footer dcf-footer-local dcf-d-grid dcf-col-gap-vw dcf-row-gap-md dcf-pt-8 dcf-pb-8" id="dcf-footer-local">
-        <h2 class="dcf-site-title dcf-mb-0 dcf-bold dcf-uppercase dcf-lh-2 dcf-inverse unl-footer-local-heading" style="letter-spacing: .032em;"><?php print $site_name; ?></h2>
+    <?php if ($page['contactinfo']): ?>
 
-        <?php if ($page['contactinfo']): ?>
-        <div class="unl-footer-local">
-            <?php print render($page['contactinfo']); ?>
-        </div>
-        <?php endif; ?>
+        <?php print render($page['contactinfo']); ?>
 
-        <?php if ($page['contactinfo_additional']): ?>
-        <div class="unl-footer-local">
-            <?php print render($page['contactinfo_additional']); ?>
-        </div>
-        <?php endif; ?>
+    <?php endif; ?>
 
-        <?php if ($page['socialmedia']): ?>
-        <div class="unl-footer-local">
-            <?php print render($page['socialmedia']); ?>
-        </div>
-        <?php endif; ?>
+    <?php if ($page['leftcollinks']): ?>
 
-        <?php if ($page['leftcollinks']): ?>
-        <div class="unl-footer-local">
-            <?php print render($page['leftcollinks']); ?>
-        </div>
-        <?php endif; ?>
+        <?php print render($page['leftcollinks']); ?>
 
-    </div>
+    <?php endif; ?>
     <!-- InstanceEndEditable -->
-    <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/footer-global.html"); ?>
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/footer-global-2.html"); ?>
 </footer>
