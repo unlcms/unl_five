@@ -72,13 +72,12 @@
 
 <main class="dcf-wrapper" id="dcf-main" role="main" tabindex="-1">
 
-    <div class="dcf-stretch">
+    <div class="dcf-stretch<?php if ($unl_hide_page_title): ?> dcf-sr-only<?php endif; ?>">
         <div class="dcf-wrapper dcf-pt-10 dcf-pb-7">
-
             <div id="dcf-page-title">
                 <!-- InstanceBeginEditable name="pagetitle" -->
                 <?php print render($title_prefix); ?>
-                <?php if ($title): ?><h1 class="dcf-mb-0<?php if ($unl_hide_page_title): ?> wdn-text-hidden<?php endif; ?>"><?php print $title; ?></h1><?php endif; ?>
+                <?php if ($title): ?><h1 class="dcf-mb-0"><?php print $title; ?></h1><?php endif; ?>
                 <?php print render($title_suffix); ?>
                 <!-- InstanceEndEditable -->
             </div>
