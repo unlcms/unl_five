@@ -4,6 +4,11 @@
  * that need to be made for WDN styles to work with CMS DOM structure.
  */
 
+/* UNL 5.0 uses higher z-index than Drupal */
+#toolbar {
+  z-index: 2000;
+}
+
 /* Override Drupal's decision to make all labels bold. */
 label {
   font-weight: inherit;
