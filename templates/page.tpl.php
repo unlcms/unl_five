@@ -17,7 +17,7 @@
             </div>
             <div class="dcf-site-title dcf-bold dcf-lh-2 dcf-uppercase unl-ls-1" id="dcf-site-title">
                 <!-- InstanceBeginEditable name="titlegraphic" -->
-                <?php if ($site_name): ?><a href="<?php print $front_page; ?>"><?php print $site_name; ?></a><?php endif; ?>
+                <?php if ($site_name): ?><a class="unl-site-title-medium" href="<?php print $front_page; ?>"><?php print $site_name; ?></a><?php endif; ?>
                 <!-- InstanceEndEditable -->
             </div>
         </div>
