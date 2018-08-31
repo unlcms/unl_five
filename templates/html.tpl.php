@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html class="no-js" lang="<?php print $language->language; ?>">
 <head>
-  <?php require(DRUPAL_ROOT."/wdn/templates_5.0/includes/global/meta.html"); ?>
+  <?php require(DRUPAL_ROOT."/wdn/templates_5.0/includes/global/head-1.html"); ?>
   <title><?php print $head_title; ?></title>
-  <?php require(DRUPAL_ROOT."/wdn/templates_5.0/includes/global/css.html"); ?>
-  <?php require(DRUPAL_ROOT."/wdn/templates_5.0/includes/global/js-head.html"); ?>
-  <?php require(DRUPAL_ROOT."/wdn/templates_5.0/includes/global/favicon.html"); ?>
+  <?php require(DRUPAL_ROOT."/wdn/templates_5.0/includes/global/head-2.html"); ?>
   <?php print $head; ?>
   <?php print $styles; ?>
   <?php print $scripts; ?>
