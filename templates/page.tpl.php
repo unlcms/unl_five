@@ -1,6 +1,6 @@
 <header class="dcf-header" id="dcf-header" role="banner">
 
-    <div class="dcf-header-global dcf-wrapper dcf-d-flex dcf-flex-row dcf-flex-nowrap dcf-ai-center dcf-jc-between dcf-relative unl-bg-scarlet">        <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/institution.html"); ?>
+    <div class="dcf-header-global dcf-wrapper dcf-d-flex dcf-flex-row dcf-flex-nowrap dcf-ai-center dcf-jc-between dcf-relative unl-bg-scarlet">
         <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/institution.html"); ?>
         <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/nav-global.html"); ?>
         <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/idm.html"); ?>
