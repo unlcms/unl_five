@@ -60,7 +60,7 @@
 
 <main class="dcf-wrapper" id="dcf-main" role="main" tabindex="-1">
 
-    <div class="dcf-stretch<?php if ($unl_hide_page_title): ?> dcf-sr-only<?php endif; ?>">
+    <div class="dcf-bleed<?php if ($unl_hide_page_title): ?> dcf-sr-only<?php endif; ?>">
         <div class="dcf-wrapper dcf-pt-10 dcf-pb-7">
             <div id="dcf-page-title">
                 <!-- InstanceBeginEditable name="pagetitle" -->
@@ -80,7 +80,7 @@
 
     <?php print render($page['content_top']); ?>
 
-    <?php if ($unl_remove_inner_wrapper): ?><div class="dcf-stretch"><?php endif; ?>
+    <?php if ($unl_remove_inner_wrapper): ?><div class="dcf-bleed"><?php endif; ?>
 
         <?php if ($page['sidebar_first'] || $page['sidebar_second']): ?>
         <div class="wdn-band"><div class="wdn-inner-wrapper wdn-inner-padding-no-top"><section class="wdn-grid-set">
