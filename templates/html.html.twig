@@ -1,46 +1,35 @@
 {%
     set body_classes = [
+        'unl',
         logged_in ? 'user-logged-in',
         not root_path ? 'path-frontpage' : 'path-' ~ root_path|clean_class,
         node_type ? 'page-node-type-' ~ node_type|clean_class,
         db_offline ? 'db-offline',
     ]
-%}
-<!DOCTYPE html>
-<html class="no-js"{{ html_attributes }}><!-- InstanceBegin template="/Templates/fixed.dwt" codeOutsideHTMLIsLocked="false" -->
+%}<!DOCTYPE html>
+<html class="no-js"{{ html_attributes }}>
 <head>
-{% include "/wdn/templates_4.1/includes/metanfavico.html" %}
-<!--
-    Membership and regular participation in the UNL Web Developer Network
-    is required to use the UNL templates. Visit the WDN site at
-    http://wdn.unl.edu/. Click the WDN Registry link to log in and
-    register your unl.edu site.
-    All UNL template code is the property of the UNL Web Developer Network.
-    The code seen in a source code view is not, and may not be used as, a
-    template. You may not use this code, a reverse-engineered version of
-    this code, or its associated visual presentation in whole or in part to
-    create a derivative work.
-    This message may not be removed from any pages based on the UNL site template.
-
-    $Id: fixed.dwt | 6edb0e1ee94038935f3821c6ce15dfd5c217b2e2 | Tue Dec 1 17:08:56 2015 -0600 | Kevin Abel $
--->
-{% include "/wdn/templates_4.1/includes/scriptsandstyles.html" %}
-<!-- InstanceBeginEditable name="doctitle" -->
+{% include "/wdn/templates_5.0/includes/global/head-1.html" %}
 <title>{{ head_title|safe_join(' | ') }}</title>
-<!-- InstanceEndEditable -->
-<!-- InstanceBeginEditable name="head" -->
+{% include "/wdn/templates_5.0/includes/global/head-2.html" %}
 <head-placeholder token="{{ placeholder_token|raw }}">
 <css-placeholder token="{{ placeholder_token|raw }}">
 <js-placeholder token="{{ placeholder_token|raw }}">
-<!-- InstanceEndEditable -->
-<!-- InstanceParam name="class" type="text" value="" -->
 </head>
-<body data-version="4.1"{{ attributes.addClass(body_classes) }}>
-{% include "/wdn/templates_4.1/includes/skipnav.html" %}
+<body data-version="5.0"{{ attributes.addClass(body_classes) }}>
+{% include "/wdn/templates_5.0/includes/global/skip-nav.html" %}
 {{ page_top }}
 {{ page }}
 {{ page_bottom }}
-{% include "/wdn/templates_4.1/includes/body_scripts.html" %}
+{% include "/wdn/templates_4.1/includes/global/noscript.html" %}
+{% include "/wdn/templates_4.1/includes/global/js-body.html" %}
+<script>
+    require(['dialog'],function(dialogHelper){
+        var dialog = document.querySelector('#my-dialog');
+        dialogHelper.initialize(dialog);
+        dialogHelper.setupShowDialogButton(dialog, document.querySelector('#test-button'));
+    });
+</script>
 <js-bottom-placeholder token="{{ placeholder_token }}">
 </body>
-<!-- InstanceEnd --></html>
+</html>

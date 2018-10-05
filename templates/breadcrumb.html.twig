@@ -1,7 +1,7 @@
-<nav id="breadcrumbs" class="wdn-inner-wrapper" role="navigation" aria-label="breadcrumbs">
-  <!-- InstanceBeginEditable name="breadcrumbs" -->
+<nav class="dcf-breadcrumbs dcf-txt-sm dcf-d-none" id="dcf-breadcrumbs" role="navigation" aria-label="breadcrumbs">
+<!-- InstanceBeginEditable name="breadcrumbs" -->
 {% if breadcrumb %}
-  <ul>
+  <ol class="dcf-list-bare dcf-mb-0 dcf-pt-4 dcf-bt-solid dcf-bt-1">
     {% for item in breadcrumb %}
       <li>
         {% if item.url %}
@@ -11,7 +11,7 @@
         {% endif %}
       </li>
     {% endfor %}
-  </ul>
+  </ol>
 {% endif %}
   <!-- InstanceEndEditable -->
 </nav>

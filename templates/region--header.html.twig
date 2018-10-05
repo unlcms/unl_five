@@ -1,19 +1,15 @@
-<div id="wdn_header_top">
-  <span id="wdn_institution_title"><a href="http://www.unl.edu/">University of Nebraska&ndash;Lincoln</a></span>
-  <div id="wdn_resources">
-    {% include "/wdn/templates_4.1/includes/wdnResources.html"%}
-    {% include "/wdn/templates_4.1/includes/idm.html"%}
-    {% include "/wdn/templates_4.1/includes/search.html"%}
-  </div>
+<div class="dcf-header-global dcf-wrapper dcf-d-flex dcf-flex-row dcf-flex-nowrap dcf-ai-center dcf-jc-between dcf-relative unl-bg-scarlet">
+  {% include "/wdn/templates_5.0/includes/global/institution.html" %}
+  {% include "/wdn/templates_5.0/includes/global/nav-global.html" %}
+  {% include "/wdn/templates_5.0/includes/global/idm.html" %}
+  {% include "/wdn/templates_5.0/includes/global/search.html" %}
 </div>
-<div id="wdn_logo_lockup">
-  <div class="wdn-inner-wrapper">
-    {% include "/wdn/templates_4.1/includes/logo.html"%}
-    <!-- InstanceBeginEditable name="titlegraphic" -->
+
+<div class="dcf-logo-lockup dcf-wrapper dcf-d-flex dcf-ai-flex-end dcf-relative dcf-overflow-hidden">
+  {% include "/wdn/templates_5.0/includes/global/logo.html" %}
+  <div class="dcf-site-group dcf-d-flex dcf-flex-col dcf-jc-center unl-font-sans">
     {% if content %}
       {{ content }}
     {% endif %}
-    <!-- InstanceEndEditable -->
   </div>
 </div>
-

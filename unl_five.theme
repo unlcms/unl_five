@@ -6,13 +6,13 @@ use Drupal\node\Entity\Node;
 /**
  * Implements template_preprocess_html().
  */
-function unl_fourone_preprocess_html(&$variables) {
-  $group = unl_fourone_get_current_group();
+function unl_five_preprocess_html(&$variables) {
+  $group = unl_five_get_current_group();
 
   // Swap head title variables for group
   if ($group) {
     unset($variables['head_title_array']['name']);
-    if (unl_fourone_is_request_group_front()) {
+    if (unl_five_is_request_group_front()) {
       unset($variables['head_title']['title']);
     }
     else {
@@ -66,8 +66,8 @@ function unl_fourone_preprocess_html(&$variables) {
 /**
  * Implements template_preprocess_page().
  */
-function unl_fourone_preprocess_page(&$variables) {
-  $group = unl_fourone_get_current_group();
+function unl_five_preprocess_page(&$variables) {
+  $group = unl_five_get_current_group();
   if ($group) {
     $variables['site_name'] = $group->label();
   }
@@ -79,7 +79,7 @@ function unl_fourone_preprocess_page(&$variables) {
 /**
  * Implements hook_page_attachments_alter().
  */
-function unl_fourone_page_attachments_alter(&$attachments) {
+function unl_five_page_attachments_alter(&$attachments) {
   $metaToRemove = [
     'system_meta_content_type',
     'viewport',
@@ -91,20 +91,20 @@ function unl_fourone_page_attachments_alter(&$attachments) {
   }
 }
 
-function unl_fourone_js_alter(&$js, \Drupal\Core\Asset\AttachedAssetsInterface $assets) {
-  if (in_array('unl_fourone/amd', $assets->libraries)) {
-    $js['themes/unl_fourone/js/amd-enable.js']['weight'] += 999;
+function unl_five_js_alter(&$js, \Drupal\Core\Asset\AttachedAssetsInterface $assets) {
+  if (in_array('unl_five/amd', $assets->libraries)) {
+    $js['themes/unl_five/js/amd-enable.js']['weight'] += 999;
   }
 }
 
 /**
  * Implements template_preprocess_region().
  */
-function unl_fourone_preprocess_region(&$variables) {
+function unl_five_preprocess_region(&$variables) {
   // Add the Main Menu block for possible output in
   // region--navlinks.html.twig if a Group Menu does not exist.
   if ($variables['region'] == 'navlinks' && \Drupal::service('module_handler')->moduleExists('groupmenu_block')) {
-    $block = \Drupal\block\Entity\Block::load('unl_fourone_main_menu');
+    $block = \Drupal\block\Entity\Block::load('unl_five_main_menu');
     $variables['block_main_menu'] = \Drupal::entityTypeManager()
       ->getViewBuilder('block')
       ->view($block);
@@ -114,7 +114,7 @@ function unl_fourone_preprocess_region(&$variables) {
 /**
  * Implements template_preprocess_block().
  */
-function unl_fourone_preprocess_block(&$variables) {
+function unl_five_preprocess_block(&$variables) {
   // Add Menu Block class to book navigation block so that they can share CSS.
   if ($variables['plugin_id'] == 'book_navigation') {
     $variables['attributes']['class'][] = 'block-menu-block';
@@ -127,7 +127,7 @@ function unl_fourone_preprocess_block(&$variables) {
 
   // Change Site Title to the Group title
   if ($variables['base_plugin_id'] == 'system_branding_block') {
-    $group = unl_fourone_get_current_group();
+    $group = unl_five_get_current_group();
     if ($group) {
       $variables['site_name'] = $group->label();
       if ($site_affiliation = $group->get('field_site_affiliation')) {
@@ -148,14 +148,14 @@ function unl_fourone_preprocess_block(&$variables) {
 /**
  * Implements template_preprocess_breadcrumb().
  */
-function unl_fourone_preprocess_breadcrumb(&$variables) {
+function unl_five_preprocess_breadcrumb(&$variables) {
   if ($variables['breadcrumb']) {
     $variables['breadcrumb'][0] = [
       'text' => 'Nebraska',
-      'url' => 'http://www.unl.edu/',
+      'url' => 'https://www.unl.edu/',
     ];
 
-    if (unl_fourone_get_current_group()) {
+    if (unl_five_get_current_group()) {
       // @todo: There should probably be a way to inject "intermediate" crumbs
     }
 
@@ -175,7 +175,7 @@ function unl_fourone_preprocess_breadcrumb(&$variables) {
 /**
  * Implements template_preprocess_webform_composite_address().
  */
-function unl_fourone_preprocess_webform_composite_address(&$variables) {
+function unl_five_preprocess_webform_composite_address(&$variables) {
   $containerKey = array_search('container', $variables['element']['#theme_wrappers']);
 
   if (in_array('fieldset', $variables['element']['#theme_wrappers']) && $containerKey !== false) {
@@ -188,7 +188,7 @@ function unl_fourone_preprocess_webform_composite_address(&$variables) {
  *
  * @return Drupal\group\Entity\Group
  */
-function unl_fourone_get_current_group() {
+function unl_five_get_current_group() {
   $moduleHandler = \Drupal::service('module_handler');
   if (!$moduleHandler->moduleExists('group')) {
     return NULL;
@@ -219,7 +219,7 @@ function unl_fourone_get_current_group() {
  *
  * @return bool
  */
-function unl_fourone_is_request_group_front() {
+function unl_five_is_request_group_front() {
   $group = \Drupal::request()->attributes->get('group');
 
   return $group ? TRUE : FALSE;
