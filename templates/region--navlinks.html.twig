@@ -1,9 +1,8 @@
 {# content will be the Group Menu block. If a Group Menu is not available
- then output the Main Menu. block_main_menu is set in unl_five_preprocess_region() #}
-<nav class="dcf-nav-local dcf-w-100% dcf-lh-3" role="navigation" aria-label="local navigation">
+ then output the Main Menu. block_main_menu is set in unl_fourone_preprocess_region() #}
+
 {% if content %}
   {{ content }}
   {% else %}
   {{ block_main_menu }}
 {% endif %}
-</nav>

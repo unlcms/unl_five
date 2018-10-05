@@ -1,15 +1,12 @@
-<div class="dcf-header-global dcf-wrapper dcf-d-flex dcf-flex-row dcf-flex-nowrap dcf-ai-center dcf-jc-between dcf-relative unl-bg-scarlet">
-  {% include "/wdn/templates_5.0/includes/global/institution.html" %}
-  {% include "/wdn/templates_5.0/includes/global/nav-global.html" %}
-  {% include "/wdn/templates_5.0/includes/global/idm.html" %}
-  {% include "/wdn/templates_5.0/includes/global/search.html" %}
+{% include "/wdn/templates_5.0/includes/global/header-global.html" %}
+{% include "/wdn/templates_5.0/includes/global/idm.html" %}
+{% include "/wdn/templates_5.0/includes/global/search.html" %}
 </div>
 
-<div class="dcf-logo-lockup dcf-wrapper dcf-d-flex dcf-ai-flex-end dcf-relative dcf-overflow-hidden">
-  {% include "/wdn/templates_5.0/includes/global/logo.html" %}
-  <div class="dcf-site-group dcf-d-flex dcf-flex-col dcf-jc-center unl-font-sans">
-    {% if content %}
-      {{ content }}
-    {% endif %}
-  </div>
+{% include "/wdn/templates_5.0/includes/global/logo-lockup.html" %}
+{% if content %}
+  {{ content }}
+{% endif %}
+
+</div>
 </div>
