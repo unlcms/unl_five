@@ -1,0 +1,226 @@
+<?php
+
+use Drupal\group\Entity\GroupContent;
+use Drupal\node\Entity\Node;
+
+/**
+ * Implements template_preprocess_html().
+ */
+function unl_fourone_preprocess_html(&$variables) {
+  $group = unl_fourone_get_current_group();
+
+  // Swap head title variables for group
+  if ($group) {
+    unset($variables['head_title_array']['name']);
+    if (unl_fourone_is_request_group_front()) {
+      unset($variables['head_title']['title']);
+    }
+    else {
+      $variables['head_title_array'] = array_slice($variables['head_title_array'], 0, 1, true) +
+                                       array('Group' => $group->label()) +
+                                       array_slice($variables['head_title_array'], 1, NULL, true);
+    }
+  }
+
+
+  // Set the <title> tag to UNL format: Page Title | Site Name | University of Nebraska–Lincoln
+  $moduleHandler = \Drupal::service('module_handler');
+  if (!$moduleHandler->moduleExists('metatag')) {
+    // Remove Page Title on the front page.
+    if (\Drupal::service('path.matcher')->isFrontPage()) {
+      unset($variables['head_title_array']['title']);
+    }
+    // Append University of Nebraska–Lincoln to the end.
+    $site_config = \Drupal::config('system.site');
+    if ($site_config->get('name') != 'University of Nebraska–Lincoln') {
+      $variables['head_title_array'] = array_merge($variables['head_title_array'], array('UNL' => 'University of Nebraska–Lincoln'));
+    }
+    $variables['head_title'] = implode(' | ', $variables['head_title_array']);
+  }
+
+  // If <link rel="home"> has already been set elsewhere (in a Context for example) then return...
+  foreach ($variables['page']['#attached']['html_head'] as $key => $element) {
+    if ($element[0]["#tag"] == 'link' && isset($element[0]['#attributes']['rel']) && $element[0]['#attributes']['rel'] == 'home') {
+      return;
+    }
+  }
+
+  // ...otherwise add a <link rel="home"> tag with the front page as the href attribute
+  $element = array(
+    '#tag' => 'link',
+    '#attributes' => array(
+      'rel' => 'home',
+      'href' => $group
+        ? $group->toUrl()->toString()
+        : \Drupal\Core\Url::fromRoute('<front>', array(), array('absolute' => TRUE))
+          ->toString(),
+    ),
+    '#type' => 'html_tag'
+  );
+  $variables['page']['#attached']['html_head'][] = array(
+    $element,
+    'link-rel-home'
+  );
+}
+
+/**
+ * Implements template_preprocess_page().
+ */
+function unl_fourone_preprocess_page(&$variables) {
+  $group = unl_fourone_get_current_group();
+  if ($group) {
+    $variables['site_name'] = $group->label();
+  }
+  else {
+    $variables['site_name'] = \Drupal::config('system.site')->get('name');
+  }
+}
+
+/**
+ * Implements hook_page_attachments_alter().
+ */
+function unl_fourone_page_attachments_alter(&$attachments) {
+  $metaToRemove = [
+    'system_meta_content_type',
+    'viewport',
+  ];
+  foreach ($attachments['#attached']['html_head'] as $key => $element) {
+    if (in_array($element[1], $metaToRemove)) {
+      unset($attachments['#attached']['html_head'][$key]);
+    }
+  }
+}
+
+function unl_fourone_js_alter(&$js, \Drupal\Core\Asset\AttachedAssetsInterface $assets) {
+  if (in_array('unl_fourone/amd', $assets->libraries)) {
+    $js['themes/unl_fourone/js/amd-enable.js']['weight'] += 999;
+  }
+}
+
+/**
+ * Implements template_preprocess_region().
+ */
+function unl_fourone_preprocess_region(&$variables) {
+  // Add the Main Menu block for possible output in
+  // region--navlinks.html.twig if a Group Menu does not exist.
+  if ($variables['region'] == 'navlinks' && \Drupal::service('module_handler')->moduleExists('groupmenu_block')) {
+    $block = \Drupal\block\Entity\Block::load('unl_fourone_main_menu');
+    $variables['block_main_menu'] = \Drupal::entityTypeManager()
+      ->getViewBuilder('block')
+      ->view($block);
+  }
+}
+
+/**
+ * Implements template_preprocess_block().
+ */
+function unl_fourone_preprocess_block(&$variables) {
+  // Add Menu Block class to book navigation block so that they can share CSS.
+  if ($variables['plugin_id'] == 'book_navigation') {
+    $variables['attributes']['class'][] = 'block-menu-block';
+  }
+  // Add .wdn-sans-serif to menu blocks.
+  if ($variables['plugin_id'] == 'book_navigation' || substr($variables['plugin_id'], 0, 16) == 'block-menu-block' ) {
+    $variables['attributes']['classes'][] = 'wdn-sans-serif';
+    $variables['title_attributes']['class'][] = 'wdn-sans-serif';
+  }
+
+  // Change Site Title to the Group title
+  if ($variables['base_plugin_id'] == 'system_branding_block') {
+    $group = unl_fourone_get_current_group();
+    if ($group) {
+      $variables['site_name'] = $group->label();
+      if ($site_affiliation = $group->get('field_site_affiliation')) {
+        $variables['site_slogan'] = $site_affiliation->value;
+      }
+    }
+  }
+
+  $moduleHandler = \Drupal::service('module_handler');
+  if ($moduleHandler->moduleExists('group_subdomain')) {
+    $variables['#cache']['contexts'][] = 'url';
+  }
+  else {
+    $variables['#cache']['contexts'][] = 'url.path';
+  }
+}
+
+/**
+ * Implements template_preprocess_breadcrumb().
+ */
+function unl_fourone_preprocess_breadcrumb(&$variables) {
+  if ($variables['breadcrumb']) {
+    $variables['breadcrumb'][0] = [
+      'text' => 'Nebraska',
+      'url' => 'http://www.unl.edu/',
+    ];
+
+    if (unl_fourone_get_current_group()) {
+      // @todo: There should probably be a way to inject "intermediate" crumbs
+    }
+
+    // Append current page.
+    $request = \Drupal::request();
+    $route_match = \Drupal::routeMatch();
+    $page_title = \Drupal::service('title_resolver')->getTitle($request, $route_match->getRouteObject());
+
+    if (!empty($page_title)) {
+      $variables['breadcrumb'][] = [
+        'text' => $page_title,
+      ];
+    }
+  }
+}
+
+/**
+ * Implements template_preprocess_webform_composite_address().
+ */
+function unl_fourone_preprocess_webform_composite_address(&$variables) {
+  $containerKey = array_search('container', $variables['element']['#theme_wrappers']);
+
+  if (in_array('fieldset', $variables['element']['#theme_wrappers']) && $containerKey !== false) {
+    unset($variables['element']['#theme_wrappers'][$containerKey]);
+  }
+}
+
+/**
+ * Get the current Group.
+ *
+ * @return Drupal\group\Entity\Group
+ */
+function unl_fourone_get_current_group() {
+  $moduleHandler = \Drupal::service('module_handler');
+  if (!$moduleHandler->moduleExists('group')) {
+    return NULL;
+  }
+
+  // If we're on a Group entity page.
+  $group_route_context = \Drupal::service('group.group_route_context');
+  $contexts = $group_route_context->getRuntimeContexts(['group']);
+  $group = $contexts['group']->getContextValue();
+
+  // If we're on a Node entity page.
+  $node = \Drupal::request()->attributes->get('node');
+  if ($node) {
+    if (is_numeric($node)) {
+      $node = Node::load($node);
+    }
+    $group_content_array = GroupContent::loadByEntity($node);
+    foreach ($group_content_array as $group_content) {
+      $group = $group_content->getGroup();
+    }
+  }
+
+  return $group;
+}
+
+/**
+ * Returns if the requested page is a Group entity and thus the front page of the group.
+ *
+ * @return bool
+ */
+function unl_fourone_is_request_group_front() {
+  $group = \Drupal::request()->attributes->get('group');
+
+  return $group ? TRUE : FALSE;
+}

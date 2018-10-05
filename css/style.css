@@ -1,0 +1,34 @@
+/**
+ * Most unl_fourone css comes from all.css in the WDNTemplates project.
+ * CSS that does appear here is for CMS specific items or modifications
+ * that need to be made for WDN styles to work with CMS DOM structure.
+ */
+
+/* The exclude_node_title module empties the h1 text but leaves the empty element
+   See: https://www.drupal.org/node/2624734 */
+#pagetitle h1:empty {
+    display: none;
+}
+
+/* Removes extra margin-top due to div+h1 rules if the h1 is wrapped, such as when editor is logged in */
+#pagetitle h1 {
+    margin-top: 1em;
+}
+
+/**
+ * Fixes admin toolbar positioning during js load (fixes page width)
+ * caused by #wdn_wrapper {overflow:hidden}
+ */
+#toolbar-bar::after {
+    clear: left;
+    content: ' ';
+    display: block;
+}
+
+/* Margin for images aligned in the WYSIWYG editor */
+.align-left {
+    margin: 0 1em 1em 0;
+}
+.align-right {
+    margin: 0 0 1em 1em;
+}

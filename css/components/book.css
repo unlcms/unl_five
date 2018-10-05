@@ -1,0 +1,22 @@
+/**
+ * Book navigation blocks have the .block-menu-block class
+ * added so they can share the menu-block.css styles.
+ */
+
+.book-navigation ul {
+  border-top: 1px solid #d5d5d2;
+  padding: 1em 0 1em 3em !important;
+  margin-bottom: 3em;
+}
+.book-navigation .page-links {
+  background: #F4F3F0;
+  border-bottom: 1px solid #d5d5d2;
+  border-top: 1px solid #d5d5d2;
+  margin: 3em 0 1em;
+}
+.book-navigation .page-links a,
+.node-book .links a {
+  color: #525252;
+  font-size: .8em;
+  border: none;
+}

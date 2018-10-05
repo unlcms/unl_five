@@ -1,0 +1,31 @@
+global-styling:
+  version: VERSION
+  css:
+    component:
+      css/components/book.css: {}
+      css/components/local-tasks.css: {}
+      css/components/form.css: {}
+      css/components/node-preview.css: {}
+      css/components/tabs.css: {}
+      css/components/views.css: {}
+    theme:
+      css/menu-block.css: {}
+      css/style.css: {}
+
+messages:
+  version: VERSION
+  js:
+    js/messages.js: {}
+
+amd:
+  version: VERSION
+  js:
+    js/amd-disable.js: { weight: -999 }
+    js/amd-enable.js: {}
+
+idm:
+  version: VERSION
+  js:
+    js/idm.js: {}
+  dependencies:
+    - core/drupalSettings

@@ -1,0 +1,27 @@
+/**
+ * The .block-menu-block class is also added to the
+ * book navigation block in unl_fourone_preprocess_block().
+ */
+
+.block-menu-block a {color: #333;}
+.block-menu-block a:hover {color: #d00000;}
+.block-menu-block a.active {background-color: #F2E8B1 !important;}
+.block-menu-block h3 {background-color: #454542; color: #FFF; font-size: inherit; text-transform: uppercase; margin: 0; padding: 1em;}
+.block-menu-block h3 a {color: #fff; border: none;}
+.block-menu-block h3 a.active {background-color: transparent !important;}
+.block-menu-block ul {background-color: #fff;padding: 0; list-style-image: none; list-style-type: none; margin: 0;}
+.block-menu-block li {padding: 0;}
+.block-menu-block ul a {border: none; font-size: .8em}
+.block-menu-block ul:first-child > li,
+.block-menu-block ul:first-child > li > ul > li {list-style-image: none; list-style-type: none;}
+.block-menu-block ul:first-child > li > a {display: block; background-color: #f2edde; padding: .5em .5em .5em 1.5em; margin-bottom: 1px; border-bottom: 1px solid #E2E2E2;}
+.block-menu-block ul:first-child > li > a {background-position: .3em center; background-repeat: no-repeat;}
+.block-menu-block ul:first-child > li > ul > li > a {background-position: 1em center; background-repeat: no-repeat;}
+.block-menu-block li.collapsed > a {background-image: url("../../../../../misc/menu-collapsed.png");}
+.block-menu-block li.expanded > a {background-image: url("../../../../../misc/menu-expanded.png");}
+.block-menu-block ul:first-child > li:last-child > a {border: none; margin: 0;}
+.block-menu-block ul:first-child > li > ul > li > a {display: block; background-color: #f4f3f0; padding: .5em .5em .5em 2.2em; margin-bottom: 1px;}
+.block-menu-block ul:first-child > li > ul > li > ul {padding: .5em 0 .5em 3.2em;}
+.block-menu-block ul:first-child > li > ul > li > ul ul {padding: .4em 0 0 1em;}
+.block-menu-block ul:first-child > li > ul > li > ul li {padding: 0 0 .2em 0em;}
+.block-menu-block ul:first-child > li > ul > li > ul a {background: none; padding: .2em;}

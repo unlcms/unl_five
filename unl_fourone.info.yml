@@ -1,0 +1,39 @@
+name: UNLedu 4.1
+type: theme
+description: 'This theme tracks the 4.1.x version of the UNLedu Web Framework.'
+core: 8.x
+
+libraries:
+  - unl_fourone/global-styling
+  - unl_fourone/idm
+  - unl_fourone/amd
+
+libraries-override:
+  core/classList: false
+  core/html5shiv: false
+  core/normalize: false
+  core/modernizr: false
+
+ckeditor_stylesheets:
+  - css/ckeditor-iframe.css
+
+regions:
+  page_top: Page top
+  page_bottom: Page bottom
+
+  header: Header
+  breadcrumb: Breadcrumbs
+  pagetitle: Page Title
+  navlinks: Navigation links
+  content_top: Content top
+  sidebar_first: Sidebar first
+  content: Content
+  sidebar_second: Sidebar second
+  content_bottom: Content bottom
+
+  optionalfooter: Optional footer
+  contactinfo: Contact info (Main)
+  contactinfo_additional: Contact info (Additional)
+  socialmedia: Social media
+  leftcollinks: Related links
+

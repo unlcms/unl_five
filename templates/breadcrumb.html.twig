@@ -1,0 +1,17 @@
+<nav id="breadcrumbs" class="wdn-inner-wrapper" role="navigation" aria-label="breadcrumbs">
+  <!-- InstanceBeginEditable name="breadcrumbs" -->
+{% if breadcrumb %}
+  <ul>
+    {% for item in breadcrumb %}
+      <li>
+        {% if item.url %}
+          <a href="{{ item.url }}">{{ item.text }}</a>
+        {% else %}
+          {{ item.text }}
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+{% endif %}
+  <!-- InstanceEndEditable -->
+</nav>

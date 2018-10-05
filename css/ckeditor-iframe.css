@@ -1,0 +1,13 @@
+@import url("../../../wdn/templates_4.1/css/all.css");
+
+body {
+  font-family: inherit;
+  font-size: 16px;
+  color: inherit;
+  background-color: inherit;
+}
+
+#maincontent > * {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}

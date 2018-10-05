@@ -1,0 +1,113 @@
+<div id="wdn_wrapper">
+    <input type="checkbox" id="wdn_menu_toggle" value="Show navigation menu" class="wdn-content-slide wdn-input-driver" />
+    {% include "/wdn/templates_4.1/includes/noscript-padding.html"%}
+    <header id="header" role="banner" class="wdn-content-slide wdn-band">
+      {{ page.header }}
+    </header>
+    <div id="wdn_navigation_bar" class="wdn-band">
+        {{ page.breadcrumb }}
+        {{ page.navlinks }}
+    </div>
+    <div class="wdn-menu-trigger wdn-content-slide">
+        <label for="wdn_menu_toggle" class="wdn-icon-menu">Menu</label>
+        {% include "/wdn/templates_4.1/includes/share.html"%}
+    </div>
+    <main id="wdn_content_wrapper" role="main" class="wdn-content-slide" tabindex="-1">
+        <div id="maincontent" class="wdn-main">
+            {{ page.content_top }}
+            <div id="pagetitle">
+                <!-- InstanceBeginEditable name="pagetitle" -->
+                {{ page.pagetitle }}
+                <!-- InstanceEndEditable -->
+            </div>
+            <!-- InstanceBeginEditable name="maincontentarea" -->
+
+            {% if page.sidebar_first or page.sidebar_second %}
+            <div class="wdn-band"><div class="wdn-inner-wrapper wdn-inner-padding-no-top"><section class="wdn-grid-set">
+            {% endif %}
+
+              {% if page.sidebar_first %}
+                <div class="bp768-wdn-col-one-third">
+                {{ page.sidebar_first }}
+                </div>
+              {% endif %}
+
+              {% if page.sidebar_first and page.sidebar_second %}
+                <div class="bp768-wdn-col-one-third">
+                {{ page.content }}
+                </div>
+              {% elseif page.sidebar_first or page.sidebar_second %}
+                <div class="bp768-wdn-col-two-thirds">
+                {{ page.content }}
+                </div>
+              {% else %}
+                  {{ page.content }}
+              {% endif %}
+
+              {% if page.sidebar_second %}
+                <div class="bp768-wdn-col-one-third">
+                {{ page.sidebar_second }}
+                </div>
+              {% endif %}
+
+            {% if page.sidebar_first or page.sidebar_second %}
+            </section></div></div>
+            {% endif %}
+
+            {{ page.content_bottom }}
+            <!-- InstanceEndEditable -->
+        </div>
+    </main>
+
+
+
+    <footer id="footer" role="contentinfo" class="wdn-content-slide">
+        <div id="wdn_optional_footer" class="wdn-band wdn-footer-optional">
+            <div class="wdn-inner-wrapper">
+                <!-- InstanceBeginEditable name="optionalfooter" -->
+                {{ page.optionalfooter }}
+                <!-- InstanceEndEditable -->
+            </div>
+        </div>
+        <div id="wdn_local_footer" class="wdn-band wdn-footer-local">
+            <div class="wdn-inner-wrapper">
+                <!-- InstanceBeginEditable name="contactinfo" -->
+                <div class="wdn-grid-set wdn-footer-links-local">
+                    <div class="wdn-col-full bp960-wdn-col-one-half">
+                        <div class="wdn-footer-module">
+                            <span class="wdn-footer-heading" role="heading" aria-level="2">{{ site_name }}<span class="wdn-text-hidden"> Contact Information</span></span>
+                            <div class="wdn-grid-set-full">
+                                <div class="wdn-col">
+                                {{ page.contactinfo }}
+                                </div>
+                                <div class="wdn-col">
+                                {{ page.contactinfo_additional }}
+                                </div>
+                                <div class="wdn-col">
+                                {{ page.socialmedia }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- InstanceEndEditable -->
+                    <!-- InstanceBeginEditable name="leftcollinks" -->
+                    {% if page.leftcollinks %}
+                    <div class="wdn-col-full bp960-wdn-col-one-half">
+                        <div class="wdn-footer-module">
+                          <span class="wdn-footer-heading" role="heading" aria-level="2">Related Links</span>
+                          {{ page.leftcollinks }}
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+                <!-- InstanceEndEditable -->
+            </div>
+        </div>
+        <div id="wdn_global_footer" class="wdn-band wdn-footer-global">
+            <div class="wdn-inner-wrapper">
+                {% include "/wdn/templates_4.1/includes/globalfooter.html"%}
+            </div>
+        </div>
+    </footer>
+    {% include "/wdn/templates_4.1/includes/noscript.html"%}
+</div>
