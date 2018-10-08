@@ -360,12 +360,12 @@ function unl_five_breadcrumb($variables) {
     $breadcrumbs[] = check_plain(menu_get_active_title());
   }
 
-  $html = '' . PHP_EOL;
+  $html = '<ol>' . PHP_EOL;
   foreach ($breadcrumbs as $breadcrumb) {
     $html .= '<li>' .  $breadcrumb . '</li>';
   }
 
-  return $html;
+  return $html . '</ol>';
 }
 
 /**

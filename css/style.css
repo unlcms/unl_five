@@ -39,7 +39,7 @@ label {
 }
 
 /* Overrides of system.menus.css due to conflicts with UNL navigation */
-nav.dcf-nav-local li {
+#dcf-navigation .dcf-nav-local li {
   margin: 0;
   padding: 0;
   list-style-image: none;
