@@ -13,9 +13,9 @@
 
 <?php print $page_top; ?>
 <?php print $page; ?>
-<?php print $page_bottom; ?>
 
 <?php require(DRUPAL_ROOT."/wdn/templates_5.0/includes/global/noscript.html"); ?>
 <?php require(DRUPAL_ROOT."/wdn/templates_5.0/includes/global/js-body.html"); ?>
+<?php print $page_bottom; ?>
 </body>
 </html>

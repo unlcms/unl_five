@@ -123,12 +123,11 @@ function unl_five_preprocess_html(&$vars, $hook) {
   // Add the CSS and JS files that are generated from the unl_five appearance settings page
   foreach (array('css', 'js') as $type) {
     $file = variable_get('unl_custom_code_path', 'public://custom') . '/custom_unl_five.' . $type;
-    if (is_file($file) && ($type == 'css' || !theme_get_setting('unl_speedy'))) {
+    if (is_file($file) && $type == 'css') {
       $func = 'drupal_add_'.$type;
-      $func($file, array('type' => 'file', 'group' => ($type=='css'?CSS_THEME:JS_THEME), 'every_page' => TRUE));
+      $func($file, array('type' => 'file', 'group' => CSS_THEME, 'every_page' => TRUE));
     }
-    else {
-      // Add the JS to footer if Speedy is enabled.
+    elseif (is_file($file)) {
       drupal_add_js($file, array('scope' => 'footer', 'type' => 'file', 'group' => JS_THEME, 'every_page' => TRUE));
     }
   }
@@ -587,12 +586,8 @@ EOF;
     return '';
   }
 
-  $output = <<<EOF
-<script type="text/javascript">
-WDN.initializePlugin('notice');
-</script>
-$output
-EOF;
+  $script = "require(['wdn'], function(WDN) {WDN.initializePlugin('notice');});" . PHP_EOL;
+  drupal_add_js($script, array('type' => 'inline', 'scope' => 'footer'));
 
   return $output;
 }
