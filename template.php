@@ -533,7 +533,7 @@ function unl_five_pager($variables) {
     }
     return '<h2 class="element-invisible">' . t('Pages') . '</h2>' . theme('item_list', array(
       'items' => $items,
-      'attributes' => array('class' => array('wdn_pagination', 'wdn-inner-wrapper')),
+      'attributes' => array('class' => array('wdn_pagination', 'dcf-list-bare')),
     ));
   }
 }
