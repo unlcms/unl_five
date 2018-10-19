@@ -291,7 +291,7 @@ function unl_five_preprocess_page(&$vars, $hook) {
 
   // Add js to modify the My.UNL login links.
   $loginUrl = url('user', array('query' => drupal_get_destination()));
-  $script = "require(['idm'], function(idm) {idm.setLoginURL('" . $loginUrl . "'); idm.setLogoutURL('user/logout');});" . PHP_EOL;
+  $script = "WDN.setPluginParam('idm', 'login', '" . $loginUrl . "'); WDN.setPluginParam('idm', 'logout', 'user/logout');" . PHP_EOL;
   drupal_add_js($script, array('type' => 'inline', 'scope' => 'footer'));
 
   // Unset the sidebars if on a user page (i.e. user profile or imce file browser)
