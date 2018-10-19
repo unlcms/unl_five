@@ -72,6 +72,15 @@ function unl_five_css_alter(&$css) {
 }
 
 /**
+ * Implements template_preprocess().
+ */
+function unl_five_preprocess(&$vars) {
+  // For checking the presence of ?format=partial in any template, which is used
+  // to output the page without UNL's header and footer (for embedding in other pages, etc).
+  $vars['format'] = filter_input(INPUT_GET, 'format', FILTER_SANITIZE_STRING);
+}
+
+/**
  * Implements template_preprocess_block().
  */
 function unl_five_preprocess_block(&$vars) {

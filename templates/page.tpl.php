@@ -1,3 +1,4 @@
+<?php if ($format !== 'partial'): ?>
 <header class="dcf-header" id="dcf-header" role="banner">
 
     <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/header-global-1.html"); ?>
@@ -54,7 +55,7 @@
     <?php if ($tabs): ?><div class="tabs"><?php print render($tabs); ?></div><?php endif; ?>
     <?php print render($page['help']); ?>
     <?php if ($action_links): ?><ul class="action-links"><?php print render($action_links); ?></ul><?php endif; ?>
-
+<?php endif; ?>
     <?php print render($page['content_top']); ?>
 
     <?php if ($unl_remove_inner_wrapper): ?><div class="dcf-bleed"><?php endif; ?>
@@ -90,6 +91,7 @@
     <?php if ($unl_remove_inner_wrapper): ?></div><?php endif; ?>
 
     <?php print render($page['content_bottom']); ?>
+<?php if ($format !== 'partial'): ?>
     <!-- InstanceEndEditable -->
     </div>
 
@@ -111,3 +113,4 @@
     <!-- InstanceEndEditable -->
     <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/footer-global-2.html"); ?>
 </footer>
+<?php endif; ?>

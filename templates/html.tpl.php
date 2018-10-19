@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php if ($format !== 'partial'): ?><!DOCTYPE html>
 <html class="no-js" lang="<?php print $language->language; ?>">
 <head>
   <?php require(DRUPAL_ROOT."/wdn/templates_5.0/includes/global/head-1.html"); ?>
@@ -12,10 +12,12 @@
 <?php require(DRUPAL_ROOT."/wdn/templates_5.0/includes/global/skip-nav.html"); ?>
 
 <?php print $page_top; ?>
+<?php endif; ?>
 <?php print $page; ?>
-
+<?php if ($format !== 'partial'): ?>
 <?php require(DRUPAL_ROOT."/wdn/templates_5.0/includes/global/noscript.html"); ?>
 <?php require(DRUPAL_ROOT."/wdn/templates_5.0/includes/global/js-body.html"); ?>
 <?php print $page_bottom; ?>
 </body>
 </html>
+<?php endif; ?>
