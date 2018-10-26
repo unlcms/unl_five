@@ -5,28 +5,26 @@
     <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/idm.html"); ?>
     <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/search.html"); ?>
     <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/header-global-2.html"); ?>
-    <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/logo-lockup.html"); ?>
-
-    <div class="dcf-site-affiliation dcf-lh-3 dcf-txt-2xs" id="dcf-site-affiliation">
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/logo-lockup-1.html"); ?>
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/site-affiliation-1.html"); ?>
         <!-- InstanceBeginEditable name="affiliation" -->
         <?php if ($site_slogan): ?><?php print $site_slogan; ?><?php endif; ?>
         <!-- InstanceEndEditable -->
-    </div>
-    <div class="dcf-site-title dcf-bold dcf-lh-2 dcf-uppercase unl-ls-1" id="dcf-site-title">
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/site-affiliation-2.html"); ?>
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/site-title-1.html"); ?>
         <!-- InstanceBeginEditable name="titlegraphic" -->
         <?php if ($site_name): ?><a class="unl-site-title-medium" href="<?php print $front_page; ?>"><?php print $site_name; ?></a><?php endif; ?>
         <!-- InstanceEndEditable -->
-    </div>
-    </div>
-    </div>
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/site-title-2.html"); ?>
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/logo-lockup-2.html"); ?>
     <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/nav-toggle-group.html"); ?>
 
-    <nav class="dcf-nav-menu dcf-modal-parent unl-font-sans" id="dcf-navigation" role="navigation" aria-label="local navigation">
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/nav-menu-1.html"); ?>
         <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/nav-toggle-btn.html"); ?>
-        <div class="dcf-nav-menu-child dcf-nav-local dcf-w-100%">
+        <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/nav-menu-child-1.html"); ?>
             <?php print render($page['navlinks']); ?>
-        </div>
-    </nav>
+        <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/nav-menu-child-2.html"); ?>
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/nav-menu-2.html"); ?>
 
 </header>
 
