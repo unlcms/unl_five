@@ -1,11 +1,11 @@
 {% extends "block.html.twig" %}
 {% block content %}
-<nav class="dcf-nav-menu dcf-modal-parent unl-font-sans" id="dcf-navigation" role="navigation" aria-label="local navigation">
+  {% include "/wdn/templates_5.0/includes/global/nav-menu-1.html" %}
   {% include "/wdn/templates_5.0/includes/global/nav-toggle-btn.html" %}
-  <div class="dcf-nav-menu-child dcf-nav-local dcf-w-100%">
+  {% include "/wdn/templates_5.0/includes/global/nav-menu-child-1.html" %}
     <!-- InstanceBeginEditable name="navlinks" -->
     {{ content }}
     <!-- InstanceEndEditable -->
-  </div>
-</nav>
+  {% include "/wdn/templates_5.0/includes/global/nav-menu-child-2.html" %}
+  {% include "/wdn/templates_5.0/includes/global/nav-menu-2.html" %}
 {% endblock %}
