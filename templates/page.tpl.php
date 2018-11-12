@@ -31,7 +31,7 @@
 <main class="dcf-main" id="dcf-main" role="main" tabindex="-1">
 
     <!-- InstanceBeginEditable name="hero" -->
-    <div class="dcf-hero<?php if ($unl_hide_page_title): ?> dcf-sr-only<?php endif; ?>">
+    <div class="dcf-hero dcf-hero-default<?php if ($unl_hide_page_title): ?> dcf-sr-only<?php endif; ?>">
     <!-- InstanceEndEditable -->
         <div class="dcf-hero-group-1">
             <nav class="dcf-breadcrumbs" id="dcf-breadcrumbs" role="navigation" aria-label="breadcrumbs">
