@@ -216,12 +216,6 @@ function unl_five_preprocess_region(&$vars) {
   if (in_array($vars['region'], $sidebar_regions)) {
     $vars['classes_array'][] = 'sidebar';
   }
-
-  // Content top and bottom regions receive 'wdn-band' class
-  $content_regions = array('content_top', 'content_bottom');
-  if (in_array($vars['region'], $content_regions)) {
-    $vars['classes_array'][] = 'wdn-band';
-  }
 }
 
 /**
