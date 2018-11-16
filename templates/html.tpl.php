@@ -10,6 +10,7 @@
 <?php print $head; ?>
 <?php print $styles; ?>
 <?php print $scripts; ?>
+<?php print theme_get_setting('head_html'); ?>
 <!-- InstanceEndEditable -->
 </head>
 <body class="unl <?php print $classes; ?>" data-version="5.0" <?php print $attributes;?>>
