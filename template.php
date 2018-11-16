@@ -205,10 +205,10 @@ function unl_five_preprocess_region(&$vars) {
   $vars['classes_array'][] = $vars['region_name'];
 
   if ($vars['region'] == 'sidebar_first') {
-    $vars['classes_array'][] = theme_get_setting('grid_class_sidebar_first');
+    $vars['classes_array'][] = block_get_blocks_by_region('sidebar_second') ? '' : 'dcf-col-33%-start@md';
   }
   else if ($vars['region'] == 'sidebar_second') {
-    $vars['classes_array'][] = theme_get_setting('grid_class_sidebar_second');
+    $vars['classes_array'][] = block_get_blocks_by_region('sidebar_first') ? '' : 'dcf-col-33%-end@md';
   }
 
   // Sidebar regions receive common 'sidebar' class
