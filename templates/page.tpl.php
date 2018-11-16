@@ -76,11 +76,11 @@
         <?php endif; ?>
 
         <?php if (!isset($page['sidebar_first']['#region']) && isset($page['sidebar_second']['#region'])): ?>
-          <div class="dcf-col-67%-start@md">
+          <div class="dcf-col-100% dcf-col-67%-start@md">
             <?php print render($page['content']); ?>
           </div>
         <?php elseif (isset($page['sidebar_first']['#region']) && !isset($page['sidebar_second']['#region'])): ?>
-          <div class="dcf-col-67%-end@md">
+          <div class="dcf-col-100% dcf-col-67%-end@md">
             <?php print render($page['content']); ?>
           </div>
         <?php else: ?>
