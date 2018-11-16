@@ -66,9 +66,9 @@
     <?php if ($unl_remove_inner_wrapper): ?><div class="dcf-bleed"><?php endif; ?>
 
         <?php if ($page['sidebar_first'] xor $page['sidebar_second']): ?>
-        <div class="dcf-grid">
+        <div class="dcf-grid dcf-col-gap-4">
         <?php elseif ($page['sidebar_first'] && $page['sidebar_second']) : ?>
-        <div class="dcf-grid-thirds@md">
+        <div class="dcf-grid-thirds@md dcf-col-gap-4">
         <?php endif; ?>
 
         <?php if($page['sidebar_first']): ?>
