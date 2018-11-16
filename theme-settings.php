@@ -7,40 +7,6 @@
 function unl_five_form_system_theme_settings_alter(&$form, &$form_state) {
   global $user;
 
-  // Add checkboxes to the Toggle Display form to hide UNL template items on an affiliate site
-  $form['theme_settings'] += array(
-    'toggle_unl_banner' => array(
-      '#type' => 'checkbox',
-      '#title' => t('UNL affiliate banner'),
-      '#default_value' => theme_get_setting('toggle_unl_banner'),
-      '#access' => theme_get_setting('unl_affiliate'),
-    ),
-    'toggle_unl_branding' => array(
-      '#type' => 'checkbox',
-      '#title' => t('UNL branding elements'),
-      '#default_value' => theme_get_setting('toggle_unl_branding'),
-      '#access' => theme_get_setting('unl_affiliate'),
-    ),
-    'toggle_unl_breadcrumb' => array(
-      '#type' => 'checkbox',
-      '#title' => t('UNL breadcrumb'),
-      '#default_value' => theme_get_setting('toggle_unl_breadcrumb'),
-      '#access' => theme_get_setting('unl_affiliate'),
-    ),
-    'toggle_unl_search' => array(
-      '#type' => 'checkbox',
-      '#title' => t('UNL search box'),
-      '#default_value' => theme_get_setting('toggle_unl_search'),
-      '#access' => theme_get_setting('unl_affiliate'),
-    ),
-    'toggle_unl_tools' => array(
-      '#type' => 'checkbox',
-      '#title' => t('UNL tools'),
-      '#default_value' => theme_get_setting('toggle_unl_tools'),
-      '#access' => theme_get_setting('unl_affiliate'),
-    ),
-  );
-
   $form['intermediate_breadcrumbs'] = array(
     '#type' => 'fieldset',
     '#title' => t('Intermediate breadcrumbs'),
@@ -101,25 +67,11 @@ function unl_five_form_system_theme_settings_alter(&$form, &$form_state) {
   $form['advanced_settings'] = array(
     '#type' => 'fieldset',
     '#title' => t('Advanced settings'),
-    'unl_affiliate' => array(
-      '#type' => 'checkbox',
-      '#title' => t('Affiliate site'),
-      '#default_value' => theme_get_setting('unl_affiliate'),
-      '#description' => t('Grants access to the Color scheme picker, Logo image settings, Shortcut icon settings on this page for customizing the UNL template.'),
-      '#access' => !!count(array_intersect(array('administrator'), array_values($GLOBALS['user']->roles))),
-    ),
     'unl_rso' => array(
       '#type' => 'checkbox',
       '#title' => t('RSO site'),
       '#default_value' => theme_get_setting('unl_rso'),
       '#description' => t('Adds text to the header and footer that designates the site as belonging to a Registered Student Organization.'),
-      '#access' => !!count(array_intersect(array('administrator'), array_values($GLOBALS['user']->roles))),
-    ),
-    'unl_speedy' => array(
-      '#type' => 'checkbox',
-      '#title' => t('Speedy template'),
-      '#default_value' => theme_get_setting('unl_speedy'),
-      '#description' => t('Use the Speedy version of the Fixed template.'),
       '#access' => !!count(array_intersect(array('administrator'), array_values($GLOBALS['user']->roles))),
     ),
   );

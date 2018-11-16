@@ -63,15 +63,6 @@ function unl_five_html_head_alter(&$head_elements) {
 }
 
 /**
- * Implements hook_css_alter().
- */
-function unl_five_css_alter(&$css) {
-  if (!theme_get_setting('unl_affiliate')) {
-    unset($css[drupal_get_path('theme', 'unl_five') . '/css/colors.css']);
-  }
-}
-
-/**
  * Implements template_preprocess().
  */
 function unl_five_preprocess(&$vars) {
@@ -141,32 +132,6 @@ function unl_five_preprocess_html(&$vars, $hook) {
     }
   }
 
-  // Affiliate Template
-  if (theme_get_setting('unl_affiliate')) {
-    drupal_add_css(drupal_get_path('module', 'unl_five') . '/css/colors.css', array('type' => 'file', 'group' => CSS_THEME, 'every_page' => TRUE));
-
-    if (theme_get_setting('toggle_logo') && !theme_get_setting('default_logo')) {
-      $logo_css = '#header #logo{background-image:url('.file_create_url(theme_get_setting('logo_path')).'); background-position:13px 10px;}
-                   @media (max-width:1040px) {#header #logo{background-size:90%; background-position:2px 3px;}}';
-      drupal_add_css($logo_css, array('type' => 'inline', 'group' => CSS_THEME, 'every_page' => TRUE));
-    }
-    if (!theme_get_setting('toggle_unl_banner')) {
-      drupal_add_css('#wdn_institution_title{visibility:hidden;}', array('type' => 'inline', 'group' => CSS_THEME, 'every_page' => TRUE));
-    }
-    if (!theme_get_setting('toggle_unl_branding')) {
-      drupal_add_css('#footer_floater,#wdn_copyright #wdn_logos{display:none;}', array('type' => 'inline', 'group' => CSS_THEME, 'every_page' => TRUE));
-    }
-    if (!theme_get_setting('toggle_unl_breadcrumb')) {
-      drupal_add_css('#breadcrumbs > ul > li:first-child{display:none;}', array('type' => 'inline', 'group' => CSS_THEME, 'every_page' => TRUE));
-    }
-    if (!theme_get_setting('toggle_unl_search')) {
-      drupal_add_css('#wdn_search{display:none;}', array('type' => 'inline', 'group' => CSS_THEME, 'every_page' => TRUE));
-    }
-    if (!theme_get_setting('toggle_unl_tools')) {
-      drupal_add_css('#wdn_tool_links{display:none;}', array('type' => 'inline', 'group' => CSS_THEME, 'every_page' => TRUE));
-    }
-  }
-
   if (!module_exists('metatag')) {
     // Set the <title> tag to UNL format: Page Title | Site Name | Nebraska
     if ($vars['is_front']) {
@@ -179,21 +144,6 @@ function unl_five_preprocess_html(&$vars, $hook) {
       $vars['head_title_array'] = array_merge($vars['head_title_array'], array('UNL' => 'Nebraska'));
     }
     $vars['head_title'] = implode(' | ', $vars['head_title_array']);
-  }
-}
-
-/**
- * Implements template_process_html().
- */
-function unl_five_process_html(&$vars) {
-  // Hook into color.module.
-  if (theme_get_setting('unl_affiliate') && module_exists('color')) {
-    _color_html_alter($vars);
-  }
-
-  // Template suggestion for the Speedy template.
-  if (theme_get_setting('unl_speedy')) {
-    $vars['theme_hook_suggestions'][] = 'html__speedy';
   }
 }
 
@@ -308,11 +258,6 @@ function unl_five_preprocess_page(&$vars, $hook) {
  * Implements template_process_page().
  */
 function unl_five_process_page(&$vars) {
-  // Hook into color.module.
-  if (theme_get_setting('unl_affiliate') && module_exists('color')) {
-    _color_page_alter($vars);
-  }
-
   // Add RSO disclaimer.
   if (theme_get_setting('unl_rso')) {
     foreach ($vars['page']['contactinfo'] as $block => $value) {
