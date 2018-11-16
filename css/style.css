@@ -18,8 +18,8 @@ label {
 #unlcms_tabs {
   position: absolute;
   right: 0;
-  top: 155px;
-  z-index: 1010;
+  top: 166px;
+  font-size: 0.7em;
 }
 
 /* Related Links region contextual links */

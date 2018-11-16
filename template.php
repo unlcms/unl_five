@@ -399,12 +399,12 @@ function unl_five_menu_local_tasks($variables) {
   $output = '';
 
   if (!empty($variables['primary'])) {
-    $variables['primary']['#prefix'] = '<ul class="dcf-btn-group disableSwitching" id="unlcms_tabs">';
+    $variables['primary']['#prefix'] = '<ul class="wdn_tabs disableSwitching" id="unlcms_tabs">';
     $variables['primary']['#suffix'] = '</ul>';
     $output .= drupal_render($variables['primary']);
   }
   if (!empty($variables['secondary'])) {
-    $variables['secondary']['#prefix'] = '<ul class="dcf-btn-group disableSwitching" id="unlcms_tabs">';
+    $variables['secondary']['#prefix'] = '<ul class="wdn_tabs disableSwitching" id="unlcms_tabs">';
     $variables['secondary']['#suffix'] = '</ul>';
     $output .= drupal_render($variables['secondary']);
   }
@@ -428,7 +428,7 @@ function unl_five_menu_local_task($variables) {
     $link['localized_options']['html'] = TRUE;
     $link_text = t('!local-task-title !active', array('!local-task-title' => $link['title'], '!active' => ''));
   }
-  return '<li' . (!empty($variables['element']['#active']) ? ' class="selected dcf-btn dcf-btn-primary"' : ' class="dcf-btn dcf-btn-secondary"') . '>' . l($link_text, $link['href'], $link['localized_options']) . "</li>\n";
+  return '<li' . (!empty($variables['element']['#active']) ? ' class="selected"' : '') . '>' . l($link_text, $link['href'], $link['localized_options']) . "</li>\n";
 }
 
 /**
