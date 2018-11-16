@@ -98,35 +98,9 @@ function unl_five_form_system_theme_settings_alter(&$form, &$form_state) {
     ),
   );
 
-  $grid_class_sidebar_first = theme_get_setting('grid_class_sidebar_first');
-  $grid_class_sidebar_second = theme_get_setting('grid_class_sidebar_second');
-  $grid_class_content_one_sidebar = theme_get_setting('grid_class_content_one_sidebar');
-  $grid_class_content_two_sidebars = theme_get_setting('grid_class_content_two_sidebars');
-
   $form['advanced_settings'] = array(
     '#type' => 'fieldset',
     '#title' => t('Advanced settings'),
-    'grid_class_sidebar_first' => array(
-      '#type' => 'textfield',
-      '#title' => t('Sidebar first grid class'),
-      '#default_value' => !empty($grid_class_sidebar_first) ? theme_get_setting('grid_class_sidebar_first') : 'bp768-wdn-col-one-fourth',
-      '#description' => t('Refer to http://wdn.unl.edu/resources/grid'),
-    ),
-    'grid_class_sidebar_second' => array(
-      '#type' => 'textfield',
-      '#title' => t('Sidebar second grid class'),
-      '#default_value' => !empty($grid_class_sidebar_second) ? theme_get_setting('grid_class_sidebar_second') : 'bp768-wdn-col-one-fourth',
-    ),
-    'grid_class_content_one_sidebar' => array(
-      '#type' => 'textfield',
-      '#title' => t('Content grid class when one sidebar is present'),
-      '#default_value' => !empty($grid_class_content_one_sidebar) ? theme_get_setting('grid_class_content_one_sidebar') : 'bp768-wdn-col-three-fourths',
-    ),
-    'grid_class_content_two_sidebars' => array(
-      '#type' => 'textfield',
-      '#title' => t('Content grid class when both sidebars are present'),
-      '#default_value' => !empty($grid_class_content_two_sidebars) ? theme_get_setting('grid_class_content_two_sidebars') : 'bp768-wdn-col-two-fourths',
-    ),
     'unl_affiliate' => array(
       '#type' => 'checkbox',
       '#title' => t('Affiliate site'),

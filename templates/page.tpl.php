@@ -26,6 +26,7 @@
         <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/nav-menu-child-2.html"); ?>
     <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/nav-menu-2.html"); ?>
 
+    <?php if ($tabs): ?><?php print render($tabs); ?><?php endif; ?>
 </header>
 
 <main class="dcf-main" id="dcf-main" role="main" tabindex="-1">
@@ -57,7 +58,6 @@
     <div class="dcf-main-content dcf-wrapper">
     <!-- InstanceBeginEditable name="maincontentarea" -->
     <?php print $messages; ?>
-    <?php if ($tabs): ?><div class="tabs"><?php print render($tabs); ?></div><?php endif; ?>
     <?php print render($page['help']); ?>
     <?php if ($action_links): ?><ul class="action-links"><?php print render($action_links); ?></ul><?php endif; ?>
 <?php endif; ?>
@@ -65,20 +65,22 @@
 
     <?php if ($unl_remove_inner_wrapper): ?><div class="dcf-bleed"><?php endif; ?>
 
-        <?php if ($page['sidebar_first'] || $page['sidebar_second']): ?>
-        <div class="wdn-band"><div class="wdn-inner-wrapper wdn-inner-padding-no-top"><section class="wdn-grid-set">
+        <?php if ($page['sidebar_first'] xor $page['sidebar_second']): ?>
+        <div class="dcf-grid">
+        <?php elseif ($page['sidebar_first'] && $page['sidebar_second']) : ?>
+        <div class="dcf-grid-thirds@md">
         <?php endif; ?>
 
         <?php if($page['sidebar_first']): ?>
         <?php print render($page['sidebar_first']); ?>
         <?php endif; ?>
 
-        <?php if (isset($page['sidebar_first']['#region']) && isset($page['sidebar_second']['#region'])): ?>
-          <div class="<?php print theme_get_setting('grid_class_content_two_sidebars'); ?>">
+        <?php if (!isset($page['sidebar_first']['#region']) && isset($page['sidebar_second']['#region'])): ?>
+          <div class="dcf-col-100% dcf-col-67%-start@md">
             <?php print render($page['content']); ?>
           </div>
-        <?php elseif (isset($page['sidebar_first']['#region']) || isset($page['sidebar_second']['#region'])): ?>
-          <div class="<?php print theme_get_setting('grid_class_content_one_sidebar'); ?>">
+        <?php elseif (isset($page['sidebar_first']['#region']) && !isset($page['sidebar_second']['#region'])): ?>
+          <div class="dcf-col-100% dcf-col-67%-end@md">
             <?php print render($page['content']); ?>
           </div>
         <?php else: ?>
@@ -90,7 +92,7 @@
         <?php endif; ?>
 
         <?php if ($page['sidebar_first'] || $page['sidebar_second']): ?>
-        </section></div></div>
+        </div>
         <?php endif; ?>
 
     <?php if ($unl_remove_inner_wrapper): ?></div><?php endif; ?>
