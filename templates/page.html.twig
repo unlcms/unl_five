@@ -8,18 +8,28 @@
 
 </header>
 
-<main class="dcf-wrapper" id="dcf-main" role="main" tabindex="-1">
+<main class="dcf-main" id="dcf-main" role="main" tabindex="-1">
 
-    <div class="dcf-bleed{% if unl_hide_page_title %} dcf-sr-only{% endif %}">
-        <div class="dcf-wrapper dcf-pt-10 dcf-pb-7">
-            <div id="dcf-page-title">
+    <!-- InstanceBeginEditable name="hero" -->
+    <div class="dcf-hero dcf-hero-default{% if unl_hide_page_title %} dcf-sr-only{% endif %}">
+        <!-- InstanceEndEditable -->
+        <div class="dcf-hero-group-1">
+            {{ page.breadcrumb }}
+            <header class="dcf-page-title" id="dcf-page-title">
                 <!-- InstanceBeginEditable name="pagetitle" -->
                 {{ page.pagetitle }}
                 <!-- InstanceEndEditable -->
-            </div>
+            </header>
+            <!-- InstanceBeginEditable name="herogroup1" -->
+            <!-- InstanceEndEditable -->
         </div>
+        <!-- InstanceBeginEditable name="herogroup2" -->
+        <div class="dcf-hero-group-2">
+        </div>
+        <!-- InstanceEndEditable -->
     </div>
-
+    <div class="dcf-main-content dcf-wrapper">
+    <!-- InstanceBeginEditable name="maincontentarea" -->
     {{ page.content_top }}
 
     {% if page.sidebar_first or page.sidebar_second %}
@@ -56,11 +66,14 @@
 
     {{ page.content_bottom }}
     <!-- InstanceEndEditable -->
+    </div>
 
 </main>
-<footer class="dcf-footer dcf-txt-xs" id="dcf-footer" role="contentinfo">
+<footer class="dcf-footer" id="dcf-footer" role="contentinfo">
     {% include "/wdn/templates_5.0/includes/global/footer-global-1.html" %}
+    <!-- InstanceBeginEditable name="contactinfo" -->
     {{ page.contactinfo }}
     {{ page.leftcollinks }}
+    <!-- InstanceEndEditable -->
     {% include "/wdn/templates_5.0/includes/global/footer-global-2.html" %}
 </footer>

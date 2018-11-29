@@ -12,7 +12,6 @@ libraries-override:
   core/classList: false
   core/html5shiv: false
   core/normalize: false
-  core/modernizr: false
 
 ckeditor_stylesheets:
   - css/ckeditor-iframe.css
@@ -31,8 +30,6 @@ regions:
   sidebar_second: Sidebar second
   content_bottom: Content bottom
 
-  contactinfo: Contact info (Main)
-  contactinfo_additional: Contact info (Additional)
+  contactinfo: Contact info
   socialmedia: Social media
   leftcollinks: Related links
-
