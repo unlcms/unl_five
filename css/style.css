@@ -24,6 +24,26 @@
     content: ' ';
     display: block;
 }
+/**
+ * Fixes admin toolbar Drupal logo
+ */
+#toolbar-administration *::after,
+#toolbar-administration *::before {
+    -webkit-box-sizing: unset;
+    box-sizing: unset;
+}
+/**
+ * Fixes admin toolbar margin
+ */
+.toolbar-menu li {
+    margin-bottom: 0;
+}
+/**
+ * Fixes admin toolbar appearing below parts of the UNL red bar menu
+ */
+.toolbar-oriented .toolbar-bar {
+    z-index: 1000;
+}
 
 /* Margin for images aligned in the WYSIWYG editor */
 .align-left {
