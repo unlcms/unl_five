@@ -672,7 +672,7 @@ function unl_five_og_get_front_group_id() {
  *
  * @param $view
  */
-function unl_five_og_views_pre_render(&$view) {
+function unl_five_views_pre_render(&$view) {
   unl_five_og_get_current_group();
 }
 
