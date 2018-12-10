@@ -273,8 +273,12 @@ function unl_five_preprocess_page(&$vars, $hook) {
     if ($group) {
       $front_nid = unl_five_og_get_front_group_id();
       if ($group->nid == $front_nid) {
+        // Clear the site_slogan for the main group
         $vars['site_slogan'] = '';
       }
+
+      // Set the front page URL for the Site Title link.
+      $vars['front_page'] = drupal_get_path_alias('node/' . $group->nid);
     }
   }
 }
