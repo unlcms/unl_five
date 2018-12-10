@@ -736,7 +736,7 @@ function unl_five_og_breadcrumb($variables) {
 /**
  * Implements hook_menu_breadcrumb_alter().
  */
-function unl_five_og_menu_breadcrumb_alter(&$active_trail, $item) {
+function unl_five_menu_breadcrumb_alter(&$active_trail, $item) {
   $group = unl_five_og_get_current_group();
   if ($group) {
     $front_nid = unl_five_og_get_front_group_id();
