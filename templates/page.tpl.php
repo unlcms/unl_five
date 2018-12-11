@@ -35,11 +35,13 @@
     <div class="dcf-hero dcf-hero-default<?php if ($unl_hide_page_title): ?> dcf-sr-only<?php endif; ?>">
     <!-- InstanceEndEditable -->
         <div class="dcf-hero-group-1">
-            <nav class="dcf-breadcrumbs" id="dcf-breadcrumbs" role="navigation" aria-label="breadcrumbs">
-                <!-- InstanceBeginEditable name="breadcrumbs" -->
-                <?php if ($breadcrumb): ?><?php print $breadcrumb; ?><?php endif; ?>
-                <!-- InstanceEndEditable -->
-            </nav>
+            <div class="dcf-breadcrumbs-wrapper">
+                <nav class="dcf-breadcrumbs" id="dcf-breadcrumbs" role="navigation" aria-label="breadcrumbs">
+                    <!-- InstanceBeginEditable name="breadcrumbs" -->
+                    <?php if ($breadcrumb): ?><?php print $breadcrumb; ?><?php endif; ?>
+                    <!-- InstanceEndEditable -->
+                </nav>
+            </div>
             <header class="dcf-page-title" id="dcf-page-title">
                 <!-- InstanceBeginEditable name="pagetitle" -->
                 <?php print render($title_prefix); ?>
