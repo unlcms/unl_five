@@ -222,6 +222,12 @@ function unl_five_username_alter(&$name, $account) {
  * Implements template_preprocess_page().
  */
 function unl_five_preprocess_page(&$vars, $hook) {
+  // Set a class to adjust the text size of the Site Title based on its length.
+  $vars['site_name_class'] = 'dcf-txt-h6';
+  if ($vars['site_name'] && strlen($vars['site_name']) < 40 && empty($vars['site_slogan'])) {
+    $vars['site_name_class'] = 'dcf-txt-h5';
+  }
+
   // Wrap 403 pages in WDN wrappers.
   $header = drupal_get_http_header("status");
   if ($header == "403 Forbidden") {

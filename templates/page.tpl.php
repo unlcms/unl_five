@@ -30,7 +30,7 @@
     <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/site-affiliation-2.html"); ?>
     <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/site-title-1.html"); ?>
         <!-- InstanceBeginEditable name="titlegraphic" -->
-        <?php if ($site_name): ?><a class="unl-site-title-medium" href="<?php print $front_page; ?>"><?php print $site_name; ?></a><?php endif; ?>
+        <?php if ($site_name): ?><a class="<?php print $site_name_class; ?>" href="<?php print $front_page; ?>"><?php print $site_name; ?></a><?php endif; ?>
         <!-- InstanceEndEditable -->
     <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/site-title-2.html"); ?>
     <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/logo-lockup-2.html"); ?>
