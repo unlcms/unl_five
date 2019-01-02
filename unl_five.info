@@ -8,6 +8,7 @@ stylesheets[all][] = css/style.css
 stylesheets[all][] = css/book-overrides.css
 stylesheets[all][] = css/menu-block.css
 stylesheets[all][] = css/views.css
+stylesheets[all][] = css/webform.css
 
 regions[page_top] = Page top
 regions[page_bottom] = Page bottom
