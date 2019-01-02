@@ -284,7 +284,7 @@ function unl_five_preprocess_page(&$vars, $hook) {
       }
 
       // Set the front page URL for the Site Title link.
-      $vars['front_page'] = drupal_get_path_alias('node/' . $group->nid);
+      $vars['front_page'] = url(drupal_get_path_alias('node/' . $group->nid), array('absolute'=>true));
     }
   }
 }
