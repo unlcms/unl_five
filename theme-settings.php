@@ -67,6 +67,12 @@ function unl_five_form_system_theme_settings_alter(&$form, &$form_state) {
   $form['advanced_settings'] = array(
     '#type' => 'fieldset',
     '#title' => t('Advanced settings'),
+    'enable_drill_down' => array(
+      '#type' => 'checkbox',
+      '#title' => t('Enable drill-down main menu'),
+      '#default_value' => theme_get_setting('enable_drill_down'),
+      '#description' => t('Changes the navigation (and site title) if you are 2+ levels deep with even deeper enabled menu links.'),
+    ),
     'unl_rso' => array(
       '#type' => 'checkbox',
       '#title' => t('RSO site'),
