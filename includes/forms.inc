@@ -53,6 +53,8 @@ function _unl_five_form_element_class(&$element) {
 function unl_five_webform_element($variables) {
   $element = $variables['element'];
 
+  $element['#wrapper_attributes']['class'][] = 'dcf-form-group';
+
   $output = '<div ' . drupal_attributes($element['#wrapper_attributes']) . '>' . "\n";
 
   // Composite elements consist of more than one HTML form control. These must be grouped by a fieldset.
@@ -77,7 +79,7 @@ function unl_five_webform_element($variables) {
   $above = !empty($element['#webform_component']['extra']['description_above']);
   $description = array(
     FALSE => '',
-    TRUE => !empty($element['#description']) ? ' <div class="description">' . $element['#description'] . "</div>\n" : '',
+    TRUE => !empty($element['#description']) ? ' <div class="dcf-form-help">' . $element['#description'] . "</div>\n" : '',
   );
 
   // Generate the title, either a legend or a label, only if the title will be used
@@ -231,7 +233,7 @@ function unl_five_form_element($variables) {
   $output .= "\n";
 
   if (!empty($element['#description'])) {
-    $output .= '<div class="description">' . $element['#description'] . "</div>\n";
+    $output .= '<div class="dcf-form-help">' . $element['#description'] . "</div>\n";
   }
 
   if ($composite) {
