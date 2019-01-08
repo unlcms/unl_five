@@ -231,8 +231,8 @@ function unl_five_form_element($variables) {
 function unl_five_webform_time($variables) {
   $element = $variables['element'];
 
-  $element['hour']['#attributes']['class'] = array('hour');
-  $element['minute']['#attributes']['class'] = array('minute');
+  $element['hour']['#attributes']['class'] = array('dcf-input-select', 'hour');
+  $element['minute']['#attributes']['class'] = array('dcf-input-select', 'minute');
 
   // Add error classes to all items within the element.
   if (form_get_error($element)) {
