@@ -71,9 +71,11 @@ function unl_five_webform_element($variables) {
     if ($composite) {
       $attributes = array();
       if ($element['#title_display'] == 'invisible') {
-        $attributes['class'] = 'element-invisible';
+        $attributes['class'] = 'dcf-legend element-invisible';
       }
-      $attributes['class'][] = 'dcf-legend';
+      else {
+        $attributes['class'] = 'dcf-legend';
+      }
       $title = '<legend' . drupal_attributes($attributes) . '>' . $element['#title'];
       if (!empty($element['#required'])) {
         $title .= ' ' . theme('form_required_marker', array('element' => $element));
@@ -181,9 +183,11 @@ function unl_five_form_element($variables) {
     if ($composite) {
       $attributes = array();
       if ($element['#title_display'] == 'invisible') {
-        $attributes['class'] = 'element-invisible';
+        $attributes['class'] = 'dcf-legend element-invisible';
       }
-      $attributes['class'][] = 'dcf-legend';
+      else {
+        $attributes['class'] = 'dcf-legend';
+      }
       $title = '<legend' . drupal_attributes($attributes) . '>' . $element['#title'];
       if (!empty($element['#required'])) {
         $title .= theme('form_required_marker', array('element' => $element));
