@@ -1,6 +1,32 @@
 <?php
 
 /**
+ * Implements hook_form_alter().
+ */
+function unl_five_form_alter(&$form, &$form_state, $form_id) {
+  // Add DCF classes directly to form elements.
+  foreach ($form['submitted'] as &$element) {
+    $class = '';
+    switch ($element['#type']) {
+      case 'textfield':
+      case 'textarea':
+        $class = 'dcf-input-text';
+        break;
+      case 'select':
+      case 'date':
+        $class = 'dcf-input-select';
+        break;
+      case 'radios':
+      case 'checkboxes':
+        $class = 'dcf-input-control';
+        break;
+    }
+
+    $element['#attributes']['class'][] = $class;
+  }
+}
+
+/**
  * Replacement for theme_webform_element().
  * 
  * Converts composite element labels into fieldsets, the label becomes a legend.
@@ -256,6 +282,7 @@ function unl_five_file_managed_file($variables) {
   if (isset($variables['element']['#id'])) {
     unset($variables['element']['#id']);
   }
+
 
   return theme_file_managed_file($variables);
 }

@@ -1,3 +1,6 @@
-.webform-container-inline div select {
-    display: inline;
+.webform-container-inline div,
+.webform-container-inline label,
+.webform-container-inline select {
+    display: inline !important;
+    width: auto !important;
 }
