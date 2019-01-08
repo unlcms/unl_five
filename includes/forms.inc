@@ -6,25 +6,27 @@
 function unl_five_form_alter(&$form, &$form_state, $form_id) {
   // Add DCF classes directly to form elements.
   foreach ($form['submitted'] as &$element) {
-    $class = '';
-    switch ($element['#type']) {
-      case 'textfield':
-      case 'textarea':
-      case 'webform_number':
-      case 'webform_email':
-        $class = 'dcf-input-text';
-        break;
-      case 'select':
-      case 'date':
-        $class = 'dcf-input-select';
-        break;
-      case 'radios':
-      case 'checkboxes':
-        $class = 'dcf-input-control';
-        break;
-    }
+    if (isset($element['#type'])) {
+      $class = '';
+      switch ($element['#type']) {
+        case 'textfield':
+        case 'textarea':
+        case 'webform_number':
+        case 'webform_email':
+          $class = 'dcf-input-text';
+          break;
+        case 'select':
+        case 'date':
+          $class = 'dcf-input-select';
+          break;
+        case 'radios':
+        case 'checkboxes':
+          $class = 'dcf-input-control';
+          break;
+      }
 
-    $element['#attributes']['class'][] = $class;
+      $element['#attributes']['class'][] = $class;
+    }
   }
 }
 
