@@ -7,27 +7,41 @@ function unl_five_form_alter(&$form, &$form_state, $form_id) {
   // Add DCF classes directly to form elements.
   foreach ($form['submitted'] as &$element) {
     if (isset($element['#type'])) {
-      $class = '';
-      switch ($element['#type']) {
-        case 'textfield':
-        case 'textarea':
-        case 'webform_number':
-        case 'webform_email':
-          $class = 'dcf-input-text';
-          break;
-        case 'select':
-        case 'date':
-          $class = 'dcf-input-select';
-          break;
-        case 'radios':
-        case 'checkboxes':
-          $class = 'dcf-input-control';
-          break;
-      }
-
+      $class = _unl_five_form_element_class($element);
       $element['#attributes']['class'][] = $class;
     }
   }
+}
+
+/**
+ * Helper recursive function for unl_five_form_alter() to get to elements in a fieldset.
+ */
+function _unl_five_form_element_class(&$element) {
+  $class = '';
+  switch ($element['#type']) {
+    case 'textfield':
+    case 'textarea':
+    case 'webform_number':
+    case 'webform_email':
+      $class = 'dcf-input-text';
+      break;
+    case 'select':
+    case 'date':
+      $class = 'dcf-input-select';
+      break;
+    case 'radios':
+    case 'checkboxes':
+      $class = 'dcf-input-control';
+      break;
+    case 'fieldset':
+      foreach ($element as &$nested_element) {
+        if (isset($nested_element['#type'])) {
+          $class = _unl_five_form_element_class($nested_element);
+          $nested_element['#attributes']['class'][] = $class;
+        }
+      }
+  }
+  return $class;
 }
 
 /**
@@ -232,7 +246,7 @@ function unl_five_form_element($variables) {
 /**
  * Theme a webform time element.
  * 
- * Adds labels so that it passes WCAG2.0
+ * Adds labels so that it passes WCAG2.0 and adds .dcf-input-select class.
  */
 function unl_five_webform_time($variables) {
   $element = $variables['element'];
@@ -242,8 +256,8 @@ function unl_five_webform_time($variables) {
 
   // Add error classes to all items within the element.
   if (form_get_error($element)) {
-    $element['hour']['#attributes']['class'][] = 'error';
-    $element['minute']['#attributes']['class'][] = 'error';
+    $element['hour']['#attributes']['class'][] = array('dcf-input-select', 'error');
+    $element['minute']['#attributes']['class'][] = array('dcf-input-select', 'error');
   }
 
   $element['hour']['#title']           = 'New Hour';
@@ -257,7 +271,7 @@ function unl_five_webform_time($variables) {
 }
 
 /**
- * implements theme_file
+ * Implements theme_file().
  * 
  * Renders the file element via core, then passes it to the theme wrapper, which adds labels.
  * 
@@ -291,7 +305,6 @@ function unl_five_file_managed_file($variables) {
   if (isset($variables['element']['#id'])) {
     unset($variables['element']['#id']);
   }
-
 
   return theme_file_managed_file($variables);
 }
