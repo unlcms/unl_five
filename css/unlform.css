@@ -16,3 +16,7 @@ fieldset:not(.fieldset-invisible) {
     border: 1px solid #c7c8ca;
     padding: 0 1em;
 }
+
+.form-submit {
+    margin-right:.5em;
+}
