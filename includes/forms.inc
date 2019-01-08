@@ -10,6 +10,8 @@ function unl_five_form_alter(&$form, &$form_state, $form_id) {
     switch ($element['#type']) {
       case 'textfield':
       case 'textarea':
+      case 'webform_number':
+      case 'webform_email':
         $class = 'dcf-input-text';
         break;
       case 'select':
@@ -69,6 +71,7 @@ function unl_five_webform_element($variables) {
       if ($element['#title_display'] == 'invisible') {
         $attributes['class'] = 'element-invisible';
       }
+      $attributes['class'][] = 'dcf-legend';
       $title = '<legend' . drupal_attributes($attributes) . '>' . $element['#title'];
       if (!empty($element['#required'])) {
         $title .= ' ' . theme('form_required_marker', array('element' => $element));
@@ -116,8 +119,7 @@ function unl_five_webform_element($variables) {
  * 
  * Moves invisible checkboxes and radio buttons to the right of the form control to pass WCAG2.0
  */
-function unl_five_form_element($variables)
-{
+function unl_five_form_element($variables) {
   $element = & $variables['element'];
   // This is also used in the installer, pre-database setup.
   $t = get_t();
@@ -179,6 +181,7 @@ function unl_five_form_element($variables)
       if ($element['#title_display'] == 'invisible') {
         $attributes['class'] = 'element-invisible';
       }
+      $attributes['class'][] = 'dcf-legend';
       $title = '<legend' . drupal_attributes($attributes) . '>' . $element['#title'];
       if (!empty($element['#required'])) {
         $title .= theme('form_required_marker', array('element' => $element));
@@ -285,4 +288,69 @@ function unl_five_file_managed_file($variables) {
 
 
   return theme_file_managed_file($variables);
+}
+
+/**
+ * Implements theme_fieldset() to add .dcf-legend class.
+ */
+function unl_five_fieldset($variables) {
+  $element = $variables['element'];
+  element_set_attributes($element, array('id'));
+  _form_set_class($element, array('form-wrapper'));
+
+  $output = '<fieldset' . drupal_attributes($element['#attributes']) . '>';
+  if (!empty($element['#title'])) {
+    // Always wrap fieldset legends in a SPAN for CSS positioning.
+    $output .= '<legend class="dcf-legend"><span class="fieldset-legend">' . $element['#title'] . '</span></legend>';
+  }
+  $output .= '<div class="fieldset-wrapper">';
+  if (!empty($element['#description'])) {
+    $output .= '<div class="fieldset-description">' . $element['#description'] . '</div>';
+  }
+  $output .= $element['#children'];
+  if (isset($element['#value'])) {
+    $output .= $element['#value'];
+  }
+  $output .= '</div>';
+  $output .= "</fieldset>\n";
+  return $output;
+}
+
+/**
+ * Implements theme_form_element_label() to add .dcf-label class.
+ */
+function unl_five_form_element_label($variables) {
+  $element = $variables['element'];
+  // This is also used in the installer, pre-database setup.
+  $t = get_t();
+
+  // If title and required marker are both empty, output no label.
+  if ((!isset($element['#title']) || $element['#title'] === '') && empty($element['#required'])) {
+    return '';
+  }
+
+  // If the element is required, a required marker is appended to the label.
+  $required = !empty($element['#required']) ? theme('form_required_marker', array('element' => $element)) : '';
+
+  $title = filter_xss_admin($element['#title']);
+
+  $attributes = array();
+  // Style the label as class option to display inline with the element.
+  if ($element['#title_display'] == 'after') {
+    $attributes['class'] = 'dcf-label option';
+  }
+  // Show label only to screen readers to avoid disruption in visual flows.
+  elseif ($element['#title_display'] == 'invisible') {
+    $attributes['class'] = 'dcf-label element-invisible';
+  }
+  else {
+    $attributes['class'] = 'dcf-label';
+  }
+
+  if (!empty($element['#id'])) {
+    $attributes['for'] = $element['#id'];
+  }
+
+  // The leading whitespace helps visually separate fields from inline labels.
+  return ' <label' . drupal_attributes($attributes) . '>' . $t('!title !required', array('!title' => $title, '!required' => $required)) . "</label>\n";
 }

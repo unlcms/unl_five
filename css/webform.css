@@ -4,3 +4,8 @@
     display: inline !important;
     width: auto !important;
 }
+
+.fieldset-invisible {
+    margin: 0;
+    padding: 0;
+}
