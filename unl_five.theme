@@ -61,6 +61,12 @@ function unl_five_preprocess_html(&$variables) {
     $element,
     'link-rel-home'
   );
+
+  // Add node id to the body class.
+  $node = \Drupal::routeMatch()->getParameter('node');
+  if ($node) {
+    $variables['attributes']['class'][] = 'page-node-' . $node->id();
+  }
 }
 
 /**
