@@ -1,6 +1,6 @@
 <?php
 
-$wrapper_id = 'id="' . $block_html_id . '"';
+$wrapper_id = ' id="' . $block_html_id . '"';
 
 if ($format == 'partial') {
   //don't give an id to the wrapper for partial requests.  This can result in duplicate ID errors.
