@@ -1,7 +1,1 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: erasmussen
- * Date: 2/11/19
- * Time: 3:09 PM
- */
+<?php foreach ($items as $delta => $item): ?><p class="dcf-subhead unl-font-sans"><?php print render($item); ?></p><?php endforeach; ?>

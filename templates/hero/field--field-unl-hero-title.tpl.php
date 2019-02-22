@@ -1,7 +1,1 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: erasmussen
- * Date: 2/11/19
- * Time: 3:05 PM
- */
+<?php foreach ($items as $delta => $item): ?><h1><?php print render($item); ?></h1><?php endforeach; ?>

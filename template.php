@@ -262,6 +262,13 @@ function unl_five_preprocess_node(&$vars) {
   else {
     $vars['submitted'] =  t('!datetime ', array('!datetime' => $vars['date']));
   }
+
+  // Hide the unl_hero fields. They are output in the page template.
+  foreach ($vars['content'] as $key => $field) {
+    if (substr( $key, 0, 15 ) === 'field_unl_hero_') {
+      hide($vars['content'][$key]);
+    }
+  }
 }
 
 /**
@@ -291,7 +298,8 @@ function unl_five_username_alter(&$name, $account) {
  * Implements template_preprocess_page().
  */
 function unl_five_preprocess_page(&$vars, $hook) {
-  // Attach a copy of the node for use in the hero region.
+  // Attach a copy of the node for use in the hero region (unl_hero module).
+  $vars['node_view'] = array();
   if ($vars['node']) {
     $vars['node_view'] = node_view($vars['node']);
   }
