@@ -1,4 +1,4 @@
- <?php if ($format !== 'partial'): ?>
+<?php if ($format !== 'partial'): ?>
 <header class="dcf-header" id="dcf-header" role="banner">
 
     <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/header-global-1.html"); ?>
