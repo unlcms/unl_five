@@ -166,6 +166,13 @@ function unl_five_preprocess_field(&$vars, $hook) {
     $vars['element']['#label_display'] = 'hidden';
     $vars['label_hidden'] = TRUE;
   }
+
+  // Add classes to hero images created by the unl_hero module.
+  if ($vars['element']['#field_name'] == 'field_unl_hero_image') {
+    foreach($vars['items'] as $key => $item){
+      $vars['items'][ $key ]['#item']['attributes']['class'][] = 'dcf-d-block dcf-h-100% dcf-obj-fit-cover';
+    }
+  }
 }
 
 /**
@@ -284,6 +291,11 @@ function unl_five_username_alter(&$name, $account) {
  * Implements template_preprocess_page().
  */
 function unl_five_preprocess_page(&$vars, $hook) {
+  // Attach a copy of the node for use in the hero region.
+  if ($vars['node']) {
+    $vars['node_view'] = node_view($vars['node']);
+  }
+
   // Change the Site Title and Affiliation if in a drill down menu.
   $drill_down = drupal_static('unl_five_drill_down');
   if ($drill_down) {
