@@ -8,7 +8,6 @@ if ($format == 'partial') {
   $wrapper_id = '';
 }
 ?>
-
 <div <?php print $wrapper_id; ?> class="<?php print $classes; ?>">
   <?php print $content; ?>
 </div>
