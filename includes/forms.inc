@@ -5,10 +5,12 @@
  */
 function unl_five_form_alter(&$form, &$form_state, $form_id) {
   // Add DCF classes directly to form elements.
-  foreach ($form['submitted'] as &$element) {
-    if (isset($element['#type'])) {
-      $class = _unl_five_form_element_class($element);
-      $element['#attributes']['class'][] = $class;
+  if (isset($form['submitted'])) {
+    foreach ($form['submitted'] as &$element) {
+      if (isset($element['#type'])) {
+        $class = _unl_five_form_element_class($element);
+        $element['#attributes']['class'][] = $class;
+      }
     }
   }
 }
