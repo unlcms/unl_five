@@ -1,0 +1,1 @@
+<?php foreach ($items as $delta => $item): ?><p class="dcf-hero-photo-credit dcf-absolute dcf-txt-3xs dcf-txt-vertical-lr dcf-italic unl-light-gray"><?php print render($item); ?></p><?php endforeach; ?>
