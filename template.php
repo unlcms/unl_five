@@ -299,8 +299,9 @@ function unl_five_username_alter(&$name, $account) {
  */
 function unl_five_preprocess_page(&$vars, $hook) {
   // Attach a copy of the node for use in the hero region (unl_hero module).
+  // If the 'Hero size' is not set, skip this and use the default page title version of the hero.
   $vars['node_view'] = array();
-  if ($vars['node']) {
+  if ($vars['node'] && !empty($vars['node']->field_unl_hero_size)) {
     $vars['node_view'] = node_view($vars['node']);
   }
 
