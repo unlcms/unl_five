@@ -49,7 +49,7 @@
 <main class="dcf-main" id="dcf-main" role="main" tabindex="-1">
 
     <!-- InstanceBeginEditable name="hero" -->
-    <div class="dcf-hero dcf-hero-default<?php if ($unl_hide_page_title): ?> dcf-sr-only<?php endif; ?>">
+    <div class="dcf-hero <?php if (array_key_exists('field_unl_hero_size', $node_view)): ?>unl-hero-notch-stripe dcf-d-flex dcf-flex-row dcf-flex-wrap dcf-mb-6 unl-bg-darker-gray<?php else: ?>dcf-hero-default<?php endif; ?><?php if ($unl_hide_page_title): ?> dcf-sr-only<?php endif; ?>">
     <!-- InstanceEndEditable -->
         <div class="dcf-hero-group-1">
             <div class="dcf-breadcrumbs-wrapper">
@@ -62,7 +62,9 @@
             <header class="dcf-page-title" id="dcf-page-title">
                 <!-- InstanceBeginEditable name="pagetitle" -->
                 <?php print render($title_prefix); ?>
-                <?php if ($title): ?><h1 class="dcf-mb-0"><?php print $title; ?></h1><?php endif; ?>
+                <?php if (array_key_exists('field_unl_hero_subhead1', $node_view)): ?><?php print render($node_view['field_unl_hero_subhead1']); ?><?php endif; ?>
+                <?php if (array_key_exists('field_unl_hero_title', $node_view)): ?><?php print render($node_view['field_unl_hero_title']); ?><?php elseif ($title): ?><h1><?php print $title; ?></h1><?php endif; ?>
+                <?php if (array_key_exists('field_unl_hero_subhead2', $node_view)): ?><?php print render($node_view['field_unl_hero_subhead2']); ?><?php endif; ?>
                 <?php print render($title_suffix); ?>
                 <!-- InstanceEndEditable -->
             </header>
@@ -70,7 +72,9 @@
             <!-- InstanceEndEditable -->
         </div>
         <!-- InstanceBeginEditable name="herogroup2" -->
-        <div class="dcf-hero-group-2">
+        <div class="dcf-hero-group-2<?php if (array_key_exists('field_unl_hero_size', $node_view)): ?> dcf-w-100% <?php print render($node_view['field_unl_hero_size']); ?><?php endif; ?>">
+            <?php if (array_key_exists('field_unl_hero_image', $node_view)): ?><?php print render($node_view['field_unl_hero_image']); ?><?php endif; ?>
+            <?php if (array_key_exists('field_unl_hero_photo_credit', $node_view)): ?><?php print render($node_view['field_unl_hero_photo_credit']); ?><?php endif; ?>
         </div>
         <!-- InstanceEndEditable -->
     </div>
