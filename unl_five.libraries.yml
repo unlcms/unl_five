@@ -22,6 +22,8 @@ amd:
   js:
     js/amd-disable.js: { weight: -999 }
     js/amd-enable.js: {}
+  dependencies:
+    - core/jquery.form
 
 idm:
   version: VERSION
