@@ -98,8 +98,13 @@ function unl_five_page_attachments_alter(&$attachments) {
 }
 
 function unl_five_js_alter(&$js, \Drupal\Core\Asset\AttachedAssetsInterface $assets) {
+  // Values for weight of theme libraries can only be negative but amd-enable.js absolutely must come last.
   if (in_array('unl_five/amd', $assets->libraries)) {
-    $js['themes/unl_five/js/amd-enable.js']['weight'] += 999;
+    foreach ($js as $key => $library) {
+      if (strpos($key, 'unl_five/js/amd-enable.js') !== false) {
+        $js[$key]['weight'] += 999;
+      }
+    }
   }
 }
 
