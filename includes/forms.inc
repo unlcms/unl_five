@@ -4,46 +4,7 @@
  * Implements hook_form_alter().
  */
 function unl_five_form_alter(&$form, &$form_state, $form_id) {
-  // Add DCF classes directly to form elements.
-  if (isset($form['submitted'])) {
-    foreach ($form['submitted'] as &$element) {
-      if (isset($element['#type'])) {
-        $class = _unl_five_form_element_class($element);
-        $element['#attributes']['class'][] = $class;
-      }
-    }
-  }
-}
-
-/**
- * Helper recursive function for unl_five_form_alter() to get to elements in a fieldset.
- */
-function _unl_five_form_element_class(&$element) {
-  $class = '';
-  switch ($element['#type']) {
-    case 'textfield':
-    case 'textarea':
-    case 'webform_number':
-    case 'webform_email':
-      $class = 'dcf-input-text';
-      break;
-    case 'select':
-    case 'date':
-      $class = 'dcf-input-select';
-      break;
-    case 'radios':
-    case 'checkboxes':
-      $class = 'dcf-input-control';
-      break;
-    case 'fieldset':
-      foreach ($element as &$nested_element) {
-        if (isset($nested_element['#type'])) {
-          $class = _unl_five_form_element_class($nested_element);
-          $nested_element['#attributes']['class'][] = $class;
-        }
-      }
-  }
-  return $class;
+  $form['#attributes']['class'][] = 'dcf-form';
 }
 
 /**
@@ -89,10 +50,7 @@ function unl_five_webform_element($variables) {
     if ($composite) {
       $attributes = array();
       if ($element['#title_display'] == 'invisible') {
-        $attributes['class'] = 'dcf-legend element-invisible';
-      }
-      else {
-        $attributes['class'] = 'dcf-legend';
+        $attributes['class'] = 'element-invisible';
       }
       $title = '<legend' . drupal_attributes($attributes) . '>' . $element['#title'];
       if (!empty($element['#required'])) {
@@ -160,6 +118,13 @@ function unl_five_form_element($variables) {
   $attributes['class'] = array('form-item');
   if (!empty($element['#type'])) {
     $attributes['class'][] = 'form-type-' . strtr($element['#type'], '_', '-');
+
+    if ($element['#type'] == 'checkbox') {
+      $attributes['class'][] = 'dcf-input-checkbox';
+    }
+    if ($element['#type'] == 'radio') {
+      $attributes['class'][] = 'dcf-input-radio';
+    }
   }
   if (!empty($element['#name'])) {
     $attributes['class'][] = 'form-item-' . strtr($element['#name'], array(' ' => '-', '_' => '-', '[' => '-', ']' => ''));
@@ -201,10 +166,7 @@ function unl_five_form_element($variables) {
     if ($composite) {
       $attributes = array();
       if ($element['#title_display'] == 'invisible') {
-        $attributes['class'] = 'dcf-legend element-invisible';
-      }
-      else {
-        $attributes['class'] = 'dcf-legend';
+        $attributes['class'] = 'element-invisible';
       }
       $title = '<legend' . drupal_attributes($attributes) . '>' . $element['#title'];
       if (!empty($element['#required'])) {
@@ -250,18 +212,18 @@ function unl_five_form_element($variables) {
 /**
  * Theme a webform time element.
  * 
- * Adds labels so that it passes WCAG2.0 and adds .dcf-input-select class.
+ * Adds labels so that it passes WCAG2.0.
  */
 function unl_five_webform_time($variables) {
   $element = $variables['element'];
 
-  $element['hour']['#attributes']['class'] = array('dcf-input-select', 'hour');
-  $element['minute']['#attributes']['class'] = array('dcf-input-select', 'minute');
+  $element['hour']['#attributes']['class'] = array('hour');
+  $element['minute']['#attributes']['class'] = array('minute');
 
   // Add error classes to all items within the element.
   if (form_get_error($element)) {
-    $element['hour']['#attributes']['class'][] = array('dcf-input-select', 'error');
-    $element['minute']['#attributes']['class'][] = array('dcf-input-select', 'error');
+    $element['hour']['#attributes']['class'][] = array('error');
+    $element['minute']['#attributes']['class'][] = array('error');
   }
 
   $element['hour']['#title']           = 'New Hour';
@@ -311,69 +273,4 @@ function unl_five_file_managed_file($variables) {
   }
 
   return theme_file_managed_file($variables);
-}
-
-/**
- * Implements theme_fieldset() to add .dcf-legend class.
- */
-function unl_five_fieldset($variables) {
-  $element = $variables['element'];
-  element_set_attributes($element, array('id'));
-  _form_set_class($element, array('form-wrapper'));
-
-  $output = '<fieldset' . drupal_attributes($element['#attributes']) . '>';
-  if (!empty($element['#title'])) {
-    // Always wrap fieldset legends in a SPAN for CSS positioning.
-    $output .= '<legend class="dcf-legend"><span class="fieldset-legend">' . $element['#title'] . '</span></legend>';
-  }
-  $output .= '<div class="fieldset-wrapper">';
-  if (!empty($element['#description'])) {
-    $output .= '<div class="fieldset-description">' . $element['#description'] . '</div>';
-  }
-  $output .= $element['#children'];
-  if (isset($element['#value'])) {
-    $output .= $element['#value'];
-  }
-  $output .= '</div>';
-  $output .= "</fieldset>\n";
-  return $output;
-}
-
-/**
- * Implements theme_form_element_label() to add .dcf-label class.
- */
-function unl_five_form_element_label($variables) {
-  $element = $variables['element'];
-  // This is also used in the installer, pre-database setup.
-  $t = get_t();
-
-  // If title and required marker are both empty, output no label.
-  if ((!isset($element['#title']) || $element['#title'] === '') && empty($element['#required'])) {
-    return '';
-  }
-
-  // If the element is required, a required marker is appended to the label.
-  $required = !empty($element['#required']) ? theme('form_required_marker', array('element' => $element)) : '';
-
-  $title = filter_xss_admin($element['#title']);
-
-  $attributes = array();
-  // Style the label as class option to display inline with the element.
-  if ($element['#title_display'] == 'after') {
-    $attributes['class'] = 'dcf-label option';
-  }
-  // Show label only to screen readers to avoid disruption in visual flows.
-  elseif ($element['#title_display'] == 'invisible') {
-    $attributes['class'] = 'dcf-label element-invisible';
-  }
-  else {
-    $attributes['class'] = 'dcf-label';
-  }
-
-  if (!empty($element['#id'])) {
-    $attributes['for'] = $element['#id'];
-  }
-
-  // The leading whitespace helps visually separate fields from inline labels.
-  return ' <label' . drupal_attributes($attributes) . '>' . $t('!title !required', array('!title' => $title, '!required' => $required)) . "</label>\n";
 }

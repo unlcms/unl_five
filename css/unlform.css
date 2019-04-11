@@ -7,19 +7,11 @@
     width: auto !important;
 }
 
-input.webform-calendar {
+.unl .dcf-form input.webform-calendar {
+    border: 0;
+    padding: 0;
     vertical-align: text-bottom;
     width: 1.5em;
-}
-
-.fieldset-invisible {
-    margin: 0;
-    padding: 0;
-}
-
-fieldset:not(.fieldset-invisible) {
-    border: 1px solid #c7c8ca;
-    padding: 0 1em;
 }
 
 .form-submit {
