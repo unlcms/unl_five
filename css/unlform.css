@@ -21,3 +21,8 @@
 select {
     margin-bottom: 0;
 }
+
+.webform-grid td.checkbox,
+.webform-grid th.checkbox {
+    text-align: left;
+}

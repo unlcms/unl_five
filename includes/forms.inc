@@ -274,3 +274,85 @@ function unl_five_file_managed_file($variables) {
 
   return theme_file_managed_file($variables);
 }
+
+/**
+ * Theme function to render a grid component.
+ *
+ * Used here to show the <label> and hide the text with .dcf-sr-only so that the faux-radio button displays.
+ */
+function unl_five_webform_grid($variables) {
+  $element = $variables['element'];
+  $right_titles = _webform_grid_right_titles($element);
+
+  $rows = array();
+
+  // Set the header for the table.
+  $header = _webform_grid_header($element, $right_titles);
+
+  foreach (element_children($element) as $key) {
+    $question_element = $element[$key];
+    $title_element =& $question_element;
+    if ($question_element['#type'] == 'select_or_other') {
+      $title_element =& $question_element['select'];
+    }
+    $question_titles = explode('|', $title_element['#title'], 2);
+
+    // Create a row with the question title.
+    $required = !empty($question_element['#required']) ? theme('form_required_marker', array('element' => $question_element)) : '';
+    $row = array(array('data' => t('!title !required', array('!title' => webform_filter_xss($question_titles[0]), '!required' => $required)), 'class' => array('webform-grid-question')));
+
+    // Render each radio button in the row.
+    if ($question_element['#type'] == 'radios' || $question_element['#type'] == 'checkboxes') {
+      $radios = form_process_radios($question_element);
+      foreach (element_children($radios) as $key) {
+        $radio_title = $radios[$key]['#title'];
+        if (!strlen($radio_title)) {
+          $row[] = '&nbsp;';
+        }
+        else {
+          $radios[$key]['#title'] = '<span class="dcf-sr-only">' . $question_element['#title'] . ' - ' . $radio_title . '</span>';
+          //$radios[$key]['#title_display'] = 'invisible';
+          $row[] = array('data' => drupal_render($radios[$key]), 'class' => array('checkbox', 'webform-grid-option'), 'data-label' => array($radio_title));
+        }
+      }
+    }
+    else {
+      $title_element['#title_display'] = 'none';
+      $row[] = array(
+        'data' => drupal_render($question_element),
+        'colspan' => count($element['#grid_options']),
+      );
+    }
+    if ($right_titles) {
+      $row[] = array('data' => isset($question_titles[1]) ? webform_filter_xss($question_titles[1]) : '', 'class' => array('webform-grid-question'));
+    }
+
+    // Convert the parents array into a string, excluding the "submitted" wrapper.
+    $nested_level = $question_element['#parents'][0] == 'submitted' ? 1 : 0;
+    $parents = str_replace('_', '-', implode('--', array_slice($question_element['#parents'], $nested_level)));
+
+    $rows[] = array(
+      'data' => $row,
+      'class' => empty($question_element['#grid_question'])
+        ? array(
+          'webform-component',
+          'webform-component-' . str_replace('_', '-', $question_element['#type']),
+          'webform-component--' . $parents,
+        )
+        : array(),
+    );
+  }
+
+  $option_count = count($header) - 1;
+  return theme('table', array(
+    'header' => $header,
+    'rows' => $rows,
+    'sticky' => $element['#sticky'],
+    'attributes' => array(
+      'class' => array(
+        'webform-grid',
+        'webform-grid-' . $option_count,
+      ),
+    ),
+  ));
+}
