@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * unl_fourone theme implementation to wrap menu blocks.
+ * unl_five theme implementation to wrap menu blocks.
  *
  * Available variables:
  * - $content: The renderable array containing the menu.
@@ -18,4 +18,6 @@
  * @see template_preprocess_menu_block_wrapper()
  */
 ?>
-<?php print render($content); ?>
+<div class="dcf-txt-xs unl-font-sans <?php print $classes; ?>">
+  <?php print render($content); ?>
+</div>

@@ -141,10 +141,10 @@ function unl_five_preprocess_block(&$vars) {
   if ($vars['block_html_id'] == 'block-book-navigation') {
     $vars['classes_array'][] = 'block-menu-block';
   }
-  // Add .wdn-sans-serif to menu blocks.
+  // Add .unl-frame-quad to menu blocks.
   if ($vars['block_html_id'] == 'block-book-navigation' || substr($vars['block_html_id'], 0, 16) == 'block-menu-block' ) {
-    $vars['classes_array'][] = 'wdn-sans-serif';
-    $vars['title_attributes_array']['class'][] = 'wdn-sans-serif';
+    $vars['classes_array'][] = 'unl-frame-quad';
+    $vars['title_attributes_array']['class'][] = 'dcf-mb-0 dcf-txt-md dcf-uppercase unl-ls-1 unl-bg-darker-gray';
   }
 }
 
@@ -457,11 +457,77 @@ function unl_five_file_icon($variables) {
 }
 
 /**
+ * Implements theme_book_title_link().
+ */
+function unl_five_book_title_link($variables) {
+  $link = $variables['link'];
+
+  $link['options']['attributes']['class'] = array('book-title', 'dcf-pt-6', 'dcf-pb-4', 'dcf-txt-sm', 'dcf-d-block', 'unl-cream');
+
+  return l($link['title'], $link['href'], $link['options']);
+}
+
+/**
  * Implements theme_menu_tree().
  */
 function unl_five_menu_tree($variables) {
   $tree = $variables['tree'];
-  return '<ul>' . $tree . '</ul>' . PHP_EOL;
+  // Used for Main Menu
+  $html = '<ul>' . $tree . '</ul>';
+  // There isn't a general theme_menu_tree__book_toc(). The hook only exists as
+  // theme_menu_tree__book_toc_ID() so it needs to be generalized here.
+  if (strpos($variables['theme_hook_original'], 'book_toc') !== false) {
+    $html = '<ul class="dcf-list-bare dcf-m-0">' . $tree . '</ul>';
+  }
+  return $html . PHP_EOL;
+}
+
+/**
+ * Implements theme_menu_tree__menu_block().
+ */
+function unl_five_menu_tree__menu_block($variables) {
+  $tree = $variables['tree'];
+  return '<ul class="dcf-list-bare dcf-m-0">' . $tree . '</ul>' . PHP_EOL;
+}
+
+/**
+ * Implements theme_menu_link().
+ */
+function unl_five_menu_link(array $variables) {
+  $element = $variables['element'];
+  $sub_menu = '';
+  if ($element['#below']) {
+    $sub_menu = drupal_render($element['#below']);
+  }
+  // There isn't a general theme_menu_link__book_toc(). The hook only exists as
+  // theme_menu_link__book_toc_ID() so it needs to be generalized here.
+  if (strpos($variables['theme_hook_original'], 'book_toc') !== false) {
+    $element['#attributes']['class'][] = 'dcf-p-0';
+    $element['#localized_options']['attributes']['class'][] = 'dcf-d-block dcf-txt-decor-hover';
+    if ($element['#href'] == $_GET['q'] || in_array('active', $element['#attributes']['class'])) {
+      $element['#localized_options']['attributes']['class'][] = 'dcf-bl-2 dcf-br-2 dcf-bl-solid dcf-br-solid unl-bl-scarlet unl-br-scarlet';
+    }
+  }
+  $output = l($element['#title'], $element['#href'], $element['#localized_options']);
+  return '<li' . drupal_attributes($element['#attributes']) . '>' . $output . $sub_menu . "</li>\n";
+}
+
+/**
+ * Implements theme_menu_link__menu_block().
+ */
+function unl_five_menu_link__menu_block(array $variables) {
+  $element = $variables['element'];
+  $sub_menu = '';
+  if ($element['#below']) {
+    $sub_menu = drupal_render($element['#below']);
+  }
+  $element['#attributes']['class'][] = 'dcf-p-0';
+  $element['#localized_options']['attributes']['class'][] = 'dcf-d-block dcf-txt-decor-hover';
+  if ($element['#href'] == $_GET['q'] || in_array('active', $element['#attributes']['class'])) {
+    $element['#localized_options']['attributes']['class'][] = 'dcf-bl-2 dcf-br-2 dcf-bl-solid dcf-br-solid unl-bl-scarlet unl-br-scarlet';
+  }
+  $output = l($element['#title'], $element['#href'], $element['#localized_options']);
+  return '<li' . drupal_attributes($element['#attributes']) . '>' . $output . $sub_menu . "</li>\n";
 }
 
 /**
