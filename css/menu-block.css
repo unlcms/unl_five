@@ -7,27 +7,27 @@
 .block-menu-block a:hover {cursor: pointer;}
 .block-menu-block h2 a {padding-left: 1.75rem; padding-right: 1.75rem;}
 
-.block-menu-block ul a {color: #424240; margin-bottom: 1px; padding-bottom: .5625em; padding-top: .5625em;}
+.block-menu-block ul a {background-color: #ebebea; color: #424240; margin-bottom: 1px; padding-bottom: .5625em; padding-top: .5625em;}
 .block-menu-block ul a:hover {color: #9e0900;}
 .block-menu-block ul a.active {color: #d00000;}
 
-.block-menu-block ul:first-child > li > a {padding-left: 1.75rem; background-color: #e3e3e2;}
+.block-menu-block ul:first-child > li > a {padding-left: 1.75rem;}
 .block-menu-block ul:first-child > li > a.active {padding-left: calc(1.75rem - 2px);}
 
-.block-menu-block ul:first-child > li > ul > li > a {padding-left: 2.5rem; background-color: #e8e8e7;}
+.block-menu-block ul:first-child > li > ul > li > a {padding-left: 2.5rem;}
 .block-menu-block ul:first-child > li > ul > li > a.active {padding-left: calc(2.5rem - 2px);}
 
-.block-menu-block ul:first-child > li > ul > li > ul > li a {padding-left: 3.25rem; background-color: #ededec;}
+.block-menu-block ul:first-child > li > ul > li > ul > li a {padding-left: 3.25rem;}
 .block-menu-block ul:first-child > li > ul > li > ul > li a.active {padding-left: calc(3.25rem - 2px);}
 
-.block-menu-block ul:first-child > li > ul > li > ul > li > ul > li a {padding-left: 4rem; background-color: #f1f1f0;}
+.block-menu-block ul:first-child > li > ul > li > ul > li > ul > li a {padding-left: 4rem;}
 .block-menu-block ul:first-child > li > ul > li > ul > li > ul > li a.active {padding-left: calc(4rem - 2px);}
 
-.block-menu-block ul:first-child > li > ul > li > ul > li > ul > li > ul > li a {padding-left: 4.75rem; background-color: #f6f6f5;}
+.block-menu-block ul:first-child > li > ul > li > ul > li > ul > li > ul > li a {padding-left: 4.75rem;}
 .block-menu-block ul:first-child > li > ul > li > ul > li > ul > li > ul > li a.active {padding-left: calc(4.75rem - 2px);}
 
 .block-menu-block ul:first-child > li:first-child > a {padding-top: .75em;}
-.block-menu-block ul:first-child > li:last-child > a {padding-bottom: .75em; margin-bottom: 0;}
+.block-menu-block ul:first-child > li:last-child > a {padding-bottom: 1em; margin-bottom: 0;}
 
 .block-menu-block li,
 .block-menu-block li.collapsed,
