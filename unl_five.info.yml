@@ -3,6 +3,9 @@ type: theme
 description: 'This theme tracks the 5.0.x version of the UNLedu Web Framework.'
 core: 8.x
 
+dependencies:
+  - unl_five_ckeditor:unl_five_ckeditor
+
 libraries:
   - unl_five/global-styling
   - unl_five/idm
