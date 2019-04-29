@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * @file
+ * Code for unl_five that can't be in a theme.
+ */
+
+/**
+ * Implements hook_ckeditor_css_alter().
+ *
+ * Note: hook_ckeditor_css_alter() only executes for modules and the
+ * active theme; thus, this code cannot run from unl_five.theme because
+ * the admin theme will be active when CKEditor is loaded.
+ */
+function unl_five_ckeditor_ckeditor_css_alter(&$css, $editor) {
+  // These WDN CSS files cannot be reliably loaded in unl_five.info.yml
+  // as a ckeditor_stylesheets library because CSS's @import rule can only
+  // load them relative to the theme, not relative to the docroot.
+  // The theme may be loaded from /web/themes or /web/themes/contrib,
+  // so relative paths won't work. It's also possible that Drupal may be
+  // executed out of a sub-directory namespace
+  // (e.g. http://example.unl.edu/workspace/project-herbie/web/), so
+  // loading relative to the domain root won't work either. It must relative
+  // to Drupal's base url.
+  $css[] = 'wdn/templates_5.0/css/core.css';
+  $css[] = 'wdn/templates_5.0/css/deprecated.css';
+}
