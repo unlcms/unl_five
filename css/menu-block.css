@@ -3,11 +3,10 @@
  * book navigation block in unl_five_preprocess_block().
  */
 
-.block-menu-block a {padding-right: 1.777em;}
 .block-menu-block a:hover {cursor: pointer;}
-.block-menu-block h2 a {padding-left: 1.75rem; padding-right: 1.75rem;}
+.block-menu-block h2 {padding-left: 1.75rem; padding-right: 1.75rem;}
 
-.block-menu-block ul a {background-color: #ebebea; color: #424240; margin-bottom: 1px; padding-bottom: .5625em; padding-top: .5625em;}
+.block-menu-block ul a {background-color: #ebebea; color: #424240; margin-bottom: 1px; padding-bottom: .5625em; padding-right: 1.75rem; padding-top: .5625em;}
 .block-menu-block ul a:hover {color: #9e0900;}
 .block-menu-block ul a.active {color: #d00000;}
 

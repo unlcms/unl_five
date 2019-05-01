@@ -144,7 +144,7 @@ function unl_five_preprocess_block(&$vars) {
   // Add .unl-frame-quad to menu blocks.
   if ($vars['block_html_id'] == 'block-book-navigation' || substr($vars['block_html_id'], 0, 16) == 'block-menu-block' ) {
     $vars['classes_array'][] = 'unl-frame-quad';
-    $vars['title_attributes_array']['class'][] = 'dcf-mb-0 dcf-txt-md dcf-uppercase unl-ls-1 unl-bg-darker-gray';
+    $vars['title_attributes_array']['class'][] = 'dcf-mb-0 dcf-pt-6 dcf-pb-4 dcf-txt-sm dcf-uppercase unl-ls-1 unl-bg-darker-gray';
   }
 }
 
@@ -462,7 +462,7 @@ function unl_five_file_icon($variables) {
 function unl_five_book_title_link($variables) {
   $link = $variables['link'];
 
-  $link['options']['attributes']['class'] = array('book-title', 'dcf-pt-6', 'dcf-pb-4', 'dcf-txt-sm', 'dcf-d-block', 'unl-cream');
+  $link['options']['attributes']['class'] = array('book-title', 'unl-cream');
 
   return l($link['title'], $link['href'], $link['options']);
 }
