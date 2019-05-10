@@ -1,5 +1,6 @@
 <?php
 
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\group\Entity\GroupContent;
 use Drupal\node\Entity\Node;
 
@@ -234,4 +235,79 @@ function unl_five_is_request_group_front() {
   $group = \Drupal::request()->attributes->get('group');
 
   return $group ? TRUE : FALSE;
+}
+
+/**
+ * Implements hook_form_alter().
+ *
+ * All forms that are rendered by unl_five will be compatiable with DCF.
+ */
+function unl_five_form_alter(&$form, FormStateInterface &$form_state, $form_id) {
+  // Add 'dcf-form' class to form.
+  $form['#attributes']['class'][] = 'dcf-form';
+
+  // Some webform elements are not available to hook_preprocess_form_element().
+  // Add 'dcf-form-group' class to these elements.
+  $form_group_add = [
+    'details',
+  ];
+  foreach ($form['elements'] as $key => $element) {
+    if (in_array($element['#type'], $form_group_add)) {
+      $form['elements'][$key]['#attributes']['class'][] = 'dcf-form-group';
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_form_element().
+ *
+ * All elements that are rendered by unl_five will be compatiable with DCF.
+ */
+function unl_five_preprocess_form_element(&$variables) {
+  // Add 'dcf-required' class to required elements.
+  if ($variables['element']['#required'] == TRUE) {
+    $variables['label']['#title'] = $variables['label']['#title'] . ' <small class="dcf-required">Required</small>';
+  }
+
+  // Add 'dcf-form-controls-inline' class as appropriate.
+  if (in_array('webform-element--title-inline', $variables['attributes']['class'])) {
+    $variables['attributes']['class'][] = 'dcf-form-controls-inline';
+  }
+
+  // Add 'dcf-form-help' class to descriptions.
+  // Elements of type 'details' are exempt.
+  if ($variables['element']['#type'] != 'details' && $variables['description']['content']) {
+    $variables['description']['attributes']->addClass('dcf-form-help');
+  }
+
+  // Add 'dcf-form-group' class to all elements, except those rendered
+  // with certain parents. In these cases, the class has already been
+  // added to the parent element.
+  $exempt_parents = [
+    'checkboxes',
+    'webform_checkboxes_other',
+    'radios',
+  ];
+  if (empty(array_intersect($exempt_parents, $variables['element']['#parents']))) {
+    $variables['attributes']['class'][] = 'dcf-form-group';
+  }
+
+  // Add 'dcf-input-checkbox' class to checkboxes.
+  if ($variables['type'] == 'checkbox') {
+    // Add 'dcf-input-checkbox' class to checkboxes.
+    $variables['attributes']['class'][] = 'dcf-input-checkbox';
+  }
+
+  // Add 'dcf-input-radio' class to radios except those rendered
+  // with certain parents. In these cases, the radios are
+  // displayed as buttons, so the DCF radio styles are not appropriate.
+  $exempt_parents = [
+    'buttons',
+    'buttons_other',
+  ];
+  if ($variables['type'] == 'radio'
+    && empty(array_intersect($exempt_parents, $variables['element']['#parents']))
+    ) {
+    $variables['attributes']['class'][] = 'dcf-input-radio';
+  }
 }
