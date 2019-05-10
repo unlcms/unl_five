@@ -4,7 +4,7 @@
   bottom: 0;
 }
 @media screen and (max-width: 43.69em) {
-  [[id^="block-unl-five-"][id$="-local-tasks"] {
+  [id^="block-unl-five-"][id$="-local-tasks"] {
     position: initial;
     clear: left;
   }
