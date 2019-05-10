@@ -1,0 +1,52 @@
+{% import _self as book_tree %}
+
+{#
+  We call a macro which calls itself to render the full tree.
+  @see http://twig.sensiolabs.org/doc/tags/macro.html
+#}
+{{ book_tree.book_links(items, attributes, 0) }}
+
+{% macro book_links(items, attributes, menu_level) %}
+  {% import _self as book_tree %}
+  {% if items %}
+    {% if menu_level == 0 %}
+      <div{{ attributes.addClass('block-menu-block unl-frame-quad') }}>
+    {% else %}
+      <ul class="dcf-list-bare dcf-m-0">
+    {% endif %}
+    {% for item in items %}
+      {% if menu_level == 0 %}
+        <h2{{ item.attributes.addClass('dcf-mb-0 dcf-pt-6 dcf-pb-4 dcf-txt-sm dcf-uppercase unl-ls-1 unl-bg-darker-gray') }}>
+          {{ link(item.title, item.url, {'class': 'unl-cream'}) }}
+        </h2>
+        <div class="dcf-txt-xs unl-font-sans">
+        {% if item.below %}
+          {{ book_tree.book_links(item.below, attributes, menu_level + 1) }}
+        {% endif %}
+      {% else %}
+        {%
+          set classes = [
+            'menu-item',
+            item.is_expanded ? 'menu-item--expanded',
+            item.is_collapsed ? 'menu-item--collapsed',
+            item.in_active_trail ? 'menu-item--active-trail',
+            'dcf-p-0',
+            'dcf-m-0'
+          ]
+        %}
+        <li{{ item.attributes.addClass(classes) }}>
+          {{ link(item.title, item.url, {'class': 'dcf-d-block dcf-txt-decor-hover'}) }}
+          {% if item.below %}
+            {{ book_tree.book_links(item.below, attributes, menu_level + 1) }}
+          {% endif %}
+        </li>
+      {% endif %}
+    {% endfor %}
+    {% if menu_level == 0 %}
+        </div>
+      </div>
+    {% else %}
+      </ul>
+    {% endif %}
+  {% endif %}
+{% endmacro %}

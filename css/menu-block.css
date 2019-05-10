@@ -1,27 +1,42 @@
 /**
  * The .block-menu-block class is also added to the
- * book navigation block in unl_five_preprocess_block().
+ * book navigation block in book-tree.html.twig so
+ * that Menu Blocks and Book Navigation can share the same styles.
  */
 
-.block-menu-block a {color: #333;}
-.block-menu-block a:hover {color: #d00000;}
-.block-menu-block a.active {background-color: #F2E8B1 !important;}
-.block-menu-block h3 {background-color: #454542; color: #FFF; font-size: inherit; text-transform: uppercase; margin: 0; padding: 1em;}
-.block-menu-block h3 a {color: #fff; border: none;}
-.block-menu-block h3 a.active {background-color: transparent !important;}
-.block-menu-block ul {background-color: #fff;padding: 0; list-style-image: none; list-style-type: none; margin: 0;}
-.block-menu-block li {padding: 0;}
-.block-menu-block ul a {border: none; font-size: .8em}
-.block-menu-block ul:first-child > li,
-.block-menu-block ul:first-child > li > ul > li {list-style-image: none; list-style-type: none;}
-.block-menu-block ul:first-child > li > a {display: block; background-color: #f2edde; padding: .5em .5em .5em 1.5em; margin-bottom: 1px; border-bottom: 1px solid #E2E2E2;}
-.block-menu-block ul:first-child > li > a {background-position: .3em center; background-repeat: no-repeat;}
-.block-menu-block ul:first-child > li > ul > li > a {background-position: 1em center; background-repeat: no-repeat;}
-.block-menu-block li.collapsed > a {background-image: url("../../../../../misc/menu-collapsed.png");}
-.block-menu-block li.expanded > a {background-image: url("../../../../../misc/menu-expanded.png");}
-.block-menu-block ul:first-child > li:last-child > a {border: none; margin: 0;}
-.block-menu-block ul:first-child > li > ul > li > a {display: block; background-color: #f4f3f0; padding: .5em .5em .5em 2.2em; margin-bottom: 1px;}
-.block-menu-block ul:first-child > li > ul > li > ul {padding: .5em 0 .5em 3.2em;}
-.block-menu-block ul:first-child > li > ul > li > ul ul {padding: .4em 0 0 1em;}
-.block-menu-block ul:first-child > li > ul > li > ul li {padding: 0 0 .2em 0em;}
-.block-menu-block ul:first-child > li > ul > li > ul a {background: none; padding: .2em;}
+.block-menu-block a:hover {cursor: pointer;}
+.block-menu-block h2 {padding-left: 1.75rem; padding-right: 1.75rem;}
+
+.block-menu-block ul a {background-color: #ebebea; color: #424240; margin-bottom: 1px; padding-bottom: .5625em; padding-right: 1.75rem; padding-top: .5625em;}
+.block-menu-block ul a:hover {color: #9e0900;}
+.block-menu-block ul a.active {color: #d00000;}
+
+.block-menu-block ul:first-child > li > a {padding-left: 1.75rem;}
+.block-menu-block ul:first-child > li > a.active {padding-left: calc(1.75rem - 2px);}
+
+.block-menu-block ul:first-child > li > ul > li > a {padding-left: 2.5rem;}
+.block-menu-block ul:first-child > li > ul > li > a.active {padding-left: calc(2.5rem - 2px);}
+
+.block-menu-block ul:first-child > li > ul > li > ul > li a {padding-left: 3.25rem;}
+.block-menu-block ul:first-child > li > ul > li > ul > li a.active {padding-left: calc(3.25rem - 2px);}
+
+.block-menu-block ul:first-child > li > ul > li > ul > li > ul > li a {padding-left: 4rem;}
+.block-menu-block ul:first-child > li > ul > li > ul > li > ul > li a.active {padding-left: calc(4rem - 2px);}
+
+.block-menu-block ul:first-child > li > ul > li > ul > li > ul > li > ul > li a {padding-left: 4.75rem;}
+.block-menu-block ul:first-child > li > ul > li > ul > li > ul > li > ul > li a.active {padding-left: calc(4.75rem - 2px);}
+
+.block-menu-block ul:first-child > li:first-child > a {padding-top: .75em;}
+.block-menu-block ul:first-child > li:last-child > a {padding-bottom: 1em; margin-bottom: 0;}
+
+.block-menu-block li,
+.block-menu-block li.collapsed,
+.block-menu-block li.expanded,
+.block-menu-block li.leaf {list-style-image: none; list-style-type: none;}
+.block-menu-block li.collapsed > a,
+.block-menu-block li.expanded > a,
+.block-menu-block li.leaf > a {position: relative;}
+.block-menu-block li.collapsed > a:before,
+.block-menu-block li.expanded > a:before {position: absolute; top: 50%; transform: translate(-.75rem,-45%); font-size: .451rem; color: #6b6b68;}
+.block-menu-block li.collapsed > a:before {content: '\25B6';}
+.block-menu-block li.expanded > a:before {content: '\25BC';}
