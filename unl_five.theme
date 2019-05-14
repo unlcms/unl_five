@@ -157,6 +157,19 @@ function unl_five_preprocess_block(&$variables) {
 }
 
 /**
+ * Implements template_preprocess_book_navigation().
+ */
+function unl_five_preprocess_book_navigation(&$variables) {
+  // This theme's 'book-tree' template is for the book nav in the sidebar. That block does not make use
+  // of this preprocess function nor the 'book-navigation' template. It just uses 'book-tree'.
+  // The book navigation at the bottom of the page also calls 'book-tree' so an alternative 'book-tree' template
+  // is needed. However, its only template suggestion appends the book ID to the end. It is simplified here:
+  if (is_array($variables['tree'])) {
+    $variables['tree']['#theme'] = 'book_tree__book_toc';
+  }
+}
+
+/**
  * Implements template_preprocess_breadcrumb().
  */
 function unl_five_preprocess_breadcrumb(&$variables) {
