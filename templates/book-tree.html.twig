@@ -35,7 +35,14 @@
           ]
         %}
         <li{{ item.attributes.addClass(classes) }}>
-          {{ link(item.title, item.url, {'class': 'dcf-d-block dcf-txt-decor-hover'}) }}
+          {%
+            set classes = [
+              item.in_active_trail and not item.below ? 'menu-item--active dcf-bl-2 dcf-br-2 dcf-bl-solid dcf-br-solid unl-bl-scarlet unl-br-scarlet',
+              'dcf-txt-decor-hover',
+              'dcf-d-block'
+            ]
+          %}
+          {{ link(item.title, item.url, {'class': classes}) }}
           {% if item.below %}
             {{ book_tree.book_links(item.below, attributes, menu_level + 1) }}
           {% endif %}
