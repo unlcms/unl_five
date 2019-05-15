@@ -68,6 +68,9 @@
   {% if label_display in ['before', 'invisible'] %}
     {{ label }}
   {% endif %}
+  {% if (prefix is not empty) or (suffix is not empty) %}
+    <div class="dcf-input-group">
+  {% endif %}
   {% if prefix is not empty %}
     <span class="field-prefix dcf-input-group-addon">{{ prefix }}</span>
   {% endif %}
@@ -79,6 +82,9 @@
   {{ children }}
   {% if suffix is not empty %}
     <span class="field-suffix dcf-input-group-addon">{{ suffix }}</span>
+  {% endif %}
+  {% if (prefix is not empty) or (suffix is not empty) %}
+    </div>
   {% endif %}
   {% if label_display == 'after' %}
     {{ label }}
