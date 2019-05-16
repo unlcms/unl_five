@@ -245,17 +245,6 @@ function unl_five_is_request_group_front() {
 function unl_five_form_alter(&$form, FormStateInterface &$form_state, $form_id) {
   // Add 'dcf-form' class to form.
   $form['#attributes']['class'][] = 'dcf-form';
-
-  // Some webform elements are not available to hook_preprocess_form_element().
-  // Add 'dcf-form-group' class to these elements.
-  $form_group_add = [
-    'details',
-  ];
-  foreach ($form['elements'] as $key => $element) {
-    if (in_array($element['#type'], $form_group_add)) {
-      $form['elements'][$key]['#attributes']['class'][] = 'dcf-form-group';
-    }
-  }
 }
 
 /**
@@ -301,13 +290,38 @@ function unl_five_preprocess_form_element(&$variables) {
   // Add 'dcf-input-radio' class to radios except those rendered
   // with certain parents. In these cases, the radios are
   // displayed as buttons, so the DCF radio styles are not appropriate.
-  $exempt_parents = [
+  $button_parents = [
     'buttons',
     'buttons_other',
   ];
-  if ($variables['type'] == 'radio'
-    && empty(array_intersect($exempt_parents, $variables['element']['#parents']))
-    ) {
-    $variables['attributes']['class'][] = 'dcf-input-radio';
+  if ($variables['type'] == 'radio') {
+    if (empty(array_intersect($button_parents, $variables['element']['#parents']))) {
+      $variables['attributes']['class'][] = 'dcf-input-radio';
+    }
+    else {
+      $variables['label']['#attributes']['class'][] = 'dcf-btn';
+    } 
+  }
+}
+
+/**
+ * Implements template_preprocess_details().
+ *
+ * All details elements that are rendered by unl_five will be compatiable with DCF.
+ */
+function unl_five_preprocess_details(&$variables) {
+  // Add 'dcf-form-group' class to details element.
+  $variables['attributes']['class'][] = 'dcf-form-group';
+}
+
+/**
+ * Implements template_preprocess_fieldset().
+ *
+ * All fieldsets that are rendered by unl_five will be compatiable with DCF.
+ */
+function unl_five_preprocess_fieldset(&$variables) {
+  // Add 'dcf-form-help' class to fieldset descriptions.
+  if (isset($variables['description']['attributes'])) {
+    $variables['description']['attributes']->addClass('dcf-form-help');
   }
 }
