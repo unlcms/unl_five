@@ -103,3 +103,27 @@ a.tabledrag-handle .handle {
 .intl-tel-input .country-list {
     margin-left: -.75em;
 }
+
+.webform-multiple-table .dcf-form-group {
+    margin-bottom: 0;
+}
+
+.webform-multiple-add {
+    display: flex;
+}
+
+.webform-multiple-add .form-item {
+    margin-bottom: 0;
+}
+
+.webform-multiple-add .form-item .dcf-input-group {
+    display: inline-flex;
+}
+
+.webform-multiple-table td.webform-multiple-table--operations input {
+    display: inline-block !important;
+    height: auto;
+    width: auto;
+    border: none !important;
+    padding: 0 !important;
+}

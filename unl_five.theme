@@ -325,3 +325,14 @@ function unl_five_preprocess_fieldset(&$variables) {
     $variables['description']['attributes']->addClass('dcf-form-help');
   }
 }
+
+/**
+ * Implements template_element_info_alter().
+ */
+function unl_five_element_info_alter(&$vars) {
+  // Add custom process function for WebformMultiple elements.
+  $vars['webform_multiple']['#process'][] = [
+    'Drupal\unl_five\Element\WebformMultiple',
+    'processWebformMultiple'
+  ];
+}
