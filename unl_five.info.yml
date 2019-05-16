@@ -15,6 +15,9 @@ libraries-override:
   webform/webform.element.counter:
     js:
       js/webform.element.counter.js: js/webform.element.counter.js
+  webform/webform.element.telephone:
+    js:
+      js/webform.element.telephone.js: js/webform.element.telephone.js
 
 ckeditor_stylesheets:
   - css/ckeditor-iframe.css

@@ -84,3 +84,22 @@ a.tabledrag-handle .handle {
 #maincontent > .webform-submission-form:last-child {
     margin-bottom: 1em;
 }
+
+.intl-tel-input {
+    display: flex;
+}
+
+.intl-tel-input .flag-container {
+    position: unset;
+    /* Borrowed from .unl .dcf-input-group-addon */
+    padding: .56em .75em;
+}
+
+.intl-tel-input.allow-dropdown input, .intl-tel-input.allow-dropdown input[type=tel], .intl-tel-input.allow-dropdown input[type=text], .intl-tel-input.separate-dial-code input, .intl-tel-input.separate-dial-code input[type=tel], .intl-tel-input.separate-dial-code input[type=text] {
+    padding-left: .56em;
+    padding-right: .56em;
+}
+
+.intl-tel-input .country-list {
+    margin-left: -.75em;
+}
