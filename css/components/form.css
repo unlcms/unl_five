@@ -91,17 +91,12 @@ a.tabledrag-handle .handle {
 
 .intl-tel-input .flag-container {
     position: unset;
-    /* Borrowed from .unl .dcf-input-group-addon */
-    padding: .56em .75em;
+    padding: unset;
 }
 
 .intl-tel-input.allow-dropdown input, .intl-tel-input.allow-dropdown input[type=tel], .intl-tel-input.allow-dropdown input[type=text], .intl-tel-input.separate-dial-code input, .intl-tel-input.separate-dial-code input[type=tel], .intl-tel-input.separate-dial-code input[type=text] {
     padding-left: .56em;
     padding-right: .56em;
-}
-
-.intl-tel-input .country-list {
-    margin-left: -.75em;
 }
 
 .webform-multiple-table .dcf-form-group {
