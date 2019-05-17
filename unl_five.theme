@@ -1,6 +1,7 @@
 <?php
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Render\Markup;
 use Drupal\group\Entity\GroupContent;
 use Drupal\node\Entity\Node;
 
@@ -320,9 +321,17 @@ function unl_five_preprocess_details(&$variables) {
  * All fieldsets that are rendered by unl_five will be compatiable with DCF.
  */
 function unl_five_preprocess_fieldset(&$variables) {
-  // Add 'dcf-form-help' class to fieldset descriptions.
-  if (isset($variables['description']['attributes'])) {
-    $variables['description']['attributes']->addClass('dcf-form-help');
+  // Fieldset elements.
+  if (is_array($variables['prefix'])) {
+    if (isset($variables['prefix']['description']['description']['#attributes'])) {
+      $variables['prefix']['description']['description']['#attributes']->addClass('dcf-form-help');
+    }
+  }
+  // Checkboxes and other composite elements.
+  elseif(is_object($variables['prefix'])) {
+    $markup = $variables['prefix']->__toString();
+    // There's no good way to do this.
+    $variables['prefix'] = Markup::create('<div class="dcf-form-help">' . $markup . '</div>');
   }
 }
 
