@@ -99,6 +99,11 @@ a.tabledrag-handle .handle {
     padding-right: .56em;
 }
 
+.webform-multiple-table table {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
 .webform-multiple-table .dcf-form-group {
     margin-bottom: 0;
 }
