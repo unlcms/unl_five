@@ -11,6 +11,8 @@ global-styling:
     theme:
       css/menu-block.css: {}
       css/style.css: {}
+  js:
+    js/unl-webform.js: {}
 
 messages:
   version: VERSION
