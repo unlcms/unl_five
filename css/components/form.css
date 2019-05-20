@@ -127,3 +127,55 @@ a.tabledrag-handle .handle {
     border: none !important;
     padding: 0 !important;
 }
+
+.webform-progress-tracker.progress-tracker {
+    margin-bottom: 2.37em;
+}
+
+.webform-progress-tracker .progress-marker {
+    height: 1.77em;
+    padding-bottom: 0;
+    width: 1.77em;
+}
+
+.webform-progress-tracker .progress-text {
+    font-size: .63em;
+}
+
+.webform-progress-tracker .progress-step:not(.is-active) .progress-marker,
+.webform-progress-tracker .progress-step:hover .progress-marker,
+.webform-progress-tracker .progress-step::after {
+    background-color: #6b6b68;
+}
+
+.webform-progress-tracker .progress-step:not(:last-child)::after {
+    bottom: .84em;
+    height: 3px;
+    top: .84em;
+}
+
+.webform-progress-tracker .progress-step .progress-text {
+    color: #6b6b68;
+    padding-top: .43em;
+}
+
+.webform-progress-tracker .progress-step.is-active .progress-marker,
+.webform-progress-tracker .progress-step.is-active:hover .progress-marker {
+    background-color: #d00000;
+}
+
+.webform-progress-tracker .progress-step.is-active .progress-text {
+    color: inherit;
+}
+
+.webform-flexbox {
+    margin-top: 0;
+}
+
+.webform-flex select {
+    margin-bottom: 0;
+}
+
+.dcf-form-help.description p {
+    margin-bottom: 0;
+}
