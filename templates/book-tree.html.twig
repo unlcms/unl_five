@@ -30,6 +30,7 @@
             item.is_expanded ? 'menu-item--expanded',
             item.is_collapsed ? 'menu-item--collapsed',
             item.in_active_trail ? 'menu-item--active-trail',
+            item.is_active ? 'menu-item--active',
             'dcf-p-0',
             'dcf-m-0'
           ]
@@ -37,7 +38,7 @@
         <li{{ item.attributes.addClass(classes) }}>
           {%
             set classes = [
-              item.in_active_trail and not item.below ? 'menu-item--active dcf-bl-2 dcf-br-2 dcf-bl-solid dcf-br-solid unl-bl-scarlet unl-br-scarlet',
+              item.is_active ? 'dcf-bl-2 dcf-br-2 dcf-bl-solid dcf-br-solid unl-bl-scarlet unl-br-scarlet',
               'dcf-txt-decor-hover',
               'dcf-d-block'
             ]
