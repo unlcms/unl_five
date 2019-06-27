@@ -156,6 +156,11 @@ function unl_five_preprocess_block(&$variables) {
   else {
     $variables['#cache']['contexts'][] = 'url.path';
   }
+
+  // Add a class to the existing breadcrumbs block wrapper, rather than add another wrapper in the template.
+  if ($variables['plugin_id'] == 'system_breadcrumb_block') {
+    $variables['attributes']['class'][] = 'dcf-breadcrumbs-wrapper';
+  }
 }
 
 /**
