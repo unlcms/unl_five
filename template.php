@@ -92,6 +92,9 @@ function _unl_five_limit_menu_depth($menu_links, $depth) {
  * Implementation of hook_html_head_alter().
  */
 function unl_five_html_head_alter(&$head_elements) {
+  // Add a preconnect HTTP header for Cloud Typography.
+  drupal_add_http_header('Link', '<https://cloud.typography.com>; rel=preconnect');
+
   // Remove due to w3c error: <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   unset($head_elements['system_meta_content_type']);
 
