@@ -8,6 +8,10 @@ libraries:
   - unl_five/idm
   - unl_five/amd
 
+libraries-extend:
+  core/drupal.tabledrag:
+    - unl_five/dcf-tabledrag
+
 libraries-override:
   core/classList: false
   core/html5shiv: false

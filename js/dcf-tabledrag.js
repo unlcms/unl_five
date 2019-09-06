@@ -12,7 +12,7 @@
      *
      * @type {Drupal~behavior}
      */
-    Drupal.behaviors.unlWebform = {
+    Drupal.behaviors.dcfTabledrag = {
       attach: function (context) {
         // .tabledrag-toggle-weight element is generated in core/misc/dragtable.js.
         $( document ).ready(function() {
