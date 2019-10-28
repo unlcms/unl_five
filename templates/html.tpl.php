@@ -7,6 +7,8 @@
 <!-- InstanceEndEditable -->
 <?php require(DRUPAL_ROOT."/wdn/templates_5.0/includes/global/head-2.html"); ?>
 <!-- InstanceBeginEditable name="head" -->
+<link rel="preload" href="https://unlcms.unl.edu/wdn/templates_5.0/css/deprecated.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://unlcms.unl.edu/wdn/templates_5.0/css/deprecated.css"></noscript>
 <?php print $head; ?>
 <?php print $styles; ?>
 <?php print $scripts; ?>
