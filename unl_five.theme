@@ -264,6 +264,26 @@ function unl_five_is_request_group_front() {
 function unl_five_form_alter(&$form, FormStateInterface &$form_state, $form_id) {
   // Add 'dcf-form' class to form.
   $form['#attributes']['class'][] = 'dcf-form';
+
+  // Target Layout Builder forms.
+  // e.g. form_id ends in '_layout_builder_form'.
+  if (strpos(strrev($form_id), strrev('_layout_builder_form')) === 0) {
+    // Add DCF button classes.
+    $form['actions']['submit']['#attributes']['class'][] = 'dcf-btn';
+    $form['actions']['submit']['#attributes']['class'][] = 'dcf-btn-primary';
+    $form['actions']['submit']['#attributes']['class'][] = 'dcf-mb-2';
+    $form['actions']['discard_changes']['#attributes']['class'][] = 'dcf-btn';
+    $form['actions']['discard_changes']['#attributes']['class'][] = 'dcf-btn-secondary';
+    $form['actions']['discard_changes']['#attributes']['class'][] = 'dcf-mb-2';
+    $form['actions']['revert']['#attributes']['class'][] = 'dcf-btn';
+    $form['actions']['revert']['#attributes']['class'][] = 'dcf-btn-secondary';
+    $form['actions']['revert']['#attributes']['class'][] = 'dcf-mb-2';
+    $form['actions']['move_sections']['#attributes']['class'][] = 'dcf-btn';
+    $form['actions']['move_sections']['#attributes']['class'][] = 'dcf-btn-secondary';
+    $form['actions']['move_sections']['#attributes']['class'][] = 'dcf-mb-2';
+    // Add margin-top to preview toggle.
+    $form['actions']['preview_toggle']['#attributes']['class'][] = 'dcf-mt-2';
+  }
 }
 
 /**
