@@ -177,33 +177,6 @@ function unl_five_preprocess_book_navigation(&$variables) {
 }
 
 /**
- * Implements template_preprocess_breadcrumb().
- */
-function unl_five_preprocess_breadcrumb(&$variables) {
-  if ($variables['breadcrumb']) {
-    $variables['breadcrumb'][0] = [
-      'text' => 'Nebraska',
-      'url' => 'https://www.unl.edu/',
-    ];
-
-    if (unl_five_get_current_group()) {
-      // @todo: There should probably be a way to inject "intermediate" crumbs
-    }
-
-    // Append current page.
-    $request = \Drupal::request();
-    $route_match = \Drupal::routeMatch();
-    $page_title = \Drupal::service('title_resolver')->getTitle($request, $route_match->getRouteObject());
-
-    if (!empty($page_title)) {
-      $variables['breadcrumb'][] = [
-        'text' => $page_title,
-      ];
-    }
-  }
-}
-
-/**
  * Implements template_preprocess_webform_composite_address().
  */
 function unl_five_preprocess_webform_composite_address(&$variables) {
