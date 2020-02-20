@@ -3,5 +3,8 @@ Based on the 5.0 version of the UNLedu Web Framework at http://wdn.unl.edu/
 Requirements:
   - The 'wdn' directory from the UNLedu Web Framework project (https://github.com/unl/wdntemplates) containing template dependents (the CSS and JS) needs to be located (sym-link/shortcut is o.k.) at the root of the Drupal install.
 
+Breadcrumbs:
+  - Previous versions of unl_five included breadcrumbs functionality. This code has been moved to the unl_breadcrumbs project in the 8.x-1.x branch.
+
 CKEditor integration:
   - This theme includes a 'unl_five_ckeditor' sub-module. When enabled, this sub-module provides UNLedu Web Framework CSS files to CKEditor.
