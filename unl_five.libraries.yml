@@ -23,6 +23,7 @@ amd:
     js/amd-enable.js: {}
   dependencies:
     - core/jquery.form
+    - core/drupal.autocomplete
 
 idm:
   version: VERSION
