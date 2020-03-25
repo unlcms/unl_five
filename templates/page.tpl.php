@@ -1,47 +1,47 @@
 <?php if ($format !== 'partial'): ?>
 <header class="dcf-header" id="dcf-header" role="banner">
 
-    <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/header-global-1.html"); ?>
-    <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/nav-global-1.html"); ?>
-    <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/visit-global-1.html"); ?>
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.1/includes/global/header-global-1.html"); ?>
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.1/includes/global/nav-global-1.html"); ?>
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.1/includes/global/visit-global-1.html"); ?>
     <!-- InstanceBeginEditable name="visitlocal" -->
-    <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/local/visit-local.html"); ?>
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.1/includes/local/visit-local.html"); ?>
     <!-- InstanceEndEditable -->
-    <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/visit-global-2.html"); ?>
-    <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/apply-global-1.html"); ?>
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.1/includes/global/visit-global-2.html"); ?>
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.1/includes/global/apply-global-1.html"); ?>
     <!-- InstanceBeginEditable name="applylocal" -->
-    <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/local/apply-local.html"); ?>
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.1/includes/local/apply-local.html"); ?>
     <!-- InstanceEndEditable -->
-    <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/apply-global-2.html"); ?>
-    <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/give-global-1.html"); ?>
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.1/includes/global/apply-global-2.html"); ?>
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.1/includes/global/give-global-1.html"); ?>
     <!-- InstanceBeginEditable name="givelocal" -->
-    <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/local/give-local.html"); ?>
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.1/includes/local/give-local.html"); ?>
     <!-- InstanceEndEditable -->
-    <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/give-global-2.html"); ?>
-    <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/nav-global-2.html"); ?>
-    <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/idm.html"); ?>
-    <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/search.html"); ?>
-    <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/header-global-2.html"); ?>
-    <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/logo-lockup-1.html"); ?>
-    <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/site-affiliation-1.html"); ?>
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.1/includes/global/give-global-2.html"); ?>
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.1/includes/global/nav-global-2.html"); ?>
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.1/includes/global/idm.html"); ?>
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.1/includes/global/search.html"); ?>
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.1/includes/global/header-global-2.html"); ?>
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.1/includes/global/logo-lockup-1.html"); ?>
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.1/includes/global/site-affiliation-1.html"); ?>
         <!-- InstanceBeginEditable name="affiliation" -->
         <?php if ($site_slogan): ?><?php print $site_slogan; ?><?php endif; ?>
         <!-- InstanceEndEditable -->
-    <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/site-affiliation-2.html"); ?>
-    <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/site-title-1.html"); ?>
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.1/includes/global/site-affiliation-2.html"); ?>
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.1/includes/global/site-title-1.html"); ?>
         <!-- InstanceBeginEditable name="titlegraphic" -->
         <?php if ($site_name): ?><a class="<?php print $site_name_class; ?>" href="<?php print $front_page; ?>"><?php print $site_name; ?></a><?php endif; ?>
         <!-- InstanceEndEditable -->
-    <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/site-title-2.html"); ?>
-    <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/logo-lockup-2.html"); ?>
-    <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/nav-toggle-group.html"); ?>
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.1/includes/global/site-title-2.html"); ?>
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.1/includes/global/logo-lockup-2.html"); ?>
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.1/includes/global/nav-toggle-group.html"); ?>
 
-    <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/nav-menu-1.html"); ?>
-        <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/nav-toggle-btn.html"); ?>
-        <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/nav-menu-child-1.html"); ?>
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.1/includes/global/nav-menu-1.html"); ?>
+        <?php include(DRUPAL_ROOT . "/wdn/templates_5.1/includes/global/nav-toggle-btn.html"); ?>
+        <?php include(DRUPAL_ROOT . "/wdn/templates_5.1/includes/global/nav-menu-child-1.html"); ?>
             <?php print render($page['navlinks']); ?>
-        <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/nav-menu-child-2.html"); ?>
-    <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/nav-menu-2.html"); ?>
+        <?php include(DRUPAL_ROOT . "/wdn/templates_5.1/includes/global/nav-menu-child-2.html"); ?>
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.1/includes/global/nav-menu-2.html"); ?>
 
     <?php if ($tabs): ?><?php print render($tabs); ?><?php endif; ?>
 </header>
@@ -127,7 +127,7 @@
 
 </main>
 <footer class="dcf-footer" id="dcf-footer" role="contentinfo">
-    <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/footer-global-1.html"); ?>
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.1/includes/global/footer-global-1.html"); ?>
     <!-- InstanceBeginEditable name="contactinfo" -->
     <?php if ($page['contactinfo']): ?>
 
@@ -141,6 +141,6 @@
 
     <?php endif; ?>
     <!-- InstanceEndEditable -->
-    <?php include(DRUPAL_ROOT . "/wdn/templates_5.0/includes/global/footer-global-2.html"); ?>
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.1/includes/global/footer-global-2.html"); ?>
 </footer>
 <?php endif; ?>

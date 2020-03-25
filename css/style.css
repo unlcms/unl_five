@@ -4,7 +4,7 @@
  * that need to be made for WDN styles to work with CMS DOM structure.
  */
 
-/* UNL 5.0 uses higher z-index than Drupal */
+/* UNL 5 uses higher z-index than Drupal */
 #toolbar {
   z-index: 2000;
 }
