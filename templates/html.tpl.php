@@ -1,5 +1,5 @@
 <?php if ($format !== 'partial'): ?><!DOCTYPE html>
-<html class="no-js dcf-no-js dcf-no-webp" lang="<?php print $language->language; ?>"><!-- InstanceBegin template="/Templates/fixed.dwt" codeOutsideHTMLIsLocked="false" -->
+<html class="dcf-no-js dcf-no-webp" lang="<?php print $language->language; ?>"><!-- InstanceBegin template="/Templates/fixed.dwt" codeOutsideHTMLIsLocked="false" -->
 <head>
 <?php require(DRUPAL_ROOT."/wdn/templates_5.1/includes/global/head-1.html"); ?>
 <!--
