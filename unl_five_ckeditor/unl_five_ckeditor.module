@@ -22,6 +22,6 @@ function unl_five_ckeditor_ckeditor_css_alter(&$css, $editor) {
   // (e.g. http://example.unl.edu/workspace/project-herbie/web/), so
   // loading relative to the domain root won't work either. It must relative
   // to Drupal's base url.
-  $css[] = 'wdn/templates_5.0/css/core.css';
-  $css[] = 'wdn/templates_5.0/css/deprecated.css';
+  $css[] = 'wdn/templates_5.1/css/core.css';
+  $css[] = 'wdn/templates_5.1/css/deprecated.css';
 }
