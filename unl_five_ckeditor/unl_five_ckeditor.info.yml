@@ -1,5 +1,5 @@
-name: 'UNLedu 5.0 CKEditor'
-description: 'Provides CKEditor integration for UNLedu 5.0 theme.'
+name: 'UNLedu 5.x CKEditor'
+description: 'Provides CKEditor integration for UNLedu 5.x theme.'
 package: UNL
 
 type: module
