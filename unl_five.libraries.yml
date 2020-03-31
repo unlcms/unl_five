@@ -5,7 +5,6 @@ global-styling:
       css/components/local-tasks.css: {}
       css/components/form.css: {}
       css/components/node-preview.css: {}
-      css/components/tabs.css: {}
       css/components/views.css: {}
     theme:
       css/menu-block.css: {}
