@@ -1,1 +1,10 @@
-<li{{ attributes.addClass(is_active ? 'selected') }}>{{ link }}</li>
+{% set attributes = attributes.addClass('dcf-btn') %}
+{% if is_active %}
+  {% set attributes = attributes.addClass('dcf-btn-primary') %}
+  {% set options = { '#options': { 'attributes': { 'class': ['is-active', 'dcf-inverse'] }}} %}
+  {% set link = link|merge(options) %}
+{% else %}
+  {% set attributes = attributes.addClass('dcf-btn-secondary') %}
+{% endif %}
+
+<li{{ attributes }}>{{ link }}</li>
