@@ -328,7 +328,9 @@ function unl_five_preprocess_page(&$vars, $hook) {
   // Wrap 403 pages in WDN wrappers.
   $header = drupal_get_http_header("status");
   if ($header == "403 Forbidden") {
-    $vars['page']['content']['system_main']['main']['#markup'] = '<div class="wdn-band"><div class="wdn-inner-wrapper">' . $vars['page']['content']['system_main']['main']['#markup'] . '</div></div>';
+    $vars['page']['sidebar_first'] = array();
+    $vars['page']['sidebar_second'] = array();
+    $vars['page']['content']['system_main']['main']['#markup'] = '<div class="dcf-bleed dcf-wrapper">' . $vars['page']['content']['system_main']['main']['#markup'] . '</div>';
   }
 
   // Add the variable based on the Publishing Option flag set in the unl module.
@@ -761,7 +763,7 @@ function unl_five_get_site_name_abbreviated() {
 /**
  *
  * OG Helper Functions
- * 
+ *
  */
 
 /**
