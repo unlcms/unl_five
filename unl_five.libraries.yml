@@ -24,6 +24,7 @@ amd:
   dependencies:
     - core/jquery.form
     - core/drupal.autocomplete
+    - core/js-cookie
 
 idm:
   version: VERSION
