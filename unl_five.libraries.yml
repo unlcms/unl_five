@@ -2,6 +2,7 @@ global-styling:
   version: VERSION
   css:
     component:
+      css/components/dialog.css: {}
       css/components/local-tasks.css: {}
       css/components/form.css: {}
       css/components/node-preview.css: {}
