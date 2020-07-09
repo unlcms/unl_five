@@ -65,9 +65,8 @@ function unl_five_preprocess_html(&$variables) {
   );
 
   // Add node id to the body class.
-  $node = \Drupal::routeMatch()->getParameter('node');
-  if ($node) {
-    $variables['attributes']['class'][] = 'page-node-' . $node->id();
+  if ($nid = \Drupal::routeMatch()->getRawParameter('node')) {
+    $variables['attributes']['class'][] = 'page-node-' . $nid;
   }
 }
 
