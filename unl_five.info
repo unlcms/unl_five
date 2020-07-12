@@ -14,6 +14,7 @@ regions[page_top] = Page top
 regions[page_bottom] = Page bottom
 
 regions[navlinks] = Navigation
+regions[highlighted] = Highlighted
 regions[content_top] = Content top
 regions[sidebar_first] = Sidebar first
 regions[content] = Content

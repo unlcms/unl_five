@@ -48,6 +48,8 @@
 
 <main class="dcf-main" id="dcf-main" role="main" tabindex="-1">
 
+    <?php print render($page['highlighted']); ?>
+
     <!-- InstanceBeginEditable name="hero" -->
     <div class="dcf-hero <?php if (array_key_exists('field_unl_hero_size', $node_view)): ?>unl-hero-notch-stripe dcf-d-flex dcf-flex-row dcf-flex-wrap dcf-mb-6 unl-bg-darker-gray<?php else: ?>dcf-hero-default<?php endif; ?><?php if ($unl_hide_page_title): ?> dcf-sr-only<?php endif; ?>">
     <!-- InstanceEndEditable -->
