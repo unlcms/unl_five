@@ -11,6 +11,7 @@ function unl_five_form_system_theme_settings_alter(&$form, &$form_state) {
     '#type' => 'fieldset',
     '#title' => t('Intermediate breadcrumbs'),
     '#description' => t('Breadcrumbs that are displayed between the UNL breadcrumb and this site\'s breadcrumb'),
+    '#weight' => -35,
     'site_name_abbreviation' => array(
       '#type' => 'textfield',
       '#title' => t('Site name abbreviation'),
@@ -36,6 +37,43 @@ function unl_five_form_system_theme_settings_alter(&$form, &$form_state) {
       ),
     );
   }
+
+  $form['call_to_action'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Call-to-action links'),
+    '#description' => t('Leaving a URL empty will result in only the main university link being shown for that item.'),
+    '#weight' => -40,
+    'cta_visit_text' => array(
+      '#type' => 'textfield',
+      '#field_prefix' => t('Visit text&nbsp;&nbsp;'),
+      '#default_value' => null !== theme_get_setting('cta_visit_text') ? theme_get_setting('cta_visit_text') : 'Visit the ' . variable_get('site_name'),
+    ),
+    'cta_visit_url' => array(
+      '#type' => 'textfield',
+      '#field_prefix' => t('Visit URL&nbsp;&nbsp;'),
+      '#default_value' => theme_get_setting('cta_visit_url'),
+    ),
+    'cta_apply_text' => array(
+      '#type' => 'textfield',
+      '#field_prefix' => t('Apply text'),
+      '#default_value' => null !== theme_get_setting('cta_apply_text') ? theme_get_setting('cta_apply_text') : 'Apply to the ' . variable_get('site_name'),
+    ),
+    'cta_apply_url' => array(
+      '#type' => 'textfield',
+      '#field_prefix' => t('Apply URL'),
+      '#default_value' => theme_get_setting('cta_apply_url'),
+    ),
+    'cta_give_text' => array(
+      '#type' => 'textfield',
+      '#field_prefix' => t('Give text&nbsp;&nbsp;'),
+      '#default_value' => null !== theme_get_setting('cta_give_text') ? theme_get_setting('cta_give_text') : 'Give to the ' . variable_get('site_name'),
+    ),
+    'cta_give_url' => array(
+      '#type' => 'textfield',
+      '#field_prefix' => t('Give URL&nbsp;&nbsp;'),
+      '#default_value' => theme_get_setting('cta_give_url'),
+    ),
+  );
 
   $form['unl_head'] = array(
     '#type' => 'fieldset',
@@ -67,6 +105,7 @@ function unl_five_form_system_theme_settings_alter(&$form, &$form_state) {
   $form['advanced_settings'] = array(
     '#type' => 'fieldset',
     '#title' => t('Advanced settings'),
+    '#weight' => 40,
     'enable_drill_down' => array(
       '#type' => 'checkbox',
       '#title' => t('Enable drill-down main menu'),
