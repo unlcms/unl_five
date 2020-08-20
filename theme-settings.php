@@ -119,6 +119,12 @@ function unl_five_form_system_theme_settings_alter(&$form, &$form_state) {
       '#description' => t('Adds text to the header and footer that designates the site as belonging to a Registered Student Organization.'),
       '#access' => !!count(array_intersect(array('administrator'), array_values($GLOBALS['user']->roles))),
     ),
+    'unl_darkmode_preview' => array(
+      '#type' => 'checkbox',
+      '#title' => t('Enable Dark Mode Preview for Site Admin'),
+      '#default_value' => theme_get_setting('unl_darkmode_preview'),
+      '#description' => t('See http://go.unl.edu/cmsdark for more info.'),
+    ),
   );
   $form['#submit'][] = 'unl_five_form_system_theme_settings_submit';
   _unl_five_attach_syntax_highlighting($form['unl_head']);

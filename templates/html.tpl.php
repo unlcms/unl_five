@@ -1,3 +1,11 @@
+<?php
+function callback($buffer) {
+  return (str_replace("templates_5.2/", "templates_5.2_darkmode/", $buffer));
+}
+if (theme_get_setting('unl_darkmode_preview') && count(array_intersect(array('Site Admin'), array_values($GLOBALS['user']->roles)))) {
+  ob_start("callback");
+}
+?>
 <?php if ($format !== 'partial'): ?><!DOCTYPE html>
 <html class="dcf-no-js dcf-no-webp" lang="<?php print $language->language; ?>"><!-- InstanceBegin template="/Templates/fixed.dwt" codeOutsideHTMLIsLocked="false" -->
 <head>
@@ -37,3 +45,8 @@
 </body>
 <!-- InstanceEnd --></html>
 <?php endif; ?>
+<?php
+if (theme_get_setting('unl_darkmode_preview') && count(array_intersect(array('Site Admin'), array_values($GLOBALS['user']->roles)))) {
+  ob_end_flush();
+}
+?>
