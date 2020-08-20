@@ -123,7 +123,7 @@ function unl_five_form_system_theme_settings_alter(&$form, &$form_state) {
       '#type' => 'checkbox',
       '#title' => t('Enable Dark Mode Preview for Site Admin'),
       '#default_value' => theme_get_setting('unl_darkmode_preview'),
-      '#description' => t('See http://go.unl.edu/cmsdark for more info.'),
+      '#description' => t('You must set "prefers-color-scheme: dark" either in your operating system or in your browser. See http://go.unl.edu/cmsdark for more info.'),
     ),
   );
   $form['#submit'][] = 'unl_five_form_system_theme_settings_submit';
