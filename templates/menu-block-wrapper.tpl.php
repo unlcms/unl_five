@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * unl_five theme implementation to wrap menu blocks.
+ * unl_five_darkmode theme implementation to wrap menu blocks.
  *
  * Available variables:
  * - $content: The renderable array containing the menu.

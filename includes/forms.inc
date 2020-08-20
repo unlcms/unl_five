@@ -3,17 +3,17 @@
 /**
  * Implements hook_form_alter().
  */
-function unl_five_form_alter(&$form, &$form_state, $form_id) {
+function unl_five_darkmode_form_alter(&$form, &$form_state, $form_id) {
   $form['#attributes']['class'][] = 'dcf-form';
 }
 
 /**
  * Replacement for theme_webform_element().
- * 
+ *
  * Converts composite element labels into fieldsets, the label becomes a legend.
  * see https://drupal.org/node/1195418
  */
-function unl_five_webform_element($variables) {
+function unl_five_darkmode_webform_element($variables) {
   $element = $variables['element'];
 
   $element['#wrapper_attributes']['class'][] = 'dcf-form-group';
@@ -96,10 +96,10 @@ function unl_five_webform_element($variables) {
 
 /**
  * Replacement for theme_form_element().
- * 
+ *
  * Moves invisible checkboxes and radio buttons to the right of the form control to pass WCAG2.0
  */
-function unl_five_form_element($variables) {
+function unl_five_darkmode_form_element($variables) {
   $element = & $variables['element'];
   // This is also used in the installer, pre-database setup.
   $t = get_t();
@@ -211,10 +211,10 @@ function unl_five_form_element($variables) {
 
 /**
  * Theme a webform time element.
- * 
+ *
  * Adds labels so that it passes WCAG2.0.
  */
-function unl_five_webform_time($variables) {
+function unl_five_darkmode_webform_time($variables) {
   $element = $variables['element'];
 
   $element['hour']['#attributes']['class'] = array('hour');
@@ -238,14 +238,14 @@ function unl_five_webform_time($variables) {
 
 /**
  * Implements theme_file().
- * 
+ *
  * Renders the file element via core, then passes it to the theme wrapper, which adds labels.
- * 
+ *
  * @param $vars
  *
  * @return string
  */
-function unl_five_file($vars) {
+function unl_five_darkmode_file($vars) {
   //Use the default theme_file
   $vars['element']['#children'] = theme_file($vars);
   //theme it to add labels
@@ -261,7 +261,7 @@ function unl_five_file($vars) {
  *
  * @ingroup themeable
  */
-function unl_five_file_managed_file($variables) {
+function unl_five_darkmode_file_managed_file($variables) {
   /*
    * Remove the duplicate ID from the wrapper DIV
    * The same ID that was on the <input> was being applied
@@ -280,7 +280,7 @@ function unl_five_file_managed_file($variables) {
  *
  * Used here to show the <label> and hide the text with .dcf-sr-only so that the faux-radio button displays.
  */
-function unl_five_webform_grid($variables) {
+function unl_five_darkmode_webform_grid($variables) {
   $element = $variables['element'];
   $right_titles = _webform_grid_right_titles($element);
 

@@ -1,77 +1,77 @@
 <?php if ($format !== 'partial'): ?>
 <header class="dcf-header" id="dcf-header" role="banner">
 
-    <?php include(DRUPAL_ROOT . "/wdn/templates_5.2/includes/global/header-global-1.html"); ?>
-    <?php include(DRUPAL_ROOT . "/wdn/templates_5.2/includes/global/cta-header-1.html"); ?>
-    <?php include(DRUPAL_ROOT . "/wdn/templates_5.2/includes/global/visit-header-1.html"); ?>
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.2_darkmode/includes/global/header-global-1.html"); ?>
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.2_darkmode/includes/global/cta-header-1.html"); ?>
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.2_darkmode/includes/global/visit-header-1.html"); ?>
     <!-- InstanceBeginEditable name="headervisit" -->
       <?php if (null !== theme_get_setting('cta_visit_url') && !empty(trim(theme_get_setting('cta_visit_url')))) : ?>
         <li><a href="<?php print theme_get_setting('cta_visit_url'); ?>"><?php print theme_get_setting('cta_visit_text'); ?></a>
       <?php endif; ?>
     <!-- InstanceEndEditable -->
-    <?php include(DRUPAL_ROOT . "/wdn/templates_5.2/includes/global/visit-header-2.html"); ?>
-    <?php include(DRUPAL_ROOT . "/wdn/templates_5.2/includes/global/apply-header-1.html"); ?>
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.2_darkmode/includes/global/visit-header-2.html"); ?>
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.2_darkmode/includes/global/apply-header-1.html"); ?>
     <!-- InstanceBeginEditable name="headerapply" -->
       <?php if (null !== theme_get_setting('cta_apply_url') && !empty(trim(theme_get_setting('cta_apply_url')))) : ?>
         <li><a href="<?php print theme_get_setting('cta_apply_url'); ?>"><?php print theme_get_setting('cta_apply_text'); ?></a>
       <?php endif; ?>
     <!-- InstanceEndEditable -->
-    <?php include(DRUPAL_ROOT . "/wdn/templates_5.2/includes/global/apply-header-2.html"); ?>
-    <?php include(DRUPAL_ROOT . "/wdn/templates_5.2/includes/global/give-header-1.html"); ?>
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.2_darkmode/includes/global/apply-header-2.html"); ?>
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.2_darkmode/includes/global/give-header-1.html"); ?>
     <!-- InstanceBeginEditable name="headergive" -->
       <?php if (null !== theme_get_setting('cta_give_url') && !empty(trim(theme_get_setting('cta_give_url')))) : ?>
         <li><a href="<?php print theme_get_setting('cta_give_url'); ?>"><?php print theme_get_setting('cta_give_text'); ?></a>
       <?php endif; ?>
     <!-- InstanceEndEditable -->
-    <?php include(DRUPAL_ROOT . "/wdn/templates_5.2/includes/global/give-header-2.html"); ?>
-    <?php include(DRUPAL_ROOT . "/wdn/templates_5.2/includes/global/cta-header-2.html"); ?>
-    <?php include(DRUPAL_ROOT . "/wdn/templates_5.2/includes/global/idm.html"); ?>
-    <?php include(DRUPAL_ROOT . "/wdn/templates_5.2/includes/global/search.html"); ?>
-    <?php include(DRUPAL_ROOT . "/wdn/templates_5.2/includes/global/header-global-2.html"); ?>
-    <?php include(DRUPAL_ROOT . "/wdn/templates_5.2/includes/global/logo-lockup-1.html"); ?>
-    <?php include(DRUPAL_ROOT . "/wdn/templates_5.2/includes/global/site-affiliation-1.html"); ?>
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.2_darkmode/includes/global/give-header-2.html"); ?>
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.2_darkmode/includes/global/cta-header-2.html"); ?>
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.2_darkmode/includes/global/idm.html"); ?>
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.2_darkmode/includes/global/search.html"); ?>
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.2_darkmode/includes/global/header-global-2.html"); ?>
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.2_darkmode/includes/global/logo-lockup-1.html"); ?>
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.2_darkmode/includes/global/site-affiliation-1.html"); ?>
         <!-- InstanceBeginEditable name="affiliation" -->
         <?php if ($site_slogan): ?><?php print $site_slogan; ?><?php endif; ?>
         <!-- InstanceEndEditable -->
-    <?php include(DRUPAL_ROOT . "/wdn/templates_5.2/includes/global/site-affiliation-2.html"); ?>
-    <?php include(DRUPAL_ROOT . "/wdn/templates_5.2/includes/global/site-title-1.html"); ?>
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.2_darkmode/includes/global/site-affiliation-2.html"); ?>
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.2_darkmode/includes/global/site-title-1.html"); ?>
         <!-- InstanceBeginEditable name="titlegraphic" -->
         <?php if ($site_name): ?><a class="<?php print $site_name_class; ?>" href="<?php print $front_page; ?>"><?php print $site_name; ?></a><?php endif; ?>
         <!-- InstanceEndEditable -->
-    <?php include(DRUPAL_ROOT . "/wdn/templates_5.2/includes/global/site-title-2.html"); ?>
-    <?php include(DRUPAL_ROOT . "/wdn/templates_5.2/includes/global/logo-lockup-2.html"); ?>
-    <?php include(DRUPAL_ROOT . "/wdn/templates_5.2/includes/global/nav-toggle-group.html"); ?>
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.2_darkmode/includes/global/site-title-2.html"); ?>
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.2_darkmode/includes/global/logo-lockup-2.html"); ?>
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.2_darkmode/includes/global/nav-toggle-group.html"); ?>
 
-    <?php include(DRUPAL_ROOT . "/wdn/templates_5.2/includes/global/nav-menu-1.html"); ?>
-        <?php include(DRUPAL_ROOT . "/wdn/templates_5.2/includes/global/nav-toggle-btn.html"); ?>
-        <?php include(DRUPAL_ROOT . "/wdn/templates_5.2/includes/global/nav-menu-child-1.html"); ?>
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.2_darkmode/includes/global/nav-menu-1.html"); ?>
+        <?php include(DRUPAL_ROOT . "/wdn/templates_5.2_darkmode/includes/global/nav-toggle-btn.html"); ?>
+        <?php include(DRUPAL_ROOT . "/wdn/templates_5.2_darkmode/includes/global/nav-menu-child-1.html"); ?>
             <?php print render($page['navlinks']); ?>
 
-            <?php include(DRUPAL_ROOT . "/wdn/templates_5.2/includes/global/cta-nav-1.html"); ?>
-            <?php include(DRUPAL_ROOT . "/wdn/templates_5.2/includes/global/visit-nav-1.html"); ?>
+            <?php include(DRUPAL_ROOT . "/wdn/templates_5.2_darkmode/includes/global/cta-nav-1.html"); ?>
+            <?php include(DRUPAL_ROOT . "/wdn/templates_5.2_darkmode/includes/global/visit-nav-1.html"); ?>
             <!-- InstanceBeginEditable name="navvisit" -->
               <?php if (null !== theme_get_setting('cta_visit_url') && !empty(trim(theme_get_setting('cta_visit_url')))) : ?>
                 <li><a href="<?php print theme_get_setting('cta_visit_url'); ?>"><?php print theme_get_setting('cta_visit_text'); ?></a>
               <?php endif; ?>
             <!-- InstanceEndEditable -->
-            <?php include(DRUPAL_ROOT . "/wdn/templates_5.2/includes/global/visit-nav-2.html"); ?>
-            <?php include(DRUPAL_ROOT . "/wdn/templates_5.2/includes/global/apply-nav-1.html"); ?>
+            <?php include(DRUPAL_ROOT . "/wdn/templates_5.2_darkmode/includes/global/visit-nav-2.html"); ?>
+            <?php include(DRUPAL_ROOT . "/wdn/templates_5.2_darkmode/includes/global/apply-nav-1.html"); ?>
             <!-- InstanceBeginEditable name="navapply" -->
               <?php if (null !== theme_get_setting('cta_apply_url') && !empty(trim(theme_get_setting('cta_apply_url')))) : ?>
                 <li><a href="<?php print theme_get_setting('cta_apply_url'); ?>"><?php print theme_get_setting('cta_apply_text'); ?></a>
               <?php endif; ?>
             <!-- InstanceEndEditable -->
-            <?php include(DRUPAL_ROOT . "/wdn/templates_5.2/includes/global/apply-nav-2.html"); ?>
-            <?php include(DRUPAL_ROOT . "/wdn/templates_5.2/includes/global/give-nav-1.html"); ?>
+            <?php include(DRUPAL_ROOT . "/wdn/templates_5.2_darkmode/includes/global/apply-nav-2.html"); ?>
+            <?php include(DRUPAL_ROOT . "/wdn/templates_5.2_darkmode/includes/global/give-nav-1.html"); ?>
             <!-- InstanceBeginEditable name="navgive" -->
               <?php if (null !== theme_get_setting('cta_give_url') && !empty(trim(theme_get_setting('cta_give_url')))) : ?>
                 <li><a href="<?php print theme_get_setting('cta_give_url'); ?>"><?php print theme_get_setting('cta_give_text'); ?></a>
               <?php endif; ?>
             <!-- InstanceEndEditable -->
-            <?php include(DRUPAL_ROOT . "/wdn/templates_5.2/includes/global/give-nav-2.html"); ?>
-            <?php include(DRUPAL_ROOT . "/wdn/templates_5.2/includes/global/cta-nav-2.html"); ?>
-        <?php include(DRUPAL_ROOT . "/wdn/templates_5.2/includes/global/nav-menu-child-2.html"); ?>
-    <?php include(DRUPAL_ROOT . "/wdn/templates_5.2/includes/global/nav-menu-2.html"); ?>
+            <?php include(DRUPAL_ROOT . "/wdn/templates_5.2_darkmode/includes/global/give-nav-2.html"); ?>
+            <?php include(DRUPAL_ROOT . "/wdn/templates_5.2_darkmode/includes/global/cta-nav-2.html"); ?>
+        <?php include(DRUPAL_ROOT . "/wdn/templates_5.2_darkmode/includes/global/nav-menu-child-2.html"); ?>
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.2_darkmode/includes/global/nav-menu-2.html"); ?>
 
     <?php if ($tabs): ?><?php print render($tabs); ?><?php endif; ?>
 </header>
@@ -159,7 +159,7 @@
 
 </main>
 <footer class="dcf-footer" id="dcf-footer" role="contentinfo">
-    <?php include(DRUPAL_ROOT . "/wdn/templates_5.2/includes/global/footer-global-1.html"); ?>
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.2_darkmode/includes/global/footer-global-1.html"); ?>
     <!-- InstanceBeginEditable name="contactinfo" -->
     <?php if ($page['contactinfo']): ?>
 
@@ -173,6 +173,6 @@
 
     <?php endif; ?>
     <!-- InstanceEndEditable -->
-    <?php include(DRUPAL_ROOT . "/wdn/templates_5.2/includes/global/footer-global-2.html"); ?>
+    <?php include(DRUPAL_ROOT . "/wdn/templates_5.2_darkmode/includes/global/footer-global-2.html"); ?>
 </footer>
 <?php endif; ?>

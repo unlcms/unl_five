@@ -1,6 +1,6 @@
 /**
  * The .block-menu-block class is also added to the
- * book navigation block in unl_five_preprocess_block().
+ * book navigation block in unl_five_darkmode_preprocess_block().
  */
 
 .block-menu-block a:hover {cursor: pointer;}

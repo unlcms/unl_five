@@ -5,9 +5,9 @@ require_once dirname(__FILE__) . '/includes/forms.inc';
 /**
  * Implements hook_block_view_alter().
  */
-function unl_five_block_view_alter(&$data, $block) {
+function unl_five_darkmode_block_view_alter(&$data, $block) {
   if ($block->module == 'system' && $block->delta == 'main-menu') {
-    return _unl_five_block_view_system_main_menu_alter($data, $block);
+    return _unl_five_darkmode_block_view_system_main_menu_alter($data, $block);
   }
 }
 
@@ -16,23 +16,23 @@ function unl_five_block_view_alter(&$data, $block) {
  * this is actually called from unl_block_view_alter() for now. See http://drupal.org/node/1076132
  * Used to determine if a "sub-menu" should be used instead of the normal menu.
  */
-function _unl_five_block_view_system_main_menu_alter(&$data, $block) {
-  $current_menu_link = _unl_five_get_current_menu_link();
+function _unl_five_darkmode_block_view_system_main_menu_alter(&$data, $block) {
+  $current_menu_link = _unl_five_darkmode_get_current_menu_link();
   if ($current_menu_link) {
-    $submenu = _unl_five_get_current_submenu($data['content'], $current_menu_link->mlid);
+    $submenu = _unl_five_darkmode_get_current_submenu($data['content'], $current_menu_link->mlid);
     if (theme_get_setting('enable_drill_down') && $submenu && $submenu['#original_link']['depth'] > 1) {
       $data['content'] = $submenu['#below'];
-      drupal_static('unl_five_drill_down', array('title' => $submenu['#title'], 'href' => $submenu['#href']));
+      drupal_static('unl_five_darkmode_drill_down', array('title' => $submenu['#title'], 'href' => $submenu['#href']));
     }
   }
-  $data['content'] = _unl_five_limit_menu_depth($data['content'], 2);
+  $data['content'] = _unl_five_darkmode_limit_menu_depth($data['content'], 2);
 }
 
 /**
  * Return the mlid of the currently selected menu item.
  * If the current page has no menu item, use return the mlid of its parent instead.
  */
-function _unl_five_get_current_menu_link() {
+function _unl_five_darkmode_get_current_menu_link() {
   $result = db_select('menu_links')
     ->fields('menu_links')
     ->condition('menu_name', 'main-menu')
@@ -59,13 +59,13 @@ function _unl_five_get_current_menu_link() {
 /**
  * Find the the submenu we are currently "drilled-down" to.
  */
-function _unl_five_get_current_submenu($menu_links, $current_mlid) {
+function _unl_five_darkmode_get_current_submenu($menu_links, $current_mlid) {
   foreach (element_children($menu_links) as $index) {
     $menu_item = $menu_links[$index];
     if ($menu_item['#original_link']['mlid'] == $current_mlid) {
       return $menu_item;
     }
-    $sub_menu = _unl_five_get_current_submenu($menu_item['#below'], $current_mlid);
+    $sub_menu = _unl_five_darkmode_get_current_submenu($menu_item['#below'], $current_mlid);
     if ($sub_menu) {
       return $sub_menu;
     }
@@ -76,13 +76,13 @@ function _unl_five_get_current_submenu($menu_links, $current_mlid) {
 /**
  * Remove any menu items that are more than $depth levels below the current root.
  */
-function _unl_five_limit_menu_depth($menu_links, $depth) {
+function _unl_five_darkmode_limit_menu_depth($menu_links, $depth) {
   if ($depth == 0) {
     return array();
   }
 
   foreach (element_children($menu_links) as $index) {
-    $menu_links[$index]['#below'] = _unl_five_limit_menu_depth($menu_links[$index]['#below'], $depth - 1);
+    $menu_links[$index]['#below'] = _unl_five_darkmode_limit_menu_depth($menu_links[$index]['#below'], $depth - 1);
   }
 
   return $menu_links;
@@ -91,7 +91,7 @@ function _unl_five_limit_menu_depth($menu_links, $depth) {
 /**
  * Implementation of hook_html_head_alter().
  */
-function unl_five_html_head_alter(&$head_elements) {
+function unl_five_darkmode_html_head_alter(&$head_elements) {
   // Add a preconnect HTTP header for Cloud Typography.
   drupal_add_http_header('Link', '<https://cloud.typography.com>; rel=preconnect');
 
@@ -109,7 +109,7 @@ function unl_five_html_head_alter(&$head_elements) {
 
   // If we are in a drilled down menu, change the home link to the drilled down item.
   if (theme_get_setting('enable_drill_down')) {
-    $current_menu_link = _unl_five_get_current_menu_link();
+    $current_menu_link = _unl_five_darkmode_get_current_menu_link();
     if ($current_menu_link && $current_menu_link->depth > 1) {
       $home_path = drupal_get_path_alias($current_menu_link->link_path);
     }
@@ -130,7 +130,7 @@ function unl_five_html_head_alter(&$head_elements) {
 /**
  * Implements template_preprocess().
  */
-function unl_five_preprocess(&$vars) {
+function unl_five_darkmode_preprocess(&$vars) {
   // For checking the presence of ?format=partial in any template, which is used
   // to output the page without UNL's header and footer (for embedding in other pages, etc).
   $vars['format'] = filter_input(INPUT_GET, 'format', FILTER_SANITIZE_STRING);
@@ -139,7 +139,7 @@ function unl_five_preprocess(&$vars) {
 /**
  * Implements template_preprocess_block().
  */
-function unl_five_preprocess_block(&$vars) {
+function unl_five_darkmode_preprocess_block(&$vars) {
   // Add Menu Block class to book navigation block so that they can share CSS.
   if ($vars['block_html_id'] == 'block-book-navigation') {
     $vars['classes_array'][] = 'block-menu-block';
@@ -154,7 +154,7 @@ function unl_five_preprocess_block(&$vars) {
 /**
  * Implements template_preprocess_field().
  */
-function unl_five_preprocess_field(&$vars, $hook) {
+function unl_five_darkmode_preprocess_field(&$vars, $hook) {
   $element = $vars['element'];
   // Set the field label tag to a header or default to div
   if (strlen($element['#label_display']) == 2 && substr($element['#label_display'], 0, 1) == 'h') {
@@ -181,7 +181,7 @@ function unl_five_preprocess_field(&$vars, $hook) {
 /**
  * Implements template_preprocess_image().
  */
-function unl_five_preprocess_image(&$vars) {
+function unl_five_darkmode_preprocess_image(&$vars) {
   // If the image style name begins with 'wdn_band_bg' then stretch it.
   if (isset($vars['style_name']) && substr($vars['style_name'], 0, 11) == 'wdn_band_bg') {
     $vars['attributes']['class'][] = 'wdn-stretch';
@@ -191,10 +191,10 @@ function unl_five_preprocess_image(&$vars) {
 /**
  * Implements template_preprocess_html().
  */
-function unl_five_preprocess_html(&$vars, $hook) {
-  // Add the CSS and JS files that are generated from the unl_five appearance settings page
+function unl_five_darkmode_preprocess_html(&$vars, $hook) {
+  // Add the CSS and JS files that are generated from the unl_five_darkmode appearance settings page
   foreach (array('css', 'js') as $type) {
-    $file = variable_get('unl_custom_code_path', 'public://custom') . '/custom_unl_five.' . $type;
+    $file = variable_get('unl_custom_code_path', 'public://custom') . '/custom_unl_five_darkmode.' . $type;
     if (is_file($file) && $type == 'css') {
       $func = 'drupal_add_'.$type;
       $func($file, array('type' => 'file', 'group' => CSS_THEME, 'every_page' => TRUE));
@@ -222,7 +222,7 @@ function unl_five_preprocess_html(&$vars, $hook) {
 /**
  * Implements template_preprocess_region().
  */
-function unl_five_preprocess_region(&$vars) {
+function unl_five_darkmode_preprocess_region(&$vars) {
   $vars['region_name'] = str_replace('_', '-', $vars['region']);
   $vars['classes_array'][] = $vars['region_name'];
 
@@ -243,7 +243,7 @@ function unl_five_preprocess_region(&$vars) {
 /**
  * Implements template_preprocess_node().
  */
-function unl_five_preprocess_node(&$vars) {
+function unl_five_darkmode_preprocess_node(&$vars) {
   // Add template suggestions that include the view mode.
   $vars['theme_hook_suggestions'][] = 'node__' . $vars['view_mode'];
   $vars['theme_hook_suggestions'][] = 'node__' . $vars['node']->type . '__' . $vars['view_mode'];
@@ -251,7 +251,7 @@ function unl_five_preprocess_node(&$vars) {
 
   // Add forms css file if content type is webform.
   if ($vars['type'] == 'webform') {
-    $path = drupal_get_path('theme', 'unl_five');
+    $path = drupal_get_path('theme', 'unl_five_darkmode');
     drupal_add_css($path . '/css/form.css');
   }
   // Drupal doesn't correctly set the $page flag for the preview on node/add/page which results in the <h2> being displayed in modules/node/node.tpl.php
@@ -277,7 +277,7 @@ function unl_five_preprocess_node(&$vars) {
 /**
  * Implements template_preprocess_username().
  */
-function unl_five_preprocess_username(&$vars) {
+function unl_five_darkmode_preprocess_username(&$vars) {
   // Link the displayed name to UNL Directory rather than Drupal user page
   $vars['link_path'] = 'http://directory.unl.edu/?uid=' . user_load($vars['account']->uid)->name;
   $vars['link_attributes'] = array('title' => t('View user in the UNL Directory.'));
@@ -286,7 +286,7 @@ function unl_five_preprocess_username(&$vars) {
 /**
  * Implements hook_username_alter().
  */
-function unl_five_username_alter(&$name, $account) {
+function unl_five_darkmode_username_alter(&$name, $account) {
   if ($account->uid) {
     // If the CAS module is enabled, we should have their full name.
     $user = user_load_by_name($name);
@@ -300,7 +300,7 @@ function unl_five_username_alter(&$name, $account) {
 /**
  * Implements template_preprocess_page().
  */
-function unl_five_preprocess_page(&$vars, $hook) {
+function unl_five_darkmode_preprocess_page(&$vars, $hook) {
   // Attach a copy of the node for use in the hero region (unl_hero module).
   // If the 'Hero size' is not set, skip this and use the default page title version of the hero.
   $vars['node_view'] = array();
@@ -309,7 +309,7 @@ function unl_five_preprocess_page(&$vars, $hook) {
   }
 
   // Change the Site Title and Affiliation if in a drill down menu.
-  $drill_down = drupal_static('unl_five_drill_down');
+  $drill_down = drupal_static('unl_five_darkmode_drill_down');
   if ($drill_down) {
     $vars['site_slogan'] = '<a href="'.$vars['front_page'].'">'.$vars['site_name'].'</a>';
     $vars['site_name'] = $drill_down['title'];
@@ -371,12 +371,12 @@ function unl_five_preprocess_page(&$vars, $hook) {
       }
     }
     // Clear the site_slogan for the main group
-    if (unl_five_og_get_current_group() === FALSE) {
+    if (unl_five_darkmode_og_get_current_group() === FALSE) {
       $vars['site_slogan'] = '';
     }
-    $group = unl_five_og_get_current_group();
+    $group = unl_five_darkmode_og_get_current_group();
     if ($group) {
-      $front_nid = unl_five_og_get_front_group_id();
+      $front_nid = unl_five_darkmode_og_get_front_group_id();
       if ($group->nid == $front_nid) {
         // Clear the site_slogan for the main group
         $vars['site_slogan'] = '';
@@ -391,7 +391,7 @@ function unl_five_preprocess_page(&$vars, $hook) {
 /**
  * Implements template_process_page().
  */
-function unl_five_process_page(&$vars) {
+function unl_five_darkmode_process_page(&$vars) {
   // Add RSO disclaimer.
   if (theme_get_setting('unl_rso')) {
     foreach ($vars['page']['contactinfo'] as $block => $value) {
@@ -405,23 +405,23 @@ function unl_five_process_page(&$vars) {
 /**
  * Implements theme_breadcrumb().
  */
-function unl_five_breadcrumb($variables) {
+function unl_five_darkmode_breadcrumb($variables) {
   /**
    * OG
    */
   if (module_exists('og')) {
-    return unl_five_og_breadcrumb($variables);
+    return unl_five_darkmode_og_breadcrumb($variables);
   }
 
   $breadcrumbs = $variables['breadcrumb'];
 
   if (count($breadcrumbs) == 0) {
-    $breadcrumbs[] = '<a href="">' . check_plain(unl_five_get_site_name_abbreviated()) . '</a>';
+    $breadcrumbs[] = '<a href="">' . check_plain(unl_five_darkmode_get_site_name_abbreviated()) . '</a>';
   }
   else {
     // Change 'Home' to $site_name.
     array_unshift($breadcrumbs,
-                  str_replace('Home', check_plain(unl_five_get_site_name_abbreviated()),
+                  str_replace('Home', check_plain(unl_five_darkmode_get_site_name_abbreviated()),
                   array_shift($breadcrumbs)));
   }
 
@@ -460,14 +460,14 @@ function unl_five_breadcrumb($variables) {
  * Implements theme_file_icon().
  * File icons are provided as css background sprites in UNL WDN template project.
  */
-function unl_five_file_icon($variables) {
+function unl_five_darkmode_file_icon($variables) {
   return '';
 }
 
 /**
  * Implements theme_book_title_link().
  */
-function unl_five_book_title_link($variables) {
+function unl_five_darkmode_book_title_link($variables) {
   $link = $variables['link'];
 
   $link['options']['attributes']['class'] = array('book-title', 'unl-cream');
@@ -478,7 +478,7 @@ function unl_five_book_title_link($variables) {
 /**
  * Implements theme_menu_tree().
  */
-function unl_five_menu_tree($variables) {
+function unl_five_darkmode_menu_tree($variables) {
   $tree = $variables['tree'];
   // Used for Main Menu
   $html = '<ul>' . $tree . '</ul>';
@@ -493,7 +493,7 @@ function unl_five_menu_tree($variables) {
 /**
  * Implements theme_menu_tree__menu_block().
  */
-function unl_five_menu_tree__menu_block($variables) {
+function unl_five_darkmode_menu_tree__menu_block($variables) {
   $tree = $variables['tree'];
   return '<ul class="dcf-list-bare dcf-m-0">' . $tree . '</ul>' . PHP_EOL;
 }
@@ -501,7 +501,7 @@ function unl_five_menu_tree__menu_block($variables) {
 /**
  * Implements theme_menu_link().
  */
-function unl_five_menu_link(array $variables) {
+function unl_five_darkmode_menu_link(array $variables) {
   $element = $variables['element'];
   $sub_menu = '';
   if ($element['#below']) {
@@ -523,7 +523,7 @@ function unl_five_menu_link(array $variables) {
 /**
  * Implements theme_menu_link__menu_block().
  */
-function unl_five_menu_link__menu_block(array $variables) {
+function unl_five_darkmode_menu_link__menu_block(array $variables) {
   $element = $variables['element'];
   $sub_menu = '';
   if ($element['#below']) {
@@ -541,7 +541,7 @@ function unl_five_menu_link__menu_block(array $variables) {
 /**
  * Implements theme_menu_local_tasks().
  */
-function unl_five_menu_local_tasks($variables) {
+function unl_five_darkmode_menu_local_tasks($variables) {
   $output = '';
 
   if (!empty($variables['primary'])) {
@@ -561,7 +561,7 @@ function unl_five_menu_local_tasks($variables) {
 /**
  * Implements theme_menu_local_task().
  */
-function unl_five_menu_local_task($variables) {
+function unl_five_darkmode_menu_local_task($variables) {
   $link = $variables['element']['#link'];
   $link_text = $link['title'];
 
@@ -580,7 +580,7 @@ function unl_five_menu_local_task($variables) {
 /**
  * Implements theme_pager().
  */
-function unl_five_pager($variables) {
+function unl_five_darkmode_pager($variables) {
   // This is straight-copied from the default except with css class names changed and wdn css loaded
   // http://api.drupal.org/api/drupal/includes--pager.inc/function/theme_pager/7
   drupal_add_js("WDN.loadCSS(WDN.getTemplateFilePath('css/modules/pagination.css'));", array('type' => 'inline', 'scope' => 'footer'));
@@ -693,7 +693,7 @@ function unl_five_pager($variables) {
   }
 }
 
-function unl_five_status_messages($variables) {
+function unl_five_darkmode_status_messages($variables) {
   $display = $variables['display'];
 
   $output = '';
@@ -750,7 +750,7 @@ EOF;
 /**
  * Return the abbreviated site name, assuming it has been set. Otherwise return the full site name.
  */
-function unl_five_get_site_name_abbreviated() {
+function unl_five_darkmode_get_site_name_abbreviated() {
   if (theme_get_setting('site_name_abbreviation')) {
     return theme_get_setting('site_name_abbreviation');
   }
@@ -769,7 +769,7 @@ function unl_five_get_site_name_abbreviated() {
 /**
  * Custom function that returns the group node of the current group context.
  */
-function unl_five_og_get_current_group() {
+function unl_five_darkmode_og_get_current_group() {
   if (module_exists('og_context')) {
     $group_context = og_context();
     $view = views_get_page_view();
@@ -825,7 +825,7 @@ function unl_five_og_get_current_group() {
 /**
  * Custom function that returns the nid of the group being used for <front>.
  */
-function unl_five_og_get_front_group_id() {
+function unl_five_darkmode_og_get_front_group_id() {
   $front_nid = 0;
   $front_url = drupal_get_normal_path(variable_get('site_frontpage', 'node'));
   $front_url = trim($front_url, '/');
@@ -843,17 +843,17 @@ function unl_five_og_get_front_group_id() {
  *
  * @param $view
  */
-function unl_five_views_pre_render(&$view) {
-  unl_five_og_get_current_group();
+function unl_five_darkmode_views_pre_render(&$view) {
+  unl_five_darkmode_og_get_current_group();
 }
 
 /**
  * Called by theme_breadcrumb().
  */
-function unl_five_og_breadcrumb($variables) {
-  if ($group = unl_five_og_get_current_group()) {
+function unl_five_darkmode_og_breadcrumb($variables) {
+  if ($group = unl_five_darkmode_og_get_current_group()) {
     $node = menu_get_object();
-    if ($group->nid !== unl_five_og_get_front_group_id() && isset($node) && $node->type == 'group') {
+    if ($group->nid !== unl_five_darkmode_og_get_front_group_id() && isset($node) && $node->type == 'group') {
       array_pop($variables['breadcrumb']);
       // At this point, on a group homepage the breadcrumb trail should consist of one item: Home
       // This is sort of a hack below for cases where the group homepage is somewhere in a menu and an extra breadcrumb is being added.
@@ -863,12 +863,12 @@ function unl_five_og_breadcrumb($variables) {
     }
   }
   if (count($variables['breadcrumb']) == 0) {
-    $variables['breadcrumb'][] = '<a href="' . url('<front>') . '">' . check_plain(unl_five_get_site_name_abbreviated()) . '</a>';
+    $variables['breadcrumb'][] = '<a href="' . url('<front>') . '">' . check_plain(unl_five_darkmode_get_site_name_abbreviated()) . '</a>';
   }
   else {
     // Change 'Home' to be $site_name
     array_unshift($variables['breadcrumb'],
-      str_replace('Home', check_plain(unl_five_get_site_name_abbreviated()),
+      str_replace('Home', check_plain(unl_five_darkmode_get_site_name_abbreviated()),
         array_shift($variables['breadcrumb'])));
   }
   //Add the intermediate breadcrumbs if they exist
@@ -885,9 +885,9 @@ function unl_five_og_breadcrumb($variables) {
   array_unshift($variables['breadcrumb'], '<a href="https://www.unl.edu/">Nebraska</a>');
   // Append title of current page -- http://drupal.org/node/133242
   if (!drupal_is_front_page()) {
-    if ($group = unl_five_og_get_current_group()) {
+    if ($group = unl_five_darkmode_og_get_current_group()) {
       $node = menu_get_object();
-      if ($group->nid !== unl_five_og_get_front_group_id() && isset($node) && $node->type == 'group') {
+      if ($group->nid !== unl_five_darkmode_og_get_front_group_id() && isset($node) && $node->type == 'group') {
         $group_alias = drupal_get_path_alias('node/'.$node->nid);
         $group_name = $node->title;
       }
@@ -907,10 +907,10 @@ function unl_five_og_breadcrumb($variables) {
 /**
  * Implements hook_menu_breadcrumb_alter().
  */
-function unl_five_menu_breadcrumb_alter(&$active_trail, $item) {
-  $group = unl_five_og_get_current_group();
+function unl_five_darkmode_menu_breadcrumb_alter(&$active_trail, $item) {
+  $group = unl_five_darkmode_og_get_current_group();
   if ($group) {
-    $front_nid = unl_five_og_get_front_group_id();
+    $front_nid = unl_five_darkmode_og_get_front_group_id();
     // Only splice in the current group if the current group is not the main/front group.
     if ($group->nid !== $front_nid) {
       $group_breadcrumb = array(
@@ -928,7 +928,7 @@ function unl_five_menu_breadcrumb_alter(&$active_trail, $item) {
 /**
  * Implements hook_css_alter().
  */
-function unl_five_css_alter(&$css) {
+function unl_five_darkmode_css_alter(&$css) {
   // Exclude Drupal system CSS files. https://api.drupal.org/comment/16004#comment-16004
   $exclude = array(
     //'misc/vertical-tabs.css' => FALSE,
