@@ -30,7 +30,7 @@ if (theme_get_setting('unl_darkmode_preview') && count(array_intersect(array('Si
 <?php print theme_get_setting('head_html'); ?>
 <!-- InstanceEndEditable -->
 </head>
-<body class="unl <?php print $classes; ?>" data-version="5.1" <?php print $attributes;?>>
+<body class="unl <?php print $classes; ?>" data-version="5.2" <?php print $attributes;?>>
 <?php require(DRUPAL_ROOT."/wdn/templates_5.2/includes/global/skip-nav.html"); ?>
 
 <?php print $page_top; ?>
