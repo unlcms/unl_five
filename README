@@ -1,4 +1,4 @@
-Based on the 5.2 version of the UNLedu Web Framework at https://wdn.unl.edu/
+Based on the 5.x version of the UNLedu Web Framework at https://wdn.unl.edu/
 
 Requirements:
   - The 'wdn' directory from the UNLedu Web Framework project (https://github.com/unl/wdntemplates) containing template dependents (the CSS and JS) needs to be located (sym-link/shortcut is o.k.) at the root of the Drupal install.

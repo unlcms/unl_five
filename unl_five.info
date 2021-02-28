@@ -1,5 +1,5 @@
-name = UNLedu 5.2
-description = This theme tracks the 5.2.x version of the UNLedu Web Framework.
+name = UNLedu 5.3
+description = This theme tracks the 5.x version of the UNLedu Web Framework.
 screenshot = screenshot.png
 core = 7.x
 engine = phptemplate
