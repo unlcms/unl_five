@@ -181,7 +181,7 @@ function unl_five_form_element($variables) {
         $title .= theme('form_required_marker', array('element' => $element));
       }
     }
-    else {var_dump($element);
+    else {
       $title = ' ' . theme('form_element_label', $variables);
     }
   }
