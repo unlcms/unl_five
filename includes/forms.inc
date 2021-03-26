@@ -9,7 +9,7 @@ function unl_five_form_alter(&$form, &$form_state, $form_id) {
 
 /**
  * Replacement for theme_webform_element().
- * 
+ *
  * Converts composite element labels into fieldsets, the label becomes a legend.
  * see https://drupal.org/node/1195418
  */
@@ -96,7 +96,7 @@ function unl_five_webform_element($variables) {
 
 /**
  * Replacement for theme_form_element().
- * 
+ *
  * Moves invisible checkboxes and radio buttons to the right of the form control to pass WCAG2.0
  */
 function unl_five_form_element($variables) {
@@ -173,7 +173,15 @@ function unl_five_form_element($variables) {
         $title .= theme('form_required_marker', array('element' => $element));
       }
       $title .= '</legend>';
-    } else {
+    }
+    else if (isset($element['#type']) && $element['#type'] == 'date_popup') {
+      $attributes['class'] = 'dcf-txt-sm';
+      $title = '<h4' . drupal_attributes($attributes) . '>' . $element['#title'] . '</h4>';
+      if (!empty($element['#required'])) {
+        $title .= theme('form_required_marker', array('element' => $element));
+      }
+    }
+    else {var_dump($element);
       $title = ' ' . theme('form_element_label', $variables);
     }
   }
@@ -211,7 +219,7 @@ function unl_five_form_element($variables) {
 
 /**
  * Theme a webform time element.
- * 
+ *
  * Adds labels so that it passes WCAG2.0.
  */
 function unl_five_webform_time($variables) {
@@ -238,9 +246,9 @@ function unl_five_webform_time($variables) {
 
 /**
  * Implements theme_file().
- * 
+ *
  * Renders the file element via core, then passes it to the theme wrapper, which adds labels.
- * 
+ *
  * @param $vars
  *
  * @return string

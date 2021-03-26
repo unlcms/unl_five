@@ -31,7 +31,7 @@
     <?php foreach ($widgets as $id => $widget): ?>
       <div id="<?php print $widget->id; ?>-wrapper" class="views-exposed-widget views-widget-<?php print $id; ?>">
         <?php if (!empty($widget->label)): ?>
-          <h3 class="dcf-txt-sm">
+          <h3 class="dcf-txt-md">
             <?php print $widget->label; ?>
           </h3>
         <?php endif; ?>
