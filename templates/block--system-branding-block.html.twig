@@ -1,15 +1,15 @@
 {% extends "block.html.twig" %}
 {% block content %}
-  {% include "/wdn/templates_5.1/includes/global/site-affiliation-1.html" %}
+  {% include "/wdn/templates_5.3/includes/global/site-affiliation-1.html" %}
     <!-- InstanceBeginEditable name="affiliation" -->
     {% if site_slogan %}{{ site_slogan|raw }}{% endif %}
     <!-- InstanceEndEditable -->
-  {% include "/wdn/templates_5.1/includes/global/site-affiliation-2.html" %}
-  {% include "/wdn/templates_5.1/includes/global/site-title-1.html" %}
+  {% include "/wdn/templates_5.3/includes/global/site-affiliation-2.html" %}
+  {% include "/wdn/templates_5.3/includes/global/site-title-1.html" %}
     <!-- InstanceBeginEditable name="titlegraphic" -->
     {% if site_name %}
     <a href="{{ path('<front>') }}" class="dcf-txt-h5">{{ site_name }}</a>
     {% endif %}
     <!-- InstanceEndEditable -->
-  {% include "/wdn/templates_5.1/includes/global/site-title-2.html" %}
+  {% include "/wdn/templates_5.3/includes/global/site-title-2.html" %}
 {% endblock %}
