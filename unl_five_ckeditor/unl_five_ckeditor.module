@@ -5,6 +5,8 @@
  * Code for unl_five that can't be in a theme.
  */
 
+use Drupal\editor\EditorInterface;
+
 /**
  * Implements hook_ckeditor_css_alter().
  *
@@ -12,7 +14,7 @@
  * active theme; thus, this code cannot run from unl_five.theme because
  * the admin theme will be active when CKEditor is loaded.
  */
-function unl_five_ckeditor_ckeditor_css_alter(&$css, $editor) {
+function unl_five_ckeditor_ckeditor_css_alter(&$css, EditorInterface $editor) {
   // These WDN CSS files cannot be reliably loaded in unl_five.info.yml
   // as a ckeditor_stylesheets library because CSS's @import rule can only
   // load them relative to the theme, not relative to the docroot.
@@ -22,6 +24,14 @@ function unl_five_ckeditor_ckeditor_css_alter(&$css, $editor) {
   // (e.g. http://example.unl.edu/workspace/project-herbie/web/), so
   // loading relative to the domain root won't work either. It must relative
   // to Drupal's base url.
-  $css[] = 'wdn/templates_5.1/css/core.css';
-  $css[] = 'wdn/templates_5.1/css/deprecated.css';
+  //
+  // Load the WDN templates path from unl_five_preprocess().
+  $unl_five_path = drupal_get_path('theme', 'unl_five');
+  require_once $unl_five_path . '/unl_five.theme';
+  $vars = [];
+  unl_five_preprocess($vars);
+  $wdn_path = $vars['wdn']['directory'];
+
+  $css[] = "$wdn_path/css/main.css";
+  $css[] = "$wdn_path/css/deprecated.css";
 }
