@@ -37,3 +37,9 @@ dcf-tabledrag:
   version: VERSION
   js:
     js/dcf-tabledrag.js: { weight: -1 }
+
+layout_builder:
+  version: VERSION
+  css:
+    theme:
+      css/layout-builder.css: {}
