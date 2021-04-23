@@ -12,6 +12,8 @@ libraries:
 libraries-extend:
   core/drupal.tabledrag:
     - unl_five/dcf-tabledrag
+  layout_builder/drupal.layout_builder:
+    - unl_five/layout_builder
 
 libraries-override:
   core/classList: false
