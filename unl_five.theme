@@ -237,6 +237,22 @@ function unl_five_form_alter(&$form, FormStateInterface &$form_state, $form_id) 
   // Add 'dcf-form' class to form.
   $form['#attributes']['class'][] = 'dcf-form';
 
+  // If a Webform form, add a class indicating the major version of the
+  // Webform module.
+  if (isset($form['#webform_id'])) {
+    /** @var \Drupal\Core\Extension\ModuleExtensionList */
+    $extension_list = Drupal::service('extension.list.module');
+    if ($extension_list->exists('webform')) {
+      $extension_info = $extension_list->getExtensionInfo('webform');
+      if (strncasecmp($extension_info['version'], "8.x-5", 5) === 0) {
+        $form['#attributes']['class'][] = 'webform-version-5';
+      }
+      elseif (strncasecmp($extension_info['version'], "6.", 2) === 0) {
+        $form['#attributes']['class'][] = 'webform-version-6';
+      }
+    }
+  }
+
   // Target Layout Builder forms.
   // e.g. form_id ends in '_layout_builder_form'.
   if (strpos(strrev($form_id), strrev('_layout_builder_form')) === 0) {
