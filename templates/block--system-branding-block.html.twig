@@ -2,7 +2,16 @@
 {% block content %}
   {% include "/wdn/templates_5.3/includes/global/site-affiliation-1.html" %}
     <!-- InstanceBeginEditable name="affiliation" -->
-    {% if site_slogan %}{{ site_slogan|raw }}{% endif %}
+    {# 
+      If a subtheme or module provides an affiliation_name and an
+      affiliation_url, then use them for the affiliation markup;
+      otherwise, use site_slogan.
+    #}
+    {% if affiliation_name and affiliation_url %}
+      <a href="{{ affiliation_url }}">{{ affiliation_name }}</a>
+    {% elseif site_slogan %}
+      {{ site_slogan }}
+    {% endif %}
     <!-- InstanceEndEditable -->
   {% include "/wdn/templates_5.3/includes/global/site-affiliation-2.html" %}
   {% include "/wdn/templates_5.3/includes/global/site-title-1.html" %}
