@@ -163,6 +163,26 @@ function unl_five_preprocess_block(&$variables) {
 }
 
 /**
+ * Implements template_preprocess_field().
+ */
+function unl_five_preprocess_field(&$variables) {
+  // Search the text of text field types for usage of the 'unl-font-serif'.
+  // Load the 'unl_five_herbie/font-serif' library if found.
+  if (in_array($variables['field_type'], [
+    'text',
+    'text_long',
+    'text_with_summary',
+  ])) {
+    foreach ($variables['items'] as $item) {
+      if (strstr($item['content']['#text'], 'unl-font-serif')) {
+        $variables['#attached']['library'][] = 'unl_five/wdn-font-serif';
+        break;
+      }
+    }
+  }
+}
+
+/**
  * Implements template_preprocess_book_navigation().
  */
 function unl_five_preprocess_book_navigation(&$variables) {

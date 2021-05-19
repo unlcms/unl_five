@@ -43,3 +43,8 @@ layout_builder:
   css:
     theme:
       css/layout-builder.css: {}
+
+wdn-font-serif:
+  version: VERSION
+  js:
+    js/wdn-font-serif.js: {}
