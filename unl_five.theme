@@ -6,6 +6,31 @@ use Drupal\group\Entity\GroupContent;
 use Drupal\node\Entity\Node;
 
 /**
+ * Returns the WDN version.
+ *
+ * @return string
+ *   The WDN version.
+ */
+function unl_five_get_wdn_version() {
+  $unl_five_path = drupal_get_path('theme', 'unl_five');
+
+  return file_get_contents($unl_five_path . '/WDN_VERSION');
+}
+
+/**
+ * Implements hook_preprocess().
+ */
+function unl_five_preprocess(&$vars) {
+  // Populate global WDN object with version and directory path.
+  // The WDN object will available to all Twig templates.
+  $wdn_version_string = unl_five_get_wdn_version();
+  $vars['wdn'] = [
+    'version' => $wdn_version_string,
+    'directory' => "/wdn/templates_$wdn_version_string",
+  ];
+}
+
+/**
  * Implements template_preprocess_html().
  */
 function unl_five_preprocess_html(&$variables) {
