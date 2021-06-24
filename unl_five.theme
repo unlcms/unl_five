@@ -337,7 +337,7 @@ function unl_five_preprocess_form_element(&$variables) {
 
   // Add 'dcf-form-help' class to descriptions.
   // Elements of type 'details' are exempt.
-  if ($variables['element']['#type'] != 'details' && $variables['description']['content']) {
+  if ($variables['element']['#type'] != 'details' && isset($variables['description']['content'])) {
     $variables['description']['attributes']->addClass('dcf-form-help');
   }
 
