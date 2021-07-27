@@ -102,10 +102,17 @@ function unl_five_form_system_theme_settings_alter(&$form, &$form_state) {
     ),
   );
 
+  $unl_deprecated_css = theme_get_setting('unl_deprecated_css');
   $form['advanced_settings'] = array(
     '#type' => 'fieldset',
     '#title' => t('Advanced settings'),
     '#weight' => 40,
+    'unl_deprecated_css' => array(
+      '#type' => 'checkbox',
+      '#title' => t('Include deprecated CSS file'),
+      '#default_value' => isset($unl_deprecated_css) ? $unl_deprecated_css : true,
+      //'#description' => t('You must set "prefers-color-scheme: dark" either in your operating system or in your browser. See http://go.unl.edu/cmsdark for more info.'),
+    ),
     'enable_drill_down' => array(
       '#type' => 'checkbox',
       '#title' => t('Enable drill-down main menu'),

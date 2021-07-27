@@ -21,14 +21,21 @@ label {
 #unlcms_tabs {
   position: absolute;
   right: 0;
-  top: 95px;
-  font-size: 0.7em;
+  top: 105px;
+  font-size: 0.8em;
 }
 @media only screen and (max-width: 56.1231em) {
   #unlcms_tabs {
-    top: 58px;
+    top: 63px;
     font-size: 0.5em;
   }
+}
+#unlcms_tabs .dcf-tab {
+  font-weight: normal;
+}
+#unlcms_tabs .dcf-tab[aria-selected] {
+  border: 1px solid var(--b-tab);
+  border-bottom-color: var(--bg-tab-selected);
 }
 
 /* Related Links region contextual links */

@@ -545,12 +545,12 @@ function unl_five_menu_local_tasks($variables) {
   $output = '';
 
   if (!empty($variables['primary'])) {
-    $variables['primary']['#prefix'] = '<ul class="wdn_tabs disableSwitching" id="unlcms_tabs">';
+    $variables['primary']['#prefix'] = '<ul class="dcf-tabs-list dcf-list-bare dcf-mb-0 disableSwitching" id="unlcms_tabs">';
     $variables['primary']['#suffix'] = '</ul>';
     $output .= drupal_render($variables['primary']);
   }
   if (!empty($variables['secondary'])) {
-    $variables['secondary']['#prefix'] = '<ul class="wdn_tabs disableSwitching" id="unlcms_tabs">';
+    $variables['secondary']['#prefix'] = '<ul class="dcf-tabs-list dcf-list-bare dcf-mb-0 disableSwitching" id="unlcms_tabs">';
     $variables['secondary']['#suffix'] = '</ul>';
     $output .= drupal_render($variables['secondary']);
   }
@@ -565,7 +565,10 @@ function unl_five_menu_local_task($variables) {
   $link = $variables['element']['#link'];
   $link_text = $link['title'];
 
+  $link['localized_options']['attributes']['class'] = array('dcf-tab dcf-d-block');
+
   if (!empty($variables['element']['#active'])) {
+    $link['localized_options']['attributes']['aria-selected'] = array('true');
     // If the link does not contain HTML already, check_plain() it now.
     // After we set 'html'=TRUE the link will not be sanitized by l().
     if (empty($link['localized_options']['html'])) {
@@ -574,7 +577,7 @@ function unl_five_menu_local_task($variables) {
     $link['localized_options']['html'] = TRUE;
     $link_text = t('!local-task-title !active', array('!local-task-title' => $link['title'], '!active' => ''));
   }
-  return '<li' . (!empty($variables['element']['#active']) ? ' class="selected"' : '') . '>' . l($link_text, $link['href'], $link['localized_options']) . "</li>\n";
+  return '<li class="dcf-tabs-list-item dcf-mb-0">' . l($link_text, $link['href'], $link['localized_options']) . "</li>\n";
 }
 
 /**

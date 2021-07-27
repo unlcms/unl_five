@@ -22,8 +22,10 @@ if (theme_get_setting('unl_darkmode_preview') && count(array_intersect(array('Si
 <!-- InstanceEndEditable -->
 <?php require(DRUPAL_ROOT."/wdn/templates_5.3/includes/global/head-2.html"); ?>
 <!-- InstanceBeginEditable name="head" -->
+<?php if (theme_get_setting('unl_deprecated_css')) : ?>
 <link rel="preload" href="https://unlcms.unl.edu/wdn/templates_5.3/css/deprecated.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="https://unlcms.unl.edu/wdn/templates_5.3/css/deprecated.css"></noscript>
+<?php endif; ?>
 <?php print $head; ?>
 <?php print $styles; ?>
 <?php print $scripts; ?>
