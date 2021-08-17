@@ -1,10 +1,8 @@
-{% set attributes = attributes.addClass('dcf-btn') %}
 {% if is_active %}
-  {% set attributes = attributes.addClass('dcf-btn-primary') %}
-  {% set options = { '#options': { 'attributes': { 'class': ['is-active', 'dcf-inverse'] }}} %}
-  {% set link = link|merge(options) %}
+  {% set options = { '#options': { 'attributes': { 'class': ['dcf-btn', 'dcf-btn-primary', 'is-active', 'dcf-inverse'] }}} %}
 {% else %}
-  {% set attributes = attributes.addClass('dcf-btn-secondary') %}
+  {% set options = { '#options': { 'attributes': { 'class': ['dcf-btn', 'dcf-btn-secondary'] }}} %}
 {% endif %}
+{% set link = link|merge(options) %}
 
 <li{{ attributes }}>{{ link }}</li>
