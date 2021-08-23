@@ -365,7 +365,8 @@ function unl_five_preprocess_form_element(&$variables) {
     'webform_checkboxes_other',
     'radios',
   ];
-  if (empty(array_intersect($exempt_parents, $variables['element']['#parents']))) {
+  $parents = $variables['element']['#parents'] ?? [];
+  if (empty(array_intersect($exempt_parents, $parents))) {
     $variables['attributes']['class'][] = 'dcf-form-group';
   }
 
@@ -382,8 +383,9 @@ function unl_five_preprocess_form_element(&$variables) {
     'buttons',
     'buttons_other',
   ];
+  $parents = $variables['element']['#parents'] ?? [];
   if ($variables['type'] == 'radio') {
-    if (empty(array_intersect($button_parents, $variables['element']['#parents']))) {
+    if (empty(array_intersect($button_parents, $parents))) {
       $variables['attributes']['class'][] = 'dcf-input-radio';
     }
     else {
