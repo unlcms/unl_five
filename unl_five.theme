@@ -334,8 +334,21 @@ function unl_five_preprocess_form_element(&$variables) {
   }
 
   // Add 'dcf-form-controls-inline' class as appropriate.
-  if (isset($variables['attributes']['class']) && in_array('webform-element--title-inline', $variables['attributes']['class'])) {
-    $variables['attributes']['class'][] = 'dcf-form-controls-inline';
+  if (isset($variables['attributes']['class'])) {
+    if (is_array($variables['attributes']['class'])
+      && in_array('webform-element--title-inline', $variables['attributes']['class'])
+      ) {
+
+      $variables['attributes']['class'][] = 'dcf-form-controls-inline';
+    }
+    // $variables['attributes']['class'] could also be a string.
+    else {
+      // Convert string value into an array value; preserve existing class.
+      $variables['attributes']['class'] = [
+        $variables['attributes']['class'],
+        'dcf-form-controls-inline',
+      ];
+    }
   }
 
   // Add 'dcf-form-help' class to descriptions.
