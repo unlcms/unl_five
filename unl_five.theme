@@ -326,7 +326,10 @@ function unl_five_form_alter(&$form, FormStateInterface &$form_state, $form_id) 
  */
 function unl_five_preprocess_form_element(&$variables) {
   // Add 'dcf-required' class to required elements.
-  if ($variables['element']['#required'] == TRUE) {
+  if (isset($variables['element']['#required'])
+    && $variables['element']['#required'] == TRUE
+    ) {
+
     $variables['label']['#title'] = $variables['label']['#title'] . ' <small class="dcf-required">Required</small>';
   }
 
