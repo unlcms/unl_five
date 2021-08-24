@@ -242,6 +242,10 @@ function unl_five_get_current_group() {
     return NULL;
   }
 
+  if (!theme_get_setting('group.adjust')) {
+    return NULL;
+  }
+
   // If we're on a Group entity page.
   $group_route_context = \Drupal::service('group.group_route_context');
   $contexts = $group_route_context->getRuntimeContexts(['group']);
@@ -390,7 +394,7 @@ function unl_five_preprocess_form_element(&$variables) {
     }
     else {
       $variables['label']['#attributes']['class'][] = 'dcf-btn';
-    } 
+    }
   }
 }
 
