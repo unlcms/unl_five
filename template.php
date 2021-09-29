@@ -689,9 +689,9 @@ function unl_five_pager($variables) {
         'data' => $li_last,
       );
     }
-    return '<h2 class="element-invisible">' . t('Pages') . '</h2>' . theme('item_list', array(
+    return '<h2 class="dcf-sr-only">' . t('Pages') . '</h2>' . theme('item_list', array(
       'items' => $items,
-      'attributes' => array('class' => array('wdn_pagination', 'dcf-list-bare')),
+      'attributes' => array('class' => array('dcf-list-inline', 'dcf-list-bare', 'dcf-mt-4', 'dcf-mb-4')),
     ));
   }
 }
