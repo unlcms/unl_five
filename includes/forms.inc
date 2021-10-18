@@ -364,3 +364,19 @@ function unl_five_webform_grid($variables) {
     ),
   ));
 }
+
+/**
+ * Returns HTML for a marker for required form elements. Implements theme_form_required_marker().
+ *
+ * @param $variables
+ *   An associative array containing:
+ *   - element: An associative array containing the properties of the element.
+ *
+ * @ingroup themeable
+ */
+function unl_five_form_required_marker($variables) {
+  $attributes = array(
+    'class' => 'dcf-required',
+  );
+  return '<small' . drupal_attributes($attributes) . '>Required</small>';
+}
