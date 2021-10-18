@@ -132,6 +132,9 @@ input.webform-calendar {
 
 
 /* Published state */
+.node-unpublished {
+  background: var(--bg-body);
+}
 .node-unpublished::before {
   content: 'Unpublished';
   background: #fff4f4;
@@ -143,7 +146,7 @@ input.webform-calendar {
   font-style: italic;
 }
 
-@media (prefers-color-scheme: dark){
+@media (prefers-color-scheme: dark) {
   .node-unpublished::before {
     background: var(--bg-mark);
     color: var(--inverse);
