@@ -582,12 +582,9 @@ function unl_five_menu_local_task($variables) {
 
 /**
  * Implements theme_pager().
+ * This is straight-copied from the default except with css class names changed.
  */
 function unl_five_pager($variables) {
-  // This is straight-copied from the default except with css class names changed and wdn css loaded
-  // http://api.drupal.org/api/drupal/includes--pager.inc/function/theme_pager/7
-  drupal_add_js("WDN.loadCSS(WDN.getTemplateFilePath('css/modules/pagination.css'));", array('type' => 'inline', 'scope' => 'footer'));
-
   $tags = $variables['tags'];
   $element = $variables['element'];
   $parameters = $variables['parameters'];
@@ -691,7 +688,8 @@ function unl_five_pager($variables) {
     }
     return '<h2 class="dcf-sr-only">' . t('Pages') . '</h2>' . theme('item_list', array(
       'items' => $items,
-      'attributes' => array('class' => array('dcf-list-inline', 'dcf-list-bare', 'dcf-mt-4', 'dcf-mb-4')),
+      'type' => 'ol',
+      'attributes' => array('class' => array('pager', 'dcf-list-inline', 'dcf-list-bare', 'dcf-mt-4', 'dcf-mb-4')),
     ));
   }
 }
