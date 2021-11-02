@@ -147,7 +147,7 @@ function unl_five_preprocess_block(&$vars) {
   // Add .unl-frame-quad to menu blocks.
   if ($vars['block_html_id'] == 'block-book-navigation' || substr($vars['block_html_id'], 0, 16) == 'block-menu-block' ) {
     $vars['classes_array'][] = 'unl-frame-quad';
-    $vars['title_attributes_array']['class'][] = 'dcf-mb-0 dcf-pt-6 dcf-pb-4 dcf-txt-sm dcf-uppercase unl-ls-1 unl-bg-darker-gray';
+    $vars['title_attributes_array']['class'][] = 'dcf-mb-0 dcf-pt-6 dcf-pb-4 dcf-txt-sm dcf-uppercase unl-cream unl-ls-1 unl-bg-darker-gray';
   }
 }
 
@@ -586,7 +586,6 @@ function unl_five_menu_local_task($variables) {
 function unl_five_pager($variables) {
   // This is straight-copied from the default except with css class names changed and wdn css loaded
   // http://api.drupal.org/api/drupal/includes--pager.inc/function/theme_pager/7
-  drupal_add_js("WDN.loadCSS(WDN.getTemplateFilePath('css/modules/pagination.css'));", array('type' => 'inline', 'scope' => 'footer'));
 
   $tags = $variables['tags'];
   $element = $variables['element'];
