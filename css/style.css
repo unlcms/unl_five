@@ -129,3 +129,26 @@ input.webform-calendar {
   height: 0;
   visibility: hidden;
 }
+
+
+/* Published state */
+.node-unpublished {
+  background: var(--bg-body);
+}
+.node-unpublished::before {
+  content: 'Unpublished';
+  background: #fff4f4;
+  border-bottom: 4px solid var(--bg-body);
+  display: block;
+  color: var(--body);
+  padding: .2em .6em;
+  margin-bottom: .5em;
+  font-style: italic;
+}
+
+@media (prefers-color-scheme: dark) {
+  .node-unpublished::before {
+    background: var(--bg-mark);
+    color: var(--inverse);
+  }
+}
