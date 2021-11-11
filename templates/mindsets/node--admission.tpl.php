@@ -19,7 +19,7 @@
 
 
 <div class="dcf-bleed dcf-wrapper dcf-pt-8 dcf-pb-4">
-    <p class="dcf-w-max-lg dcf-ml-auto dcf-mr-auto dcf-txt-center dcf-txt-lg"><?php print render($content['body']); ?></p>
+    <p class="dcf-w-max-lg dcf-ml-auto dcf-mr-auto dcf-txt-center dcf-txt-lg"><?php print render($content['n_admission_lead_copy']); ?></p>
 </div>
 
 <?php print render($content['s_p_supsec_featured']); ?>
