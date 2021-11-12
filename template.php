@@ -249,11 +249,16 @@ function unl_five_preprocess_node(&$vars) {
   $vars['theme_hook_suggestions'][] = 'node__' . $vars['node']->type . '__' . $vars['view_mode'];
   $vars['theme_hook_suggestions'][] = 'node__' . $vars['node']->nid . '__' . $vars['view_mode'];
 
+  $path = drupal_get_path('theme', 'unl_five');
   // Add forms css file if content type is webform.
   if ($vars['type'] == 'webform') {
-    $path = drupal_get_path('theme', 'unl_five');
     drupal_add_css($path . '/css/form.css');
   }
+  // Add Majors & Mindsets css.
+  if (in_array($vars['type'], array('admission', 'mindset'))) {
+    drupal_add_css($path . '/css/mindsets/mindsets.css');
+  }
+
   // Drupal doesn't correctly set the $page flag for the preview on node/add/page which results in the <h2> being displayed in modules/node/node.tpl.php
   if (isset($vars['elements']['#node']->op) && $vars['elements']['#node']->op == 'Preview') {
     $vars['page'] = true;
