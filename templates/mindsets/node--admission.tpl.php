@@ -48,13 +48,13 @@
 		<h2 class="dcf-txt-h4 dcf-mb-4 dcf-regular dcf-uppercase unl-cream dcf-txt-center">Contact Us</h2>
   <?php if (count($content['s_n_contacts']['#items']) == 1): ?>
   <div class="dcf-d-flex dcf-jc-center">
-    <div class="dcf-w-max-lg">
+    <div class="dcf-w-max-lg dcf-w-100%">
        <?php print render($content['s_n_contacts']); ?>
     </div>
   </div>
   <?php else: ?>
   <div class="dcf-d-flex dcf-jc-center">
-    <div class="dcf-w-max-xl">
+    <div class="dcf-w-max-xl dcf-w-100%">
   <div class="dcf-grid-halves@md dcf-col-gap-vw dcf-row-gap-6">
        <?php print render($content['s_n_contacts']); ?>
   </div>

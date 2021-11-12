@@ -1,7 +1,9 @@
 <div class="<?php print $classes; ?>"<?php print $attributes; ?>>
   <div class="content dcf-grid dcf-col-gap-5 dcf-row-gap-5"<?php print $content_attributes; ?>>
     <div class="dcf-col-25%-start">
-      <?php print render($content['p_n_contact_image']); ?>
+      <div class="dcf-1st dcf-ratio dcf-ratio-1x1">
+        <?php print render($content['p_n_contact_image']); ?>
+      </div>
     </div>
     <div class="dcf-col-75%-end">
       <h6 class="dcf-mb-0 unl-cream"><?php print render($content['p_n_contact_name']); ?></h6>
