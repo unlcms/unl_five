@@ -647,7 +647,7 @@ function unl_five_pager($variables) {
       if ($i > 1) {
         $items[] = array(
           'class' => array('ellipsis'),
-          'data' => '…',
+          'data' => '<span class="dcf-pagination-ellipsis">…</span>',
         );
       }
       // Now generate the actual pager piece.
@@ -661,7 +661,7 @@ function unl_five_pager($variables) {
         if ($i == $pager_current) {
           $items[] = array(
             'class' => array('selected'),
-            'data' => $i,
+            'data' => '<span class="dcf-pagination-selected">' . $i . '</span>',
           );
         }
         if ($i > $pager_current) {
@@ -674,7 +674,7 @@ function unl_five_pager($variables) {
       if ($i < $pager_max) {
         $items[] = array(
           'class' => array('ellipsis'),
-          'data' => '…',
+          'data' => '<span class="dcf-pagination-ellipsis">…</span>',
         );
       }
     }
@@ -691,12 +691,78 @@ function unl_five_pager($variables) {
         'data' => $li_last,
       );
     }
-    return '<h2 class="dcf-sr-only">' . t('Pages') . '</h2>' . theme('item_list', array(
+
+    $script = "require(['wdn'], function(WDN) {WDN.initializePlugin('pagination');});" . PHP_EOL;
+    drupal_add_js($script, array('type' => 'inline', 'scope' => 'footer'));
+
+    return '<nav class="dcf-pagination">' . theme('item_list', array(
       'items' => $items,
       'type' => 'ol',
       'attributes' => array('class' => array('pager', 'dcf-list-inline', 'dcf-list-bare', 'dcf-mt-4', 'dcf-mb-4')),
-    ));
+    )) . '</nav>';
   }
+}
+
+/**
+ * Implements theme_pager_link().
+ * This is straight-copied from the default except with css class names changed.
+ */
+function unl_five_pager_link($variables) {
+  $text = $variables['text'];
+  $page_new = $variables['page_new'];
+  $element = $variables['element'];
+  $parameters = $variables['parameters'];
+  $attributes = $variables['attributes'];
+  $page = isset($_GET['page']) ? $_GET['page'] : '';
+  if ($new_page = implode(',', pager_load_array($page_new[$element], $element, explode(',', $page)))) {
+    $parameters['page'] = $new_page;
+  }
+  $query = array();
+  if (count($parameters)) {
+    $query = drupal_get_query_parameters($parameters, array());
+  }
+  if ($query_pager = pager_get_query_parameters()) {
+    $query = array_merge($query, $query_pager);
+  }
+
+  $classes = array(
+    t('« first') => 'dcf-pagination-first',
+    t('‹ previous') => 'dcf-pagination-prev',
+    t('next ›') => 'dcf-pagination-next',
+    t('last »') => 'dcf-pagination-last',
+  );
+
+  // Set each pager link title
+  if (!isset($attributes['title'])) {
+    static $titles = NULL;
+    if (!isset($titles)) {
+      $titles = array(
+        t('« first') => t('Go to first page1'),
+        t('‹ previous') => t('Go to previous page'),
+        t('next ›') => t('Go to next page'),
+        t('last »') => t('Go to last page2'),
+      );
+    }
+    if (isset($titles[$text])) {
+      $attributes['title'] = $titles[$text];
+      $attributes['class'] = $classes[$text];
+    }
+    elseif (is_numeric($text)) {
+      $attributes['title'] = t('Go to page @number', array(
+        '@number' => $text,
+      ));
+    }
+  }
+
+  // @todo l() cannot be used here, since it adds an 'active' class based on the
+  //   path only (which is always the current path for pager links). Apparently,
+  //   none of the pager links is active at any time - but it should still be
+  //   possible to use l() here.
+  // @see http://drupal.org/node/1410574
+  $attributes['href'] = url($_GET['q'], array(
+    'query' => $query,
+  ));
+  return '<a' . drupal_attributes($attributes) . '>' . check_plain($text) . '</a>';
 }
 
 function unl_five_status_messages($variables) {
