@@ -9,7 +9,7 @@
 
     <?php print render($content['s_p_supsec_featured']); ?>
 
-    <?php print render($content['p_n_supsec_secondary']); ?>
+    <?php print render($content['s_p_supsec_secondary']); ?>
 
   </div>
 </div>
