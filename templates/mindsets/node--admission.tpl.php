@@ -48,7 +48,7 @@
 		<h2 class="dcf-txt-h4 dcf-mb-4 dcf-regular dcf-uppercase unl-cream dcf-txt-center">Contact Us</h2>
   <?php if (count($content['s_n_contacts']['#items']) == 1): ?>
   <div class="dcf-d-flex dcf-jc-center">
-    <div class="dcf-w-max-lg dcf-w-100%">
+    <div class="dcf-w-max-lg dcf-w-100% dcf-txt-center">
        <?php print render($content['s_n_contacts']); ?>
     </div>
   </div>
