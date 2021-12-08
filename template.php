@@ -255,7 +255,7 @@ function unl_five_preprocess_node(&$vars) {
     drupal_add_css($path . '/css/form.css');
   }
   // Add Majors & Mindsets css.
-  if (in_array($vars['type'], array('admission', 'mindset'))) {
+  if (in_array($vars['type'], array('admission', 'major', 'mindset'))) {
     drupal_add_css($path . '/css/mindsets/mindsets.css');
   }
 
