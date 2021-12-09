@@ -16,6 +16,12 @@
   margin-bottom: 0;
 }
 
+.node-admission,
+.node-major,
+.node-mindset {
+  overflow-x: hidden;
+}
+
 .unl-slope-b-downward {
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 7.5em));
 }
