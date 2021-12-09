@@ -20,6 +20,7 @@
 .node-major,
 .node-mindset {
   overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 .unl-slope-b-downward {
