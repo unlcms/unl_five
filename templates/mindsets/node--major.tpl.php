@@ -212,7 +212,7 @@
     </div>
   </div>
   <?php endif; ?>
-  <?php if (count($content['n_major_study_abroad_link']['#items'])): ?>
+  <?php if (count($content['n_major_student_orgs_link']['#items'])): ?>
     <?php print render($content['n_major_student_orgs_link']); ?>
   <?php endif; ?>
 </div>
