@@ -167,7 +167,11 @@
 <?php if (count($content['s_p_supsec_secondary']['#items'])): ?>
 <div class="dcf-bleed unl-bg-lightest-gray">
   <div class="dcf-wrapper dcf-pt-8 dcf-pb-8 dcf-relative dcf-z-1">
-    <h2 class="dcf-mb-0">Research and Academic Opportunities</h2>
+    <?php if (count($content['n_major_res_aca_alt_title']['#items'])): ?>
+      <h2 class="dcf-mb-0"><?php print render($content['n_major_res_aca_alt_title']); ?>}</h2> 
+    <?php else: ?>
+      <h2 class="dcf-mb-0">Research and Academic Opportunities</h2>
+    <?php endif; ?>
     <?php print render($content['s_p_supsec_secondary']); ?>
     <?php if (count($content['n_major_research_academic_link']['#items'])): ?>
       <?php print render($content['n_major_research_academic_link']); ?>
@@ -190,7 +194,7 @@
 </div>
 <?php endif; ?>
 
-
+<?php if (count($content['n_major_student_org_title_1']['#items'])): ?>
 <div class="dcf-bleed dcf-bg-white dcf-wrapper dcf-pt-8 dcf-pb-8">
   <h2>Student / Professional Organizations</h2>
   <?php if (count($content['n_major_student_org_title_2']['#items'])): ?>
@@ -216,6 +220,7 @@
     <?php print render($content['n_major_student_orgs_link']); ?>
   <?php endif; ?>
 </div>
+<?php endif; ?>
 
 <div class="dcf-bleed dcf-bg-white dcf-wrapper unl-bg-lightest-gray unl-bg-grit dcf-pt-8 dcf-pb-8">
   <div class="dcf-grid-thirds@md dcf-col-gap-vw dcf-row-gap-6 dcf-pt-4">
