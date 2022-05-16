@@ -353,7 +353,7 @@ function unl_five_preprocess_page(&$vars, $hook) {
   }
 
   // Add js to modify the My.UNL login links.
-  $loginUrl = url('user', array('query' => drupal_get_destination()));
+  $loginUrl = url('cas', array('query' => drupal_get_destination()));
   $script = "WDN.setPluginParam('idm', 'login', '" . $loginUrl . "'); WDN.setPluginParam('idm', 'logout', '".base_path()."user/logout');" . PHP_EOL;
   drupal_add_js($script, array('type' => 'inline', 'scope' => 'footer'));
 
