@@ -38,14 +38,14 @@ function unl_five_preprocess_html(&$variables) {
 
   // Swap head title variables for group
   if ($group) {
-    unset($variables['head_title_array']['name']);
+    unset($variables['head_title']['name']);
     if (unl_five_is_request_group_front()) {
       unset($variables['head_title']['title']);
     }
     else {
-      $variables['head_title_array'] = array_slice($variables['head_title_array'], 0, 1, true) +
+      $variables['head_title'] = array_slice($variables['head_title'], 0, 1, true) +
                                        array('Group' => $group->label()) +
-                                       array_slice($variables['head_title_array'], 1, NULL, true);
+                                       array_slice($variables['head_title'], 1, NULL, true);
     }
   }
 
@@ -55,14 +55,14 @@ function unl_five_preprocess_html(&$variables) {
   if (!$moduleHandler->moduleExists('metatag')) {
     // Remove Page Title on the front page.
     if (\Drupal::service('path.matcher')->isFrontPage()) {
-      unset($variables['head_title_array']['title']);
+      unset($variables['head_title']['title']);
     }
     // Append University of Nebraska–Lincoln to the end.
     $site_config = \Drupal::config('system.site');
     if ($site_config->get('name') != 'University of Nebraska–Lincoln') {
-      $variables['head_title_array'] = array_merge($variables['head_title_array'], array('UNL' => 'University of Nebraska–Lincoln'));
+      $variables['head_title'] = array_merge($variables['head_title'], array('UNL' => 'University of Nebraska–Lincoln'));
     }
-    $variables['head_title'] = implode(' | ', $variables['head_title_array']);
+    $variables['head_title'] = implode(' | ', $variables['head_title']);
   }
 
   // If <link rel="home"> has already been set elsewhere (in a Context for example) then return...
