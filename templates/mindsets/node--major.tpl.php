@@ -149,7 +149,7 @@
 </div>
 
 
-<h2 class="dcf-pt-4">Core Academic Experiences</h2>
+<h2 class="dcf-wrapper dcf-pt-4">Core Academic Experiences</h2>
 <div class="dcf-bleed dcf-d-grid unl-grid-cols dcf-pt-4 dcf-pb-8 dcf-ai-center">
   <div class="dcf-2nd dcf-pt-6 dcf-pl-7 dcf-pb-6 dcf-pr-7 dcf-z-1 dev-bg-scarlet-gradient-transparent dev-section-featured-region-2">
     <div class="unl-cream"><?php print render($content['n_major_core_academic_text']); ?></div>
@@ -168,7 +168,7 @@
 <div class="dcf-bleed unl-bg-lightest-gray">
   <div class="dcf-wrapper dcf-pt-8 dcf-pb-8 dcf-relative dcf-z-1">
     <?php if (count($content['n_major_res_aca_alt_title']['#items'])): ?>
-      <h2 class="dcf-mb-0"><?php print render($content['n_major_res_aca_alt_title']); ?>}</h2> 
+      <h2 class="dcf-mb-0"><?php print render($content['n_major_res_aca_alt_title']); ?>}</h2>
     <?php else: ?>
       <h2 class="dcf-mb-0">Research and Academic Opportunities</h2>
     <?php endif; ?>
