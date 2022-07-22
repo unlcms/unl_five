@@ -40,7 +40,7 @@
 
 
 
-<h2 class="dcf-txt-h4 dcf-mb-0 dcf-regular dcf-uppercase">Scholarships</h2>
+<h2 class="dcf-wrapper dcf-txt-h4 dcf-mb-0 dcf-regular dcf-uppercase">Scholarships</h2>
   <?php print render($content['n_admission_scholarship']); ?>
 
 
