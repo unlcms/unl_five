@@ -14,6 +14,11 @@ label {
   font-weight: inherit;
 }
 
+/* Override for hard-coded #000 value in system.menus.css */
+li a.active {
+  color: var(--link);
+}
+
 /* Position tabs at the top right of maincontent */
 #dcf-header {
   position: relative;
