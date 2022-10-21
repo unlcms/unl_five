@@ -5,17 +5,38 @@
  */
 function unl_five_form_alter(&$form, &$form_state, $form_id) {
   $form['#attributes']['class'][] = 'dcf-form';
+}
 
-  if (isset($form['actions']['submit'])) {
-    $form['actions']['submit']['#attributes']['class'][] = 'dcf-btn';
-    $form['actions']['submit']['#attributes']['class'][] = 'dcf-btn-primary';
-    $form['actions']['submit']['#attributes']['class'][] = 'dcf-mt-4';
+/**
+ * Implements theme_button().
+ */
+function unl_five_button($variables) {
+  $element = $variables['element'];
+  $element['#attributes']['type'] = 'submit';
+  element_set_attributes($element, array('id', 'name', 'value'));
+
+  // Remove name attribute, if empty, for W3C compliance.
+  if (isset($element['#attributes']['name']) && $element['#attributes']['name'] === '') {
+    unset($element['#attributes']['name']);
   }
-  if (isset($form['submit'])) {
-    $form['submit']['#attributes']['class'][] = 'dcf-btn';
-    $form['submit']['#attributes']['class'][] = 'dcf-btn-secondary';
-    $form['submit']['#attributes']['class'][] = 'dcf-mt-2';
+
+  $element['#attributes']['class'][] = 'form-' . $element['#button_type'];
+  if (!empty($element['#attributes']['disabled'])) {
+    $element['#attributes']['class'][] = 'form-button-disabled';
   }
+
+  $element['#attributes']['class'][] = 'dcf-btn';
+  $element['#attributes']['class'][] = 'dcf-mt-4';
+  $element['#attributes']['class'][] = 'dcf-mb-4';
+
+  if (in_array('button-primary', $element['#attributes']['class'])) {
+    $element['#attributes']['class'][] = 'dcf-btn-primary';
+  }
+  else {
+    $element['#attributes']['class'][] = 'dcf-btn-secondary';
+  }
+
+  return '<input' . drupal_attributes($element['#attributes']) . ' />';
 }
 
 /**
