@@ -7,7 +7,7 @@
   </div>
 </div>
 
-<?php if (count($content['n_major_mediahub_url']['#items'])): ?>
+<?php if (is_countable($content['n_major_mediahub_url']['#items'])): ?>
 <div class="dcf-bleed dcf-wrapper dcf-bg-white dcf-pt-8 dcf-pb-8">
   <div class="dcf-grid-halves@md dcf-col-gap-vw dcf-row-gap-6">
     <div style="padding-top: 56.25%; overflow: hidden; position:relative; -webkit-box-flex: 1; flex-grow: 1;">
@@ -26,7 +26,7 @@
     <div class="dcf-col-100% dcf-col-75%-start@md dcf-d-flex dcf-flex-col dcf-jc-center">
       <div class="dcf-txt-lg"><?php print render($content['n_major_lead_copy']); ?></div>
     </div>
-    <?php if (count($content['n_major_areas_emphasis']['#items'])): ?>
+    <?php if (is_countable($content['n_major_areas_emphasis']['#items'])): ?>
     <div class="dcf-col-100% dcf-col-25%-end@md">
       <div class="unl-bg-lightest-gray dcf-p-5 dcf-rounded">
         <h2 class="dcf-txt-h6">Areas of Emphasis</h2>
@@ -83,16 +83,16 @@
   </div>
 </div>
 
-<?php if (count($content['n_major_point_pride']['#items'])): ?>
+<?php if (is_countable($content['n_major_point_pride']['#items'])): ?>
 <div class="dcf-bleed dcf-bg-white dcf-wrapper dcf-pt-6 dcf-pb-6">
 <?php endif; ?>
-  <?php if (count($content['n_major_point_pride']['#items']) == 1): ?>
+  <?php if (is_countable($content['n_major_point_pride']['#items']) && count($content['n_major_point_pride']['#items']) == 1): ?>
   <div class="dcf-d-flex dcf-jc-center">
     <div class="dcf-w-max-md">
       <?php print render($content['n_major_point_pride']); ?>
     </div>
   </div>
-  <?php elseif (count($content['n_major_point_pride']['#items']) == 2): ?>
+  <?php elseif (is_countable($content['n_major_point_pride']['#items']) && count($content['n_major_point_pride']['#items']) == 2): ?>
   <div class="dcf-d-flex dcf-jc-center">
     <div class="dcf-w-max-lg">
       <div class="dcf-grid-halves@sm dcf-col-gap-vw dcf-row-gap-6">
@@ -100,7 +100,7 @@
       </div>
     </div>
   </div>
-  <?php elseif (count($content['n_major_point_pride']['#items']) == 3): ?>
+  <?php elseif (is_countable($content['n_major_point_pride']['#items']) && count($content['n_major_point_pride']['#items']) == 3): ?>
   <div class="dcf-d-flex dcf-jc-center">
     <div class="dcf-w-max-xl">
       <div class="dcf-grid-thirds@md dcf-col-gap-vw dcf-row-gap-6">
@@ -108,13 +108,13 @@
       </div>
     </div>
   </div>
-  <?php elseif (count($content['n_major_point_pride']['#items']) == 4): ?>
+  <?php elseif (is_countable($content['n_major_point_pride']['#items']) && count($content['n_major_point_pride']['#items']) == 4): ?>
 
   <div class="dcf-grid-halves@sm dcf-grid-fourths@md dcf-col-gap-vw dcf-row-gap-6">
     <?php print render($content['n_major_point_pride']); ?>
   </div>
   <?php endif; ?>
-<?php if (count($content['n_major_point_pride']['#items'])): ?>
+<?php if (is_countable($content['n_major_point_pride']['#items'])): ?>
 </div>
 <?php endif; ?>
 
@@ -164,16 +164,16 @@
   </div>
 </div>
 
-<?php if (count($content['s_p_supsec_secondary']['#items'])): ?>
+<?php if (is_countable($content['s_p_supsec_secondary']['#items'])): ?>
 <div class="dcf-bleed unl-bg-lightest-gray">
   <div class="dcf-wrapper dcf-pt-8 dcf-pb-8 dcf-relative dcf-z-1">
-    <?php if (count($content['n_major_res_aca_alt_title']['#items'])): ?>
+    <?php if (is_countable($content['n_major_res_aca_alt_title']['#items'])): ?>
       <h2 class="dcf-mb-0"><?php print render($content['n_major_res_aca_alt_title']); ?>}</h2>
     <?php else: ?>
       <h2 class="dcf-mb-0">Research and Academic Opportunities</h2>
     <?php endif; ?>
     <?php print render($content['s_p_supsec_secondary']); ?>
-    <?php if (count($content['n_major_research_academic_link']['#items'])): ?>
+    <?php if (is_countable($content['n_major_research_academic_link']['#items'])): ?>
       <?php print render($content['n_major_research_academic_link']); ?>
     <?php endif; ?>
   </div>
@@ -182,22 +182,22 @@
 </div>
 <?php endif; ?>
 
-<?php if (count($content['n_major_study_abroad']['#items'])): ?>
+<?php if (is_countable($content['n_major_study_abroad']['#items'])): ?>
 <div class="dcf-bleed unl-bg-lightest-gray dcf-wrapper dcf-pt-8 dcf-pb-8">
   <h2 class="dcf-mb-0">Study Abroad Opportunities</h2>
   <div class="dcf-grid-halves@md dcf-col-gap-vw dcf-row-gap-6 dcf-pt-4 dcf-pb-4">
     <?php print render($content['n_major_study_abroad']); ?>
   </div>
-  <?php if (count($content['n_major_study_abroad_link']['#items'])): ?>
+  <?php if (is_countable($content['n_major_study_abroad_link']['#items'])): ?>
     <?php print render($content['n_major_study_abroad_link']); ?>
   <?php endif; ?>
 </div>
 <?php endif; ?>
 
-<?php if (count($content['n_major_student_org_title_1']['#items'])): ?>
+<?php if (is_countable($content['n_major_student_org_title_1']['#items'])): ?>
 <div class="dcf-bleed dcf-bg-white dcf-wrapper dcf-pt-8 dcf-pb-8">
   <h2>Student / Professional Organizations</h2>
-  <?php if (count($content['n_major_student_org_title_2']['#items'])): ?>
+  <?php if (is_countable($content['n_major_student_org_title_2']['#items'])): ?>
   <div class="dcf-grid-halves@md dcf-col-gap-vw dcf-row-gap-6 dcf-pt-4 dcf-pb-4">
     <div>
       <p class="dcf-txt-h6 dcf-bold"><?php print render($content['n_major_student_org_title_1']); ?></p>
@@ -208,7 +208,7 @@
       <p><?php print render($content['n_major_student_org_text_2']); ?></p>
     </div>
   </div>
-  <?php elseif (count($content['n_major_student_org_title_1']['#items'])): ?>
+  <?php elseif (is_countable($content['n_major_student_org_title_1']['#items'])): ?>
   <div class="dcf-d-flex dcf-jc-center">
     <div class="dcf-w-max-xl dcf-txt-center">
       <p class="dcf-txt-h6 dcf-bold"><?php print render($content['n_major_student_org_title_2']); ?></p>
@@ -216,7 +216,7 @@
     </div>
   </div>
   <?php endif; ?>
-  <?php if (count($content['n_major_student_orgs_link']['#items'])): ?>
+  <?php if (is_countable($content['n_major_student_orgs_link']['#items'])): ?>
     <?php print render($content['n_major_student_orgs_link']); ?>
   <?php endif; ?>
 </div>
@@ -228,7 +228,7 @@
   </div>
 </div>
 
-<?php if (count($content['n_major_custom']['#items'])): ?>
+<?php if (is_countable($content['n_major_custom']['#items'])): ?>
   <?php print render($content['n_major_custom']); ?>
 <?php endif; ?>
 
@@ -247,7 +247,7 @@
 
 <div class="dcf-bleed dcf-wrapper unl-bg-darkest-gray unl-bg-grit dcf-pt-6 dcf-pb-6">
   <h2 class="dcf-txt-h4 dcf-mb-4 dcf-regular dcf-uppercase unl-cream dcf-txt-center">Contact Us</h2>
-  <?php if (count($content['s_n_contacts']['#items']) == 1): ?>
+  <?php if (is_countable($content['s_n_contacts']['#items']) && count($content['s_n_contacts']['#items']) == 1): ?>
   <div class="dcf-d-flex dcf-jc-center">
     <div class="dcf-w-max-lg dcf-w-100% dcf-txt-center">
       <?php print render($content['s_n_contacts']); ?>

@@ -46,7 +46,7 @@
 
 <div class="dcf-bleed dcf-wrapper unl-bg-darkest-gray unl-bg-grit dcf-pt-6 dcf-pb-6">
 		<h2 class="dcf-txt-h4 dcf-mb-4 dcf-regular dcf-uppercase unl-cream dcf-txt-center">Contact Us</h2>
-  <?php if (count($content['s_n_contacts']['#items']) == 1): ?>
+  <?php if (is_countable($content['s_n_contacts']['#items']) && count($content['s_n_contacts']['#items']) == 1): ?>
   <div class="dcf-d-flex dcf-jc-center">
     <div class="dcf-w-max-lg dcf-w-100% dcf-txt-center">
        <?php print render($content['s_n_contacts']); ?>
