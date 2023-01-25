@@ -10,51 +10,71 @@
 
 <main class="dcf-main" id="dcf-main" role="main" tabindex="-1">
 
-    {{ page.hero }}
+  {{ page.hero }}
 
-    <div class="dcf-main-content dcf-wrapper">
-    <!-- InstanceBeginEditable name="highlighted" -->
-    <!-- InstanceEndEditable -->
-    <!-- InstanceBeginEditable name="maincontentarea" -->
-    {{ page.content_top }}
+  <div class="dcf-main-content dcf-wrapper">
+      <!-- InstanceBeginEditable name="highlighted" -->
+      <!-- InstanceEndEditable -->
+      <!-- InstanceBeginEditable name="maincontentarea" -->
+      {{ page.content_top }}
 
-    {% if page.sidebar_first or page.sidebar_second %}
-        <div class="wdn-band"><div class="wdn-inner-wrapper wdn-inner-padding-no-top"><section class="wdn-grid-set">
-              {% endif %}
+      {% if not page.sidebar_first and not page.sidebar_second %}
+          {{ page.content }}
+      {% endif %}
 
-              {% if page.sidebar_first %}
-                  <div class="bp768-wdn-col-one-third">
-                    {{ page.sidebar_first }}
+      {% if page.sidebar_first or page.sidebar_second %}
+        <div class="dcf-bleed">
+          <div class="dcf-wrapper dcf-pt-0 dcf-pb-6">
+            <section class="dcf-grid dcf-col-gap-vw dcf-row-gap-6">
+
+              {#If we only have a sidebar-first#}
+              {% if page.sidebar_first and not page.sidebar_second %}
+                  <div class="dcf-col-100% dcf-col-33%-start@md">
+                        {{ page.sidebar_first }}
+                  </div>
+
+                  <div class="dcf-col-100% dcf-col-67%-end@md">
+                        {{ page.content }}
                   </div>
               {% endif %}
 
-              {% if page.sidebar_first and page.sidebar_second %}
-                  <div class="bp768-wdn-col-one-third">
-                    {{ page.content }}
+              {#If we only have a sidebar-second#}
+              {% if not page.sidebar_first and page.sidebar_second %}
+                  <div class="dcf-col-100% dcf-col-67%-start@md">
+                  {{ page.content }}
                   </div>
-              {% elseif page.sidebar_first or page.sidebar_second %}
-                  <div class="bp768-wdn-col-two-thirds">
-                    {{ page.content }}
-                  </div>
-              {% else %}
-                {{ page.content }}
-              {% endif %}
 
-              {% if page.sidebar_second %}
-                  <div class="bp768-wdn-col-one-third">
-                    {{ page.sidebar_second }}
+                  <div class="dcf-col-100% dcf-col-33%-end@md">
+                  {{ page.sidebar_second }}
                   </div>
               {% endif %}
 
-              {% if page.sidebar_first or page.sidebar_second %}
-                </section></div></div>
-    {% endif %}
+            </section>
+          </div>
+        </div>
+      {% endif %}
 
-    {{ page.content_bottom }}
-    <!-- InstanceEndEditable -->
-    </div>
 
+      {#If we have both sidebar-first and sidebar-second#}
+      {% if page.sidebar_first and page.sidebar_second %}
+        <div class="dcf-bleed">
+          <div class="dcf-wrapper dcf-pt-0 dcf-pb-6">
+            <section class="dcf-grid-thirds@md dcf-col-gap-vw dcf-row-gap-6">
+
+              {{ page.sidebar_first }}
+              {{ page.content }}
+              {{ page.sidebar_second }}
+
+            </section>
+          </div>
+        </div>
+     {% endif %}
+
+     {{ page.content_bottom }}
+     <!-- InstanceEndEditable -->
+  </div>
 </main>
+
 <footer class="dcf-footer" id="dcf-footer" role="contentinfo">
     {% include wdn.directory ~ "/includes/global/footer-global-1.html" %}
     <!-- InstanceBeginEditable name="contactinfo" -->
