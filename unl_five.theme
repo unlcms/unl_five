@@ -12,7 +12,7 @@ use Drupal\node\Entity\Node;
  *   The WDN version.
  */
 function unl_five_get_wdn_version() {
-  $unl_five_path = drupal_get_path('theme', 'unl_five');
+  $unl_five_path = \Drupal::service('extension.list.theme')->getPath('unl_five');
 
   return file_get_contents($unl_five_path . '/WDN_VERSION');
 }

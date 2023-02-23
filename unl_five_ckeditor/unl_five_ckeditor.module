@@ -26,7 +26,7 @@ function unl_five_ckeditor_ckeditor_css_alter(&$css, EditorInterface $editor) {
   // to Drupal's base url.
   //
   // Load the WDN templates path from unl_five_preprocess().
-  $unl_five_path = drupal_get_path('theme', 'unl_five');
+  $unl_five_path = \Drupal::service('extension.list.theme')->getPath('unl_five');
   require_once $unl_five_path . '/unl_five.theme';
   $vars = [];
   unl_five_preprocess($vars);
