@@ -1,8 +1,8 @@
 name: UNLedu 5.3
 type: theme
-base theme: stable
+base theme: stable9
 description: 'This theme tracks the 5.x version of the UNLedu Web Framework.'
-core_version_requirement: ^8 || ^9 || ^10
+core_version_requirement: ^9 || ^10
 
 libraries:
   - unl_five/global-styling
