@@ -24,6 +24,7 @@ amd:
   dependencies:
     - core/drupal.autocomplete
     - core/js-cookie
+    - unl_five/unl_five.jquery.form
 
 idm:
   version: VERSION
@@ -42,6 +43,19 @@ layout_builder:
   css:
     theme:
       css/layout-builder.css: {}
+
+unl_five.jquery.form:
+  # In Drupal 10 jquery.form was replaced by internal.jquery.form which can't be used in contrib.
+  remote: https://github.com/jquery-form/form
+  version: "4.3.0"
+  license:
+    name: GNU-GPL-2.0-or-later
+    url: https://raw.githubusercontent.com/jquery-form/form/master/LICENSE
+    gpl-compatible: true
+  js:
+    js/vendor/jquery-form/jquery.form.min.js: { minified: true }
+  dependencies:
+    - core/jquery
 
 wdn-font-serif:
   version: VERSION
