@@ -1,9 +1,0 @@
-name: 'UNLedu 5.x CKEditor'
-description: 'Provides CKEditor integration for UNLedu 5.x theme.'
-package: UNL
-
-type: module
-core_version_requirement: ^8 || ^9 || ^10
-
-dependencies:
-  - drupal:ckeditor

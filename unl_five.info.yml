@@ -29,6 +29,9 @@ libraries-override:
 ckeditor_stylesheets:
   - css/ckeditor-iframe.css
 
+ckeditor5-stylesheets:
+  - css/ckeditor5.css
+
 regions:
   page_top: Page top
   page_bottom: Page bottom
