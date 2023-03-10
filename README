@@ -5,6 +5,3 @@ Requirements:
 
 Breadcrumbs:
   - Previous versions of unl_five included breadcrumbs functionality. This code has been moved to the unl_breadcrumbs project in the 8.x-1.x branch.
-
-CKEditor integration:
-  - This theme includes a 'unl_five_ckeditor' sub-module. When enabled, this sub-module provides UNLedu Web Framework CSS files to CKEditor.
