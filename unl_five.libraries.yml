@@ -11,20 +11,13 @@ global-styling:
       css/menu-block.css: {}
       css/style.css: {}
 
-messages:
-  version: VERSION
-  js:
-    js/messages.js: {}
-
 amd:
   version: VERSION
   js:
     js/amd-disable.js: { weight: -999 }
-    js/amd-enable.js: {}
   dependencies:
-    - core/drupal.autocomplete
-    - core/js-cookie
-    - unl_five/unl_five.jquery.form
+    - unl_five/idm
+    - unl_five/messages
 
 idm:
   version: VERSION
@@ -32,6 +25,11 @@ idm:
     js/idm.js: {}
   dependencies:
     - core/drupalSettings
+
+messages:
+  version: VERSION
+  js:
+    js/messages.js: {}
 
 dcf-tabledrag:
   version: VERSION
@@ -43,19 +41,6 @@ layout_builder:
   css:
     theme:
       css/layout-builder.css: {}
-
-unl_five.jquery.form:
-  # In Drupal 10 jquery.form was replaced by internal.jquery.form which can't be used in contrib.
-  remote: https://github.com/jquery-form/form
-  version: "4.3.0"
-  license:
-    name: GNU-GPL-2.0-or-later
-    url: https://raw.githubusercontent.com/jquery-form/form/master/LICENSE
-    gpl-compatible: true
-  js:
-    js/vendor/jquery-form/jquery.form.min.js: { minified: true }
-  dependencies:
-    - core/jquery
 
 wdn-font-serif:
   version: VERSION
