@@ -18,17 +18,29 @@
     <!-- InstanceBeginEditable name="maincontentarea" -->
     {{ page.content_top }}
 
-    {% if not page.sidebar_first and not page.sidebar_second %}
-      {{ page.content }}
-    {% endif %}
+    {% if has_sidebar_first and has_sidebar_second %}
 
-    {% if page.sidebar_first or page.sidebar_second %}
+      {# Both sidebar-first and sidebar-second. #}
+      <div class="dcf-bleed">
+        <div class="dcf-wrapper dcf-pt-0 dcf-pb-6">
+          <section class="dcf-grid-thirds@md dcf-col-gap-vw dcf-row-gap-6">
+
+            {{ page.sidebar_first }}
+            {{ page.content }}
+            {{ page.sidebar_second }}
+
+          </section>
+        </div>
+      </div>
+
+    {% elseif has_sidebar_first or has_sidebar_second %}
+
       <div class="dcf-bleed">
         <div class="dcf-wrapper dcf-pt-0 dcf-pb-6">
           <section class="dcf-grid dcf-col-gap-vw dcf-row-gap-6">
 
             {# Only have a sidebar-first. #}
-            {% if page.sidebar_first and not page.sidebar_second %}
+            {% if has_sidebar_first and not has_sidebar_second %}
               <div class="dcf-col-100% dcf-col-33%-start@md">
                 {{ page.sidebar_first }}
               </div>
@@ -39,7 +51,7 @@
             {% endif %}
 
             {# Only have a sidebar-second. #}
-            {% if not page.sidebar_first and page.sidebar_second %}
+            {% if not has_sidebar_first and has_sidebar_second %}
               <div class="dcf-col-100% dcf-col-67%-start@md">
                 {{ page.content }}
               </div>
@@ -52,21 +64,11 @@
           </section>
         </div>
       </div>
-    {% endif %}
 
-    {# Both sidebar-first and sidebar-second. #}
-    {% if page.sidebar_first and page.sidebar_second %}
-      <div class="dcf-bleed">
-        <div class="dcf-wrapper dcf-pt-0 dcf-pb-6">
-          <section class="dcf-grid-thirds@md dcf-col-gap-vw dcf-row-gap-6">
+    {% else %}
 
-            {{ page.sidebar_first }}
-            {{ page.content }}
-            {{ page.sidebar_second }}
+      {{ page.content }}
 
-          </section>
-        </div>
-      </div>
     {% endif %}
 
     {{ page.content_bottom }}

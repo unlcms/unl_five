@@ -44,8 +44,8 @@ function unl_five_preprocess_html(&$variables) {
     }
     else {
       $variables['head_title'] = array_slice($variables['head_title'], 0, 1, true) +
-                                       array('Group' => $group->label()) +
-                                       array_slice($variables['head_title'], 1, NULL, true);
+        array('Group' => $group->label()) +
+        array_slice($variables['head_title'], 1, NULL, true);
     }
   }
 
@@ -105,6 +105,36 @@ function unl_five_preprocess_page(&$variables) {
   }
   else {
     $variables['site_name'] = \Drupal::config('system.site')->get('name');
+  }
+
+  // Work around for Drupal core issue.
+  // Create a boolean variable for each region in the format has_sidebar_second
+  // Blocks employ lazy building.  This makes it difficult to determine from
+  // **Twig templates** if they will eventually produce empty content or not.
+  // Also, it appears the Twig method of {{ page.sidebar_second|render|striptags|trim }}
+  //   doesn't always work.
+  // @see https://github.com/localgovdrupal/localgov_base/blob/654e9c51d3baa45a937eba4e3ee54a17f460d070/localgov_base.theme#L40
+  // @see https://www.drupal.org/node/953034
+  // @see https://www.drupal.org/forum/support/module-development-and-code-questions/2016-04-07/drupal-8-regions-with-and-empty#comment-12149518
+  $active_theme = \Drupal::service('theme.manager')->getActiveTheme()->getName();
+  $system_region = system_region_list($active_theme, $show = REGIONS_ALL);
+
+  foreach ($system_region as $key => $value) {
+    $region = $key;
+    $has = 'has_' . $region;
+
+    $excluded_regions = [
+      'messages',
+    ];
+
+    if (!in_array($region, $excluded_regions)) {
+      $copy = $variables['page'][$region];
+      $rendered = Drupal::service('renderer')->renderPlain($copy);
+    }
+    else {
+      $rendered = Drupal::service('renderer')->renderPlain($variables['page'][$region]);
+    }
+    $variables[$has] = !empty(trim(strip_tags($rendered, '<drupal-render-placeholder><embed><hr><iframe><img><input><link><object><script><source><style><video>')));
   }
 }
 
@@ -321,7 +351,7 @@ function unl_five_preprocess_form_element(&$variables) {
   // Add 'dcf-required' class to required elements.
   if (isset($variables['element']['#required'])
     && $variables['element']['#required'] == TRUE
-    ) {
+  ) {
 
     $variables['label']['#title'] = $variables['label']['#title'] . ' <small class="dcf-required">Required</small>';
   }
@@ -330,7 +360,7 @@ function unl_five_preprocess_form_element(&$variables) {
   if (isset($variables['attributes']['class'])) {
     if (is_array($variables['attributes']['class'])
       && in_array('webform-element--title-inline', $variables['attributes']['class'])
-      ) {
+    ) {
 
       $variables['attributes']['class'][] = 'dcf-form-controls-inline';
     }
