@@ -1,15 +1,21 @@
+{%
+  set classes = [
+  'region',
+  'region-' ~ region|clean_class,
+  'dcf-hero',
+  'dcf-hero-default',
+]
+%}
 <!-- InstanceBeginEditable name="hero" -->
-<div class="dcf-hero dcf-hero-default{% if unl_hide_page_title %} dcf-sr-only{% endif %}">
+<div{{ attributes.addClass(classes) }}>
   <!-- InstanceEndEditable -->
   <div class="dcf-hero-group-1">
     {{ elements.unl_five_breadcrumbs }}
-    {% if unl_no_page_title is not defined %}
-      <header class="dcf-page-title" id="dcf-page-title">
-        <!-- InstanceBeginEditable name="pagetitle" -->
-        {{ elements.unl_five_page_title }}
-        <!-- InstanceEndEditable -->
-      </header>
-    {% endif %}
+    <header class="dcf-page-title" id="dcf-page-title">
+      <!-- InstanceBeginEditable name="pagetitle" -->
+      {{ elements.unl_five_page_title }}
+      <!-- InstanceEndEditable -->
+    </header>
     <!-- InstanceBeginEditable name="herogroup1" -->
     <!-- InstanceEndEditable -->
   </div>
