@@ -44,3 +44,7 @@
 .toolbar-oriented .toolbar-bar {
     z-index: 1000;
 }
+
+input {
+  max-width: 100%;
+}
