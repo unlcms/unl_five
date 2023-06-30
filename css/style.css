@@ -44,3 +44,47 @@
 .toolbar-oriented .toolbar-bar {
     z-index: 1000;
 }
+
+/* #region Fixes non-responsive width issue on Webform */
+.node--type-webform input {
+    max-width: 100%;
+}
+  
+.node--type-webform select {
+    max-width: 100%;
+}
+  
+.node--type-webform fieldset {
+    min-inline-size: unset;
+} /* #endregion */
+  
+/* #region Centers a webform */
+.node--type-webform > div:not(.contextual) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+  
+.node--type-webform > div:not(.contextual) > div {
+    max-width: 42.09rem;
+    width: 100%;
+} /* #endregion */
+  
+/* #region Fixes a Webform's name element fields stacking on top of each other */
+@media (min-width: 768px) {
+div.webform-flexbox div.webform-flex.webform-name__title,
+div.webform-flexbox div.webform-flex.webform-name__first,
+div.webform-flexbox div.webform-flex.webform-name__middle,
+div.webform-flexbox div.webform-flex.webform-name__last,
+div.webform-flexbox div.webform-flex.webform-name__suffix,
+div.webform-flexbox div.webform-flex.webform-name__degree {
+    flex: 0 1 auto;
+    margin-bottom: 1em;
+ }
+  
+div.webform-name div.webform-flexbox {
+    flex-wrap: wrap;
+    margin-bottom: unset;
+  }
+} /* #endregion */
+  
