@@ -462,3 +462,15 @@ function unl_five_element_info_alter(&$vars) {
     'processWebformMultiple'
   ];
 }
+
+/**
+ * Implements hook_theme_suggestions_alter().
+ */
+function unl_five_theme_suggestions_alter(array &$suggestions, array $variables, $hook) {
+  // Support appending ?format=partial to a URL to return the
+  // main content without the UNL template wrapper.
+  $format = \Drupal::request()->query->get('format');
+  if ($format == 'partial' && in_array($hook, ['html', 'page'])) {
+    $suggestions[] = $hook . '__' . 'partial';
+  }
+}
