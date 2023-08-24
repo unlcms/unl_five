@@ -45,29 +45,13 @@
     z-index: 1000;
 }
 
-/* #region Fixes non-responsive width issue on Webform */
-.node--type-webform input {
+/* #region Fixes non-responsive width issue on Webforms */
+.dcf-form input, .dcf-form select {
     max-width: 100%;
 }
   
-.node--type-webform select {
-    max-width: 100%;
-}
-  
-.node--type-webform fieldset {
+.dcf-form fieldset {
     min-inline-size: unset;
-} /* #endregion */
-  
-/* #region Centers a webform */
-.node--type-webform > div:not(.contextual) {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-  
-.node--type-webform > div:not(.contextual) > div {
-    max-width: 42.09rem;
-    width: 100%;
 } /* #endregion */
   
 /* #region Fixes a Webform's name element fields stacking on top of each other */
