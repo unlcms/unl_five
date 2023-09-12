@@ -323,12 +323,12 @@ function unl_five_preprocess_page(&$vars, $hook) {
   }
 
   // Set a class to adjust the text size of the Site Title based on its length.
-  $vars['site_name_class'] = 'dcf-txt-h6';
+  $vars['site_name_class'] = 'dcf-txt-h5';
   if ($vars['site_name'] && strlen($vars['site_name']) < 40 && empty($vars['site_slogan'])) {
-    $vars['site_name_class'] = 'dcf-txt-h5';
+    $vars['site_name_class'] = 'dcf-txt-h4';
   }
   if ($vars['site_name'] == 'Nebraska' && empty($vars['site_slogan'])) {
-    $vars['site_name_class'] = 'dcf-txt-h4';
+    $vars['site_name_class'] = 'dcf-txt-h3';
   }
 
   // Wrap 403 pages in WDN wrappers.
