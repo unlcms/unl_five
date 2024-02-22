@@ -3,7 +3,7 @@
     {{ tree }}
     {% if has_links %}
       <h2 class="visually-hidden" id="book-label-{{ book_id }}">{{ 'Book traversal links for'|t }} {{ book_title }}</h2>
-      <ul class="book-pager unl-frame-quad unl-bg-lighter-gray dcf-p-4 dcf-mt-8 dcf-mb-8 dcf-txt-xs unl-font-sans">
+      <ul class="book-pager unl-frame-quad unl-bg-lighter-gray dcf-p-4 dcf-mt-8 dcf-mb-8 dcf-txt-xs unl-font-sans" role="list">
         {% if prev_url %}
           <li class="dcf-mb-0 book-pager__item book-pager__item--previous">
             <a href="{{ prev_url }}" class="dcf-txt-decor-hover" rel="prev" title="{{ 'Go to previous page'|t }}"><b>{{ '‹'|t }}</b> {{ prev_title }}</a>
