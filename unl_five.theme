@@ -369,14 +369,6 @@ function unl_five_preprocess_form_element(&$variables) {
 
       $variables['attributes']['class'][] = 'dcf-form-controls-inline';
     }
-    // $variables['attributes']['class'] could also be a string.
-    else {
-      // Convert string value into an array value; preserve existing class.
-      $variables['attributes']['class'] = [
-        $variables['attributes']['class'],
-        'dcf-form-controls-inline',
-      ];
-    }
   }
 
   // Add 'dcf-form-help' class to descriptions.
