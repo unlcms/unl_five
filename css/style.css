@@ -71,4 +71,43 @@ div.webform-name div.webform-flexbox {
     margin-bottom: unset;
   }
 } /* #endregion */
+
+
+.group-admin-table div.dropbutton-wrapper.dropbutton-multiple.open div.dropbutton-widget {
+    background-color: var(--bg-lightest-gray);
+    border: 2px solid var(--b-input,#ccc);
+}
+
+.group-admin-table div.dropbutton-wrapper.dropbutton-multiple.open div.dropbutton-widget li:not(.secondary-action) {
+    background-color: var(--bg-btn-secondary);
+}
+
+.group-admin-table div.dropbutton-wrapper.dropbutton-multiple.open div.dropbutton-widget li.dropbutton-toggle {
+    background-color: var(--bg-btn-primary);
+    color: #080808;
+    height: 14.8%;
+}
+
+.group-admin-table  li:not(.secondary-action), .group-admin-table  li:not(.secondary-action) a, .group-admin-table  li:not(.secondary-action) button  {
+    background-color: var(--bg-btn-primary);
+    color:  var(--bg-btn-secondary);
+    font-weight: 600;
+}
+  
+.group-admin-table  li:first-child {
+    background-color: var(--bg-btn-primary);
+    padding-left: 0.5em;
+}
+  
+.group-admin-table div.dropbutton-wrapper.dropbutton-multiple.open li:first-child {
+    padding-left: unset;
+}
+  
+.group-admin-table div.dropbutton-wrapper.dropbutton-multiple.open li:first-child a {
+    padding-left: 0.5em;
+}
+  
+.group-admin-table  .dropbutton-widget {
+    background-color: var(--bg-btn-secondary);
+}
   

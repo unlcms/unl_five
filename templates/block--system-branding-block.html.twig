@@ -2,23 +2,36 @@
 {% block content %}
   {% include wdn.directory ~ "/includes/global/site-affiliation-1.html" %}
     <!-- InstanceBeginEditable name="affiliation" -->
-    {# 
-      If a subtheme or module provides an affiliation_name and an
-      affiliation_url, then use them for the affiliation markup;
-      otherwise, use site_slogan.
-    #}
-    {% if affiliation_name and affiliation_url %}
-      <a href="{{ affiliation_url }}">{{ affiliation_name }}</a>
-    {% elseif site_slogan %}
-      {{ site_slogan }}
+    {% if group_label is null %}
+      {% if affiliation_name and affiliation_url %}
+        <a href="{{ affiliation_url }}">{{ affiliation_name }}</a>
+      {% elseif site_slogan %}
+        {{ site_slogan }}
+      {% endif %}
+      <!-- InstanceEndEditable -->
+      {% include wdn.directory ~ "/includes/global/site-affiliation-2.html" %}
+      {% include wdn.directory ~ "/includes/global/site-title-1.html" %}
+      <!-- InstanceBeginEditable name="titlegraphic" -->
+      {% if site_name %}
+      <a href="{{ path('<front>') }}" class="dcf-txt-h5">{{ site_name }}</a>
+      {% endif %}
+      <!-- InstanceEndEditable -->
+      {% include wdn.directory ~ "/includes/global/site-title-2.html" %}
+
+    {% else %}
+      {% if is_front == false %}
+        {% if site_name %}
+          <a href="{{ path('<front>') }}">{{ site_name }}</a>
+        {% endif %}
+      {% endif %}
+ <!-- InstanceEndEditable -->
+          {% include wdn.directory ~ "/includes/global/site-affiliation-2.html" %}
+      {% include wdn.directory ~ "/includes/global/site-title-1.html" %}
+      <!-- InstanceBeginEditable name="titlegraphic" -->
+      {% if group_label %}
+      <a href="/" class="dcf-txt-h5">{{ group_label }}</a>
+      {% endif %}
+      <!-- InstanceEndEditable -->
+      {% include wdn.directory ~ "/includes/global/site-title-2.html" %}
     {% endif %}
-    <!-- InstanceEndEditable -->
-  {% include wdn.directory ~ "/includes/global/site-affiliation-2.html" %}
-  {% include wdn.directory ~ "/includes/global/site-title-1.html" %}
-    <!-- InstanceBeginEditable name="titlegraphic" -->
-    {% if site_name %}
-    <a href="{{ path('<front>') }}" class="dcf-txt-h5">{{ site_name }}</a>
-    {% endif %}
-    <!-- InstanceEndEditable -->
-  {% include wdn.directory ~ "/includes/global/site-title-2.html" %}
 {% endblock %}

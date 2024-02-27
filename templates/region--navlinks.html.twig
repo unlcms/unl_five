@@ -2,7 +2,15 @@
  then output the Main Menu. block_main_menu is set in unl_fourone_preprocess_region() #}
 
 {% if content %}
-  {{ content }}
+  {% if group_blocks is not null %}
+    {{ unl_five_herbie_local_tasks }}
+    {% for groups in group_blocks %}
+      {# Group navigation #}
+      {{groups  }}
+    {% endfor %}
   {% else %}
-  {{ block_main_menu }}
+    {# Only output main navigation if there are no groups #}
+    {{ unl_five_herbie_local_tasks }}
+    {{unl_five_herbie_mainnavigation}}
+  {% endif %}
 {% endif %}

@@ -3,6 +3,8 @@
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Markup;
 use Drupal\group\Entity\GroupContent;
+use Drupal\group\Entity\GroupRelationship;
+use Drupal\block\Entity\Block;
 use Drupal\node\Entity\Node;
 
 /**
@@ -33,21 +35,8 @@ function unl_five_preprocess(&$vars) {
 /**
  * Implements template_preprocess_html().
  */
-function unl_five_preprocess_html(&$variables) {
-  $group = unl_five_get_current_group();
-
-  // Swap head title variables for group
-  if ($group) {
-    unset($variables['head_title']['name']);
-    if (unl_five_is_request_group_front()) {
-      unset($variables['head_title']['title']);
-    }
-    else {
-      $variables['head_title'] = array_slice($variables['head_title'], 0, 1, true) +
-        array('Group' => $group->label()) +
-        array_slice($variables['head_title'], 1, NULL, true);
-    }
-  }
+function unl_five_preprocess_html(&$variables)
+{
 
 
   // Set the <title> tag to UNL format: Page Title | Site Name | University of Nebraska–Lincoln
@@ -77,10 +66,8 @@ function unl_five_preprocess_html(&$variables) {
     '#tag' => 'link',
     '#attributes' => array(
       'rel' => 'home',
-      'href' => $group
-        ? $group->toUrl()->toString()
-        : \Drupal\Core\Url::fromRoute('<front>', array(), array('absolute' => TRUE))
-          ->toString(),
+      'href' => \Drupal\Core\Url::fromRoute('<front>', array(), array('absolute' => TRUE))
+        ->toString(),
     ),
     '#type' => 'html_tag'
   );
@@ -99,13 +86,6 @@ function unl_five_preprocess_html(&$variables) {
  * Implements template_preprocess_page().
  */
 function unl_five_preprocess_page(&$variables) {
-  $group = unl_five_get_current_group();
-  if ($group) {
-    $variables['site_name'] = $group->label();
-  }
-  else {
-    $variables['site_name'] = \Drupal::config('system.site')->get('name');
-  }
 
   // Work around for Drupal core issue.
   // Create a boolean variable for each region in the format has_sidebar_second
@@ -157,13 +137,50 @@ function unl_five_page_attachments_alter(&$attachments) {
  * Implements template_preprocess_region().
  */
 function unl_five_preprocess_region(&$variables) {
-  // Add the Main Menu block for possible output in
-  // region--navlinks.html.twig if a Group Menu does not exist.
-  if ($variables['region'] == 'navlinks' && \Drupal::service('module_handler')->moduleExists('groupmenu_block')) {
-    $block = \Drupal\block\Entity\Block::load('unl_five_main_menu');
-    $variables['block_main_menu'] = \Drupal::entityTypeManager()
-      ->getViewBuilder('block')
-      ->view($block);
+  //add the three navigation block views to region--navlinks.html.twig theme
+   if ($variables['region'] == 'navlinks' && \Drupal::service('module_handler')->moduleExists('group_content_menu')) {
+    $node = \Drupal::request()->attributes->get('node');
+    
+    if ($node) {
+      $group_relationships = GroupRelationship::loadByEntity($node);
+
+      //check if node is a part of a group
+      if ($group_relationships) {
+        $elements = $variables['elements'];
+        $group_blocks = [];
+        foreach ($elements as $key => $value) {
+          if (strpos($key, '#') !== 0) {
+            if ($elements[$key]['#base_plugin_id'] == 'group_content_menu') {
+              $block_id = $elements[$key]['#id'];
+              $group_block = Block::load($block_id);
+              //add all group menu views to be displayed in group_blocks
+              $group_blocks[] = \Drupal::entityTypeManager()
+                ->getViewBuilder('block')
+                ->view($group_block);
+            }
+          }
+        }
+
+        $variables['group_blocks'] = $group_blocks;
+      }
+        //Add unl_five_herbie_local_tasks menu block view to theme
+        $unl_five_herbie_local_tasks = Block::load('unl_five_herbie_local_tasks');
+        $variables['unl_five_herbie_local_tasks'] = \Drupal::entityTypeManager()
+          ->getViewBuilder('block')
+          ->view($unl_five_herbie_local_tasks);
+
+        //Add unl_five_herbie_mainnavigation menu block view to theme
+        $unl_five_herbie_mainnavigation = Block::load('unl_five_herbie_mainnavigation');
+        $variables['unl_five_herbie_mainnavigation'] = \Drupal::entityTypeManager()
+          ->getViewBuilder('block')
+          ->view($unl_five_herbie_mainnavigation);
+
+    } else {
+      $unl_five_herbie_local_tasks = Block::load('unl_five_herbie_local_tasks');
+        $variables['unl_five_herbie_local_tasks'] = \Drupal::entityTypeManager()
+          ->getViewBuilder('block')
+          ->view($unl_five_herbie_local_tasks);
+    }
   }
 }
 
@@ -203,6 +220,28 @@ function unl_five_preprocess_block(&$variables) {
   // Add a class to the existing breadcrumbs block wrapper, rather than add another wrapper in the template.
   if ($variables['plugin_id'] == 'system_breadcrumb_block') {
     $variables['attributes']['class'][] = 'dcf-breadcrumbs-wrapper';
+  }
+
+  // Change Site Title to the Group title
+  if($variables['base_plugin_id']) {
+    if ($variables['base_plugin_id'] == 'system_branding_block') {
+      if (\Drupal::service('module_handler')->moduleExists('group')) {
+        $node = \Drupal::request()->attributes->get('node');
+        $variables['is_front'] = \Drupal::service('path.matcher')->isFrontPage();
+  
+        if ($node) {
+          $group_relationships = GroupRelationship::loadByEntity($node);
+          //check if node is a part of a group
+          if ($group_relationships) {
+            foreach ($group_relationships as $group_content) {
+              $group =  $group_content->getGroup();
+            }
+            $label =  $group->get('label')->getValue()[0]['value'];
+            $variables['group_label'] = $label;
+          }
+        }
+      }
+    }
   }
 }
 
@@ -248,52 +287,6 @@ function unl_five_preprocess_webform_composite_address(&$variables) {
   if (in_array('fieldset', $variables['element']['#theme_wrappers']) && $containerKey !== false) {
     unset($variables['element']['#theme_wrappers'][$containerKey]);
   }
-}
-
-/**
- * Get the current Group.
- *
- * @return Drupal\group\Entity\Group
- */
-function unl_five_get_current_group() {
-  $moduleHandler = \Drupal::service('module_handler');
-  if (!$moduleHandler->moduleExists('group')) {
-    return NULL;
-  }
-
-  if (!theme_get_setting('group.adjust')) {
-    return NULL;
-  }
-
-  // If we're on a Group entity page.
-  $group_route_context = \Drupal::service('group.group_route_context');
-  $contexts = $group_route_context->getRuntimeContexts(['group']);
-  $group = $contexts['group']->getContextValue();
-
-  // If we're on a Node entity page.
-  $node = \Drupal::request()->attributes->get('node');
-  if ($node) {
-    if (is_numeric($node)) {
-      $node = Node::load($node);
-    }
-    $group_content_array = GroupContent::loadByEntity($node);
-    foreach ($group_content_array as $group_content) {
-      $group = $group_content->getGroup();
-    }
-  }
-
-  return $group;
-}
-
-/**
- * Returns if the requested page is a Group entity and thus the front page of the group.
- *
- * @return bool
- */
-function unl_five_is_request_group_front() {
-  $group = \Drupal::request()->attributes->get('group');
-
-  return $group ? TRUE : FALSE;
 }
 
 /**
