@@ -12,7 +12,7 @@
     {% if menu_level == 0 %}
       <div{{ attributes.addClass('block-menu-block unl-frame-quad') }}>
     {% else %}
-      <ul class="dcf-list-bare dcf-m-0">
+      <ul class="dcf-m-0" role="list">
     {% endif %}
     {% for item in items %}
       {% if menu_level == 0 %}
