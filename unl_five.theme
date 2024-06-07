@@ -2,7 +2,8 @@
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Markup;
-use Drupal\group\Entity\GroupContent;
+use Drupal\block\Entity\Block;
+use Drupal\group\Entity\GroupRelationship;
 use Drupal\node\Entity\Node;
 
 /**
@@ -34,12 +35,12 @@ function unl_five_preprocess(&$vars) {
  * Implements template_preprocess_html().
  */
 function unl_five_preprocess_html(&$variables) {
-  $group = unl_five_get_current_group();
+  $group = _unl_five_get_current_group();
 
-  // Swap head title variables for group
+  // Swap head title variables for group.
   if ($group) {
     unset($variables['head_title']['name']);
-    if (unl_five_is_request_group_front()) {
+    if (_unl_five_is_request_group_front()) {
       unset($variables['head_title']['title']);
     }
     else {
@@ -48,7 +49,6 @@ function unl_five_preprocess_html(&$variables) {
         array_slice($variables['head_title'], 1, NULL, true);
     }
   }
-
 
   // Set the <title> tag to UNL format: Page Title | Site Name | University of Nebraska–Lincoln
   $moduleHandler = \Drupal::service('module_handler');
@@ -65,30 +65,6 @@ function unl_five_preprocess_html(&$variables) {
     $variables['head_title'] = implode(' | ', $variables['head_title']);
   }
 
-  // If <link rel="home"> has already been set elsewhere (in a Context for example) then return...
-  foreach ($variables['page']['#attached']['html_head'] as $key => $element) {
-    if ($element[0]["#tag"] == 'link' && isset($element[0]['#attributes']['rel']) && $element[0]['#attributes']['rel'] == 'home') {
-      return;
-    }
-  }
-
-  // ...otherwise add a <link rel="home"> tag with the front page as the href attribute
-  $element = array(
-    '#tag' => 'link',
-    '#attributes' => array(
-      'rel' => 'home',
-      'href' => $group
-        ? $group->toUrl()->toString()
-        : \Drupal\Core\Url::fromRoute('<front>', array(), array('absolute' => TRUE))
-          ->toString(),
-    ),
-    '#type' => 'html_tag'
-  );
-  $variables['page']['#attached']['html_head'][] = array(
-    $element,
-    'link-rel-home'
-  );
-
   // Add node id to the body class.
   if ($nid = \Drupal::routeMatch()->getRawParameter('node')) {
     $variables['attributes']['class'][] = 'page-node-' . $nid;
@@ -99,14 +75,6 @@ function unl_five_preprocess_html(&$variables) {
  * Implements template_preprocess_page().
  */
 function unl_five_preprocess_page(&$variables) {
-  $group = unl_five_get_current_group();
-  if ($group) {
-    $variables['site_name'] = $group->label();
-  }
-  else {
-    $variables['site_name'] = \Drupal::config('system.site')->get('name');
-  }
-
   // Work around for Drupal core issue.
   // Create a boolean variable for each region in the format has_sidebar_second
   // Blocks employ lazy building.  This makes it difficult to determine from
@@ -136,6 +104,23 @@ function unl_five_preprocess_page(&$variables) {
     }
     $variables[$has] = !empty(trim(strip_tags($rendered, '<drupal-render-placeholder><embed><hr><iframe><img><input><link><object><script><source><style><video>')));
   }
+
+  // If using the group_content_menu module, remove the "Main navigation" block
+  // from the "Navigation links" region if on a page with Group context that
+  // will have a "Group Menus" menu.
+  if (\Drupal::service('module_handler')->moduleExists('group_content_menu')) {
+    $group = _unl_five_get_current_group();
+    if ($group) {
+      foreach ($variables['page']['navlinks'] as $key => $value) {
+        if (is_array($value) && array_key_exists('#weight', $value)) {
+          $block = Block::load($key);
+          if ($block->getPluginId() == 'system_menu_block:main') {
+            unset($variables['page']['navlinks'][$key]);
+          }
+        }
+      }
+    }
+  }
 }
 
 /**
@@ -154,20 +139,6 @@ function unl_five_page_attachments_alter(&$attachments) {
 }
 
 /**
- * Implements template_preprocess_region().
- */
-function unl_five_preprocess_region(&$variables) {
-  // Add the Main Menu block for possible output in
-  // region--navlinks.html.twig if a Group Menu does not exist.
-  if ($variables['region'] == 'navlinks' && \Drupal::service('module_handler')->moduleExists('groupmenu_block')) {
-    $block = \Drupal\block\Entity\Block::load('unl_five_main_menu');
-    $variables['block_main_menu'] = \Drupal::entityTypeManager()
-      ->getViewBuilder('block')
-      ->view($block);
-  }
-}
-
-/**
  * Implements template_preprocess_block().
  */
 function unl_five_preprocess_block(&$variables) {
@@ -181,23 +152,15 @@ function unl_five_preprocess_block(&$variables) {
     $variables['title_attributes']['class'][] = 'wdn-sans-serif';
   }
 
-  // Change Site Title to the Group title
+  // Change Site name to the Group title.
   if ($variables['base_plugin_id'] == 'system_branding_block') {
-    $group = unl_five_get_current_group();
+    $group = _unl_five_get_current_group();
     if ($group) {
       $variables['site_name'] = $group->label();
-      if ($site_affiliation = $group->get('field_site_affiliation')) {
-        $variables['site_slogan'] = $site_affiliation->value;
-      }
+//      if ($site_affiliation = $group->get('field_site_affiliation')) {
+//        $variables['site_slogan'] = $site_affiliation->value;
+//      }
     }
-  }
-
-  $moduleHandler = \Drupal::service('module_handler');
-  if ($moduleHandler->moduleExists('group_subdomain')) {
-    $variables['#cache']['contexts'][] = 'url';
-  }
-  else {
-    $variables['#cache']['contexts'][] = 'url.path';
   }
 
   // Add a class to the existing breadcrumbs block wrapper, rather than add another wrapper in the template.
@@ -255,13 +218,9 @@ function unl_five_preprocess_webform_composite_address(&$variables) {
  *
  * @return Drupal\group\Entity\Group
  */
-function unl_five_get_current_group() {
+function _unl_five_get_current_group() {
   $moduleHandler = \Drupal::service('module_handler');
   if (!$moduleHandler->moduleExists('group')) {
-    return NULL;
-  }
-
-  if (!theme_get_setting('group.adjust')) {
     return NULL;
   }
 
@@ -276,7 +235,7 @@ function unl_five_get_current_group() {
     if (is_numeric($node)) {
       $node = Node::load($node);
     }
-    $group_content_array = GroupContent::loadByEntity($node);
+    $group_content_array = GroupRelationship::loadByEntity($node);
     foreach ($group_content_array as $group_content) {
       $group = $group_content->getGroup();
     }
@@ -290,7 +249,7 @@ function unl_five_get_current_group() {
  *
  * @return bool
  */
-function unl_five_is_request_group_front() {
+function _unl_five_is_request_group_front() {
   $group = \Drupal::request()->attributes->get('group');
 
   return $group ? TRUE : FALSE;
@@ -427,7 +386,7 @@ function unl_five_preprocess_details(&$variables) {
 /**
  * Implements template_preprocess_fieldset().
  *
- * All fieldsets that are rendered by unl_five will be compatiable with DCF.
+ * All fieldsets that are rendered by unl_five will be compatible with DCF.
  */
 function unl_five_preprocess_fieldset(&$variables) {
   // Fieldset elements.
