@@ -152,14 +152,19 @@ function unl_five_preprocess_block(&$variables) {
     $variables['title_attributes']['class'][] = 'wdn-sans-serif';
   }
 
-  // Change Site name to the Group title.
-  if ($variables['base_plugin_id'] == 'system_branding_block') {
+   // Change Site name to the Group title and add appropriate site title link.
+   if ($variables['base_plugin_id'] == 'system_branding_block') {
     $group = _unl_five_get_current_group();
     if ($group) {
+      $group_id = $group->get('id')->getValue()[0]['value'];
+      $group_homepage_url = Url::fromRoute('entity.group.canonical', ['group' => $group_id]);
+      $string_url = $group_homepage_url->toString();  
+      
       $variables['site_name'] = $group->label();
-//      if ($site_affiliation = $group->get('field_site_affiliation')) {
-//        $variables['site_slogan'] = $site_affiliation->value;
-//      }
+      $variables['group_homepage_route'] = $string_url;
+      $variables['group_id'] = $group_id;
+      $variables['affiliation_name'] = $group->get('group_subsite_group_affiliation')->getValue()[0]['title'];
+      $variables['affiliation_url'] = $group->get('group_subsite_group_affiliation')->getValue()[0]['uri'];
     }
   }
 
