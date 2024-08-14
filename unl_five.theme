@@ -5,7 +5,8 @@ use Drupal\Core\Render\Markup;
 use Drupal\block\Entity\Block;
 use Drupal\group\Entity\GroupRelationship;
 use Drupal\node\Entity\Node;
-
+use Drupal\Core\Cache\Cache;
+use Drupal\Core\Url;
 /**
  * Returns the WDN version.
  *
@@ -121,6 +122,25 @@ function unl_five_preprocess_page(&$variables) {
       }
     }
   }
+
+  // Invalidate unl_five_herbie_branding block's cache if a site uses groups
+  if (\Drupal::service('module_handler')->moduleExists('group')) {
+    $group_storage = \Drupal::entityTypeManager()->getStorage('group');
+
+    if ($group_storage) {
+      $group_ids = $group_storage->getQuery()
+      ->condition('type', 'group_subsite')
+      ->accessCheck(TRUE)
+      ->execute();
+
+      if ($group_ids ) {
+       $block_id = 'unl_five_herbie_branding';
+       $block = \Drupal\block\Entity\Block::load($block_id);
+       $cahc_tags_to_invalidate = $block->getCacheTagsToInvalidate();
+       Cache::invalidateTags($cahc_tags_to_invalidate);
+      }
+    }
+  }
 }
 
 /**
@@ -152,14 +172,21 @@ function unl_five_preprocess_block(&$variables) {
     $variables['title_attributes']['class'][] = 'wdn-sans-serif';
   }
 
-  // Change Site name to the Group title.
+  // Change Site name to the Group title and add appropriate site title link.
   if ($variables['base_plugin_id'] == 'system_branding_block') {
     $group = _unl_five_get_current_group();
     if ($group) {
+      $group_id = $group->get('id')->getValue()[0]['value'];
+      $group_homepage_url = Url::fromRoute('entity.group.canonical', ['group' => $group_id]);
+      $string_url = $group_homepage_url->toString();  
+      
       $variables['site_name'] = $group->label();
-//      if ($site_affiliation = $group->get('field_site_affiliation')) {
-//        $variables['site_slogan'] = $site_affiliation->value;
-//      }
+      $variables['group_homepage_route'] = $string_url;
+      $variables['group_id'] = $group_id;
+
+      // if ($site_affiliation = $group->get('field_site_affiliation')) {
+      // $variables['site_slogan'] = $site_affiliation->value;
+      // }
     }
   }
 
