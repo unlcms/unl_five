@@ -1,4 +1,25 @@
 {% include wdn.directory ~ "/includes/global/header-global-1.html" %}
+
+{% include wdn.directory ~ "/includes/global/cta-header-1.html" %}
+
+{% include wdn.directory ~ "/includes/global/visit-header-1.html" %}
+  {% if visit_apply_give_nav_data["visit_nav"]["visit_nav_url"] is not empty %}
+    <li><a href="{{visit_apply_give_nav_data["visit_nav"]["visit_nav_url"]}}">{{visit_apply_give_nav_data["visit_nav"]["visit_nav_link_text"]}}</a></li>
+  {% endif %}
+{% include wdn.directory ~ "/includes/global/visit-header-2.html" %}
+
+{% include wdn.directory ~ "/includes/global/apply-header-1.html" %}
+  {% if visit_apply_give_nav_data["apply_nav"]["apply_nav_url"] is not empty %}
+		<li><a href="{{visit_apply_give_nav_data["apply_nav"]["apply_nav_url"]}}">{{visit_apply_give_nav_data["apply_nav"]["apply_nav_link_text"]}}</a></li>
+  {% endif %}
+{% include wdn.directory ~ "/includes/global/apply-header-2.html" %}
+
+{% include wdn.directory ~ "/includes/global/apply-header-1.html" %}
+  {% if visit_apply_give_nav_data["apply_nav"]["apply_nav_url"] is not empty %}
+    <li><a href="{{visit_apply_give_nav_data["apply_nav"]["apply_nav_url"]}}">{{visit_apply_give_nav_data["apply_nav"]["apply_nav_link_text"]}}</a></li>
+  {% endif %}
+{% include wdn.directory ~ "/includes/global/apply-header-2.html" %}
+
 {% include wdn.directory ~ "/includes/global/idm.html" %}
 {% include wdn.directory ~ "/includes/global/search.html" %}
 {% include wdn.directory ~ "/includes/global/header-global-2.html" %}
