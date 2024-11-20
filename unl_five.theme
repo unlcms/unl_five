@@ -191,8 +191,10 @@ function unl_five_preprocess_block(&$variables) {
       $variables['site_name'] = $group->label();
       $variables['group_homepage_route'] = $string_url;
       $variables['group_id'] = $group_id;
-      $variables['affiliation_name'] = $group->get('group_subsite_group_affiliation')->getValue()[0]['title'];
-      $variables['affiliation_url'] = $group->get('group_subsite_group_affiliation')->getValue()[0]['uri'];
+      if($group->get('group_subsite_group_affiliation')->getValue()){
+        $variables['affiliation_name'] = $group->get('group_subsite_group_affiliation')->getValue()[0]['title'];
+        $variables['affiliation_url'] = $group->get(field_name: 'group_subsite_group_affiliation')->getValue()[0]['uri'];
+      }
     }
   }
 
