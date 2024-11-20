@@ -125,15 +125,8 @@ function unl_five_preprocess_page(&$variables) {
 
   // Invalidate unl_five_herbie_branding block's cache if a site uses groups
   if (\Drupal::service('module_handler')->moduleExists('group')) {
-    $group_storage = \Drupal::entityTypeManager()->getStorage('group');
-
-    if ($group_storage) {
-      $group_ids = $group_storage->getQuery()
-        ->condition('type', 'group_subsite')
-        ->accessCheck(TRUE)
-        ->execute();
-
-      if ($group_ids) {
+    $group = \Drupal::entityTypeManager()->getStorage('group')->loadMultiple();
+      if ($group) {
         // Load blocks using block_id
         $block = \Drupal\block\Entity\Block::load('unl_five_herbie_branding');
         $cache_tags_to_invalidate = $block->getCacheTagsToInvalidate();
@@ -147,7 +140,6 @@ function unl_five_preprocess_page(&$variables) {
         $cache_tags_to_invalidate = $block->getCacheTagsToInvalidate();
         Cache::invalidateTags($cache_tags_to_invalidate);
       }
-    }
   }
 }
 
