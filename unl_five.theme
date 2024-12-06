@@ -7,6 +7,7 @@ use Drupal\group\Entity\GroupRelationship;
 use Drupal\node\Entity\Node;
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Url;
+
 /**
  * Returns the WDN version.
  *
@@ -43,8 +44,7 @@ function unl_five_preprocess_html(&$variables) {
     unset($variables['head_title']['name']);
     if (_unl_five_is_request_group_front()) {
       unset($variables['head_title']['title']);
-    }
-    else {
+    } else {
       $variables['head_title'] = array_slice($variables['head_title'], 0, 1, true) +
         array('Group' => $group->label()) +
         array_slice($variables['head_title'], 1, NULL, true);
@@ -99,8 +99,7 @@ function unl_five_preprocess_page(&$variables) {
     if (!in_array($region, $excluded_regions)) {
       $copy = $variables['page'][$region];
       $rendered = Drupal::service('renderer')->renderPlain($copy);
-    }
-    else {
+    } else {
       $rendered = Drupal::service('renderer')->renderPlain($variables['page'][$region]);
     }
     $variables[$has] = !empty(trim(strip_tags($rendered, '<drupal-render-placeholder><embed><hr><iframe><img><input><link><object><script><source><style><video>')));
@@ -125,28 +124,20 @@ function unl_five_preprocess_page(&$variables) {
 
   // Invalidate unl_five_herbie_branding block's cache if a site uses groups
   if (\Drupal::service('module_handler')->moduleExists('group')) {
-    $group_storage = \Drupal::entityTypeManager()->getStorage('group');
+    $group = \Drupal::entityTypeManager()->getStorage('group')->loadMultiple();
+    if ($group) {
+      // Load blocks using block_id
+      $block = \Drupal\block\Entity\Block::load('unl_five_herbie_branding');
+      $cache_tags_to_invalidate = $block->getCacheTagsToInvalidate();
+      Cache::invalidateTags($cache_tags_to_invalidate);
 
-    if ($group_storage) {
-      $group_ids = $group_storage->getQuery()
-        ->condition('type', 'group_subsite')
-        ->accessCheck(TRUE)
-        ->execute();
+      $block = \Drupal\block\Entity\Block::load('unl_five_herbie_contactinfo');
+      $cache_tags_to_invalidate = $block->getCacheTagsToInvalidate();
+      Cache::invalidateTags($cache_tags_to_invalidate);
 
-      if ($group_ids) {
-        // Load blocks using block_id
-        $block = \Drupal\block\Entity\Block::load('unl_five_herbie_branding');
-        $cache_tags_to_invalidate = $block->getCacheTagsToInvalidate();
-        Cache::invalidateTags($cache_tags_to_invalidate);
-
-        $block = \Drupal\block\Entity\Block::load('unl_five_herbie_contactinfo');
-        $cache_tags_to_invalidate = $block->getCacheTagsToInvalidate();
-        Cache::invalidateTags($cache_tags_to_invalidate);
-
-        $block = \Drupal\block\Entity\Block::load('unl_five_herbie_relatedlinks');
-        $cache_tags_to_invalidate = $block->getCacheTagsToInvalidate();
-        Cache::invalidateTags($cache_tags_to_invalidate);
-      }
+      $block = \Drupal\block\Entity\Block::load('unl_five_herbie_relatedlinks');
+      $cache_tags_to_invalidate = $block->getCacheTagsToInvalidate();
+      Cache::invalidateTags($cache_tags_to_invalidate);
     }
   }
 }
@@ -175,7 +166,7 @@ function unl_five_preprocess_block(&$variables) {
     $variables['attributes']['class'][] = 'block-menu-block';
   }
   // Add .wdn-sans-serif to menu blocks.
-  if ($variables['plugin_id'] == 'book_navigation' || substr($variables['plugin_id'], 0, 16) == 'block-menu-block' ) {
+  if ($variables['plugin_id'] == 'book_navigation' || substr($variables['plugin_id'], 0, 16) == 'block-menu-block') {
     $variables['attributes']['classes'][] = 'wdn-sans-serif';
     $variables['title_attributes']['class'][] = 'wdn-sans-serif';
   }
@@ -191,8 +182,10 @@ function unl_five_preprocess_block(&$variables) {
       $variables['site_name'] = $group->label();
       $variables['group_homepage_route'] = $string_url;
       $variables['group_id'] = $group_id;
-      $variables['affiliation_name'] = $group->get('group_subsite_group_affiliation')->getValue()[0]['title'];
-      $variables['affiliation_url'] = $group->get('group_subsite_group_affiliation')->getValue()[0]['uri'];
+      if ($group->get('group_subsite_group_affiliation')->getValue()) {
+        $variables['affiliation_name'] = $group->get('group_subsite_group_affiliation')->getValue()[0]['title'];
+        $variables['affiliation_url'] = $group->get(field_name: 'group_subsite_group_affiliation')->getValue()[0]['uri'];
+      }
     }
   }
 
@@ -306,8 +299,7 @@ function unl_five_form_alter(&$form, FormStateInterface &$form_state, $form_id) 
       $extension_info = $extension_list->getExtensionInfo('webform');
       if (strncasecmp($extension_info['version'], "8.x-5", 5) === 0) {
         $form['#attributes']['class'][] = 'webform-version-5';
-      }
-      elseif (strncasecmp($extension_info['version'], "6.", 2) === 0) {
+      } elseif (strncasecmp($extension_info['version'], "6.", 2) === 0) {
         $form['#attributes']['class'][] = 'webform-version-6';
       }
     }
@@ -331,8 +323,7 @@ function unl_five_form_alter(&$form, FormStateInterface &$form_state, $form_id) 
     $form['actions']['move_sections']['#attributes']['class'][] = 'dcf-mb-2';
     // Add margin-top to preview toggle.
     $form['actions']['preview_toggle']['#attributes']['class'][] = 'dcf-mt-2';
-  }
-  elseif ($form_id == 'layout_builder_discard_changes') {
+  } elseif ($form_id == 'layout_builder_discard_changes') {
     // Add DCF button classes.
     $form['actions']['submit']['#attributes']['class'][] = 'dcf-btn';
     $form['actions']['submit']['#attributes']['class'][] = 'dcf-btn-secondary';
@@ -346,19 +337,13 @@ function unl_five_form_alter(&$form, FormStateInterface &$form_state, $form_id) 
  */
 function unl_five_preprocess_form_element(&$variables) {
   // Add 'dcf-required' class to required elements.
-  if (isset($variables['element']['#required'])
-    && $variables['element']['#required'] == TRUE
-  ) {
-
+  if (isset($variables['element']['#required']) && $variables['element']['#required'] == TRUE) {
     $variables['label']['#title'] = $variables['label']['#title'] . ' <small class="dcf-required">Required</small>';
   }
 
   // Add 'dcf-form-controls-inline' class as appropriate.
   if (isset($variables['attributes']['class'])) {
-    if (is_array($variables['attributes']['class'])
-      && in_array('webform-element--title-inline', $variables['attributes']['class'])
-    ) {
-
+    if (is_array($variables['attributes']['class']) && in_array('webform-element--title-inline', $variables['attributes']['class'])) {
       $variables['attributes']['class'][] = 'dcf-form-controls-inline';
     }
   }
@@ -399,8 +384,7 @@ function unl_five_preprocess_form_element(&$variables) {
   if ($variables['type'] == 'radio') {
     if (empty(array_intersect($button_parents, $parents))) {
       $variables['attributes']['class'][] = 'dcf-input-radio';
-    }
-    else {
+    } else {
       $variables['label']['#attributes']['class'][] = 'dcf-btn';
     }
   }
@@ -429,7 +413,7 @@ function unl_five_preprocess_fieldset(&$variables) {
     }
   }
   // Checkboxes and other composite elements.
-  elseif(is_object($variables['prefix'])) {
+  elseif (is_object($variables['prefix'])) {
     $markup = $variables['prefix']->__toString();
     // There's no good way to do this.
     $variables['prefix'] = Markup::create('<div class="dcf-form-help">' . $markup . '</div>');
