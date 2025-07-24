@@ -361,9 +361,13 @@ function unl_five_preprocess_form_element(&$variables) {
   ];
   $parents = $variables['element']['#parents'] ?? [];
   if (empty(array_intersect($exempt_parents, $parents))) {
-    $variables['attributes']['class'][] = 'dcf-form-group';
+    if (is_array($variables['attributes']['class'])) {
+      $variables['attributes']['class'][] = 'dcf-form-group';
+    } 
+    elseif (is_string($variables['attributes']['class'])) {
+      $variables['attributes']['class'] = $variables['attributes']['class'] . ' dcf-form-group';
+    }
   }
-
   // Add 'dcf-input-checkbox' class to checkboxes.
   if ($variables['type'] == 'checkbox') {
     // Add 'dcf-input-checkbox' class to checkboxes.
