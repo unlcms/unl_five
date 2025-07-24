@@ -363,7 +363,8 @@ function unl_five_preprocess_form_element(&$variables) {
   if (empty(array_intersect($exempt_parents, $parents))) {
     if (is_array($variables['attributes']['class'])) {
       $variables['attributes']['class'][] = 'dcf-form-group';
-    } elseif (is_string($variables['attributes']['class'])) {
+    } 
+    elseif (is_string($variables['attributes']['class'])) {
       $classes = $variables['attributes']['class'];
       $classes = $classes . ' dcf-form-group';
     }
