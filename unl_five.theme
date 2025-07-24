@@ -365,8 +365,7 @@ function unl_five_preprocess_form_element(&$variables) {
       $variables['attributes']['class'][] = 'dcf-form-group';
     } 
     elseif (is_string($variables['attributes']['class'])) {
-      $classes = $variables['attributes']['class'];
-      $classes = $classes . ' dcf-form-group';
+      $variables['attributes']['class'] = $variables['attributes']['class'] . ' dcf-form-group';
     }
   }
   // Add 'dcf-input-checkbox' class to checkboxes.
