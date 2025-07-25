@@ -42,6 +42,10 @@ function unl_five_preprocess_html(&$variables) {
   // Swap head title variables for group. [Current Group Page | Group Label | Site Name | Nebraska]
   if ($group) {
     unset($variables['head_title']['name']);
+
+    $group_id = $group->id();
+    $variables['group_id'] = $group_id;
+
     // If we are not on the Group's front page (the meta tag module output works fine for group homepages).
     if (!_unl_five_is_request_group_front()) {
       $head_title_array = explode ("|", $variables['head_title']['title']);
