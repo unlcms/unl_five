@@ -39,18 +39,19 @@ function unl_five_preprocess(&$vars) {
 function unl_five_preprocess_html(&$variables) {
   $group = _unl_five_get_current_group();
 
-  // Swap head title variables for group. [Current Group Page | Group Label | Site Name | Nebraska]
   if ($group) {
-    unset($variables['head_title']['name']);
-
+    // Make the Group ID available in the HTML template.
     $group_id = $group->id();
     $variables['group_id'] = $group_id;
 
-    // If we are not on the Group's front page (the meta tag module output works fine for group homepages).
+    // Swap head title variables for group. [Current Group Page | Group Label | Site Name | Nebraska]
+    unset($variables['head_title']['name']);
+    // If we are not on the Group's front page (the Metatag module output works fine for group homepages).
     if (!_unl_five_is_request_group_front()) {
       $head_title_array = explode ("|", $variables['head_title']['title']);
       $thirdFromEndIndex = $thirdFromEndIndex = count($head_title_array) - 2;
-      // Always add the group label before the site name and Nebraska (Tried creating a group and group relationship for the Meta tag module for this, but it wasn't working)
+      // Always add the group label before the site name and Nebraska.
+      // (Tried creating a group and group relationship for the Metatag module for this, but it wasn't working.)
       array_splice($head_title_array, $thirdFromEndIndex, 0, $group->label());
       $head_title_array = implode(" | ", $head_title_array);
       $variables['head_title']['title'] = $head_title_array;
