@@ -128,25 +128,6 @@ function unl_five_preprocess_page(&$variables) {
       }
     }
   }
-
-  // Invalidate unl_five_herbie_branding block's cache if a site uses groups
-  if (\Drupal::service('module_handler')->moduleExists('group')) {
-    $group = \Drupal::entityTypeManager()->getStorage('group')->loadMultiple();
-    if ($group) {
-      // Load blocks using block_id
-      $block = \Drupal\block\Entity\Block::load('unl_five_herbie_branding');
-      $cache_tags_to_invalidate = $block->getCacheTagsToInvalidate();
-      Cache::invalidateTags($cache_tags_to_invalidate);
-
-      $block = \Drupal\block\Entity\Block::load('unl_five_herbie_contactinfo');
-      $cache_tags_to_invalidate = $block->getCacheTagsToInvalidate();
-      Cache::invalidateTags($cache_tags_to_invalidate);
-
-      $block = \Drupal\block\Entity\Block::load('unl_five_herbie_relatedlinks');
-      $cache_tags_to_invalidate = $block->getCacheTagsToInvalidate();
-      Cache::invalidateTags($cache_tags_to_invalidate);
-    }
-  }
 }
 
 /**
