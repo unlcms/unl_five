@@ -346,7 +346,10 @@ function unl_five_preprocess_form_element(&$variables) {
     'radios',
   ];
   $parents = $variables['element']['#parents'] ?? [];
-  if (empty(array_intersect($exempt_parents, $parents)) && isset($variables['attributes']['class'])) {
+  if (empty(array_intersect($exempt_parents, $parents))) {
+    if (!isset($variables['attributes']['class'])) {
+      $variables['attributes']['class'] = [];
+    }
     if (is_array($variables['attributes']['class'])) {
       $variables['attributes']['class'][] = 'dcf-form-group';
     } 
