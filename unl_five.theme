@@ -406,7 +406,7 @@ function unl_five_preprocess_fieldset(&$variables) {
   elseif (is_object($variables['prefix'])) {
     $markup = $variables['prefix']->__toString();
     // There's no good way to do this.
-    $variables['prefix'] = Markup::create('<div class="dcf-form-help">' . $markup . '</div>');
+    $variables['prefix'] = Markup::create('<div class="dcf-form-help dcf-mb-6">' . $markup . '</div>');
   }
 }
 
