@@ -411,14 +411,11 @@ function unl_five_preprocess_fieldset(&$variables) {
 }
 
 /**
- * Implements template_element_info_alter().
+ * Implements hook_element_info_alter().
  */
-function unl_five_element_info_alter(&$vars) {
-  // Add custom process function for WebformMultiple elements.
-  $vars['webform_multiple']['#process'][] = [
-    'Drupal\unl_five\Element\WebformMultiple',
-    'processWebformMultiple'
-  ];
+function unl_five_element_info_alter(&$types) {
+  // Add custom process function for WebformMultiple (webform_multiple) elements.
+  $types['webform_multiple']['#process'][] = '_unl_five_process_webform_multiple';
 }
 
 /**
@@ -431,4 +428,13 @@ function unl_five_theme_suggestions_alter(array &$suggestions, array $variables,
   if ($format == 'partial' && in_array($hook, ['html', 'page'])) {
     $suggestions[] = $hook . '__' . 'partial';
   }
+}
+
+function _unl_five_process_webform_multiple(&$element, FormStateInterface $form_state, &$complete_form) {
+  if (isset($element['add']['submit'])) {
+    $element['add']['submit']['#attributes']['class'][] = 'dcf-btn';
+    $element['add']['submit']['#attributes']['class'][] = 'dcf-btn-secondary';
+  }
+
+  return $element;
 }
